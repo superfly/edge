@@ -1,7 +1,10 @@
+import { applyReplacements } from "./text-replacements";
+
 declare var app: any
 export const availableMiddleware: { [key: string]: Middleware | undefined } = {
   "https-upgrader": httpsUpgrader,
-  "response-headers": responseHeaders
+  "response-headers": responseHeaders,
+  "inject-html": injectHTML
 }
 export type MiddlewareConfig = string | [string, any | undefined]
 export interface Middleware {
@@ -38,6 +41,16 @@ export function responseHeaders(fetch: Fetch, options?: any) {
       }
     }
     return resp
+  }
+}
+
+export function injectHTML(fetch: Fetch, options?: any) {
+  return async function injectHTML(req: RequestInfo, init?: RequestInit) {
+    const resp = await fetch(req, init)
+    if (!options) return resp
+    const { target_tag, html } = options
+    if (!target_tag || !html) return resp
+    return applyReplacements(resp, [[target_tag, html]])
   }
 }
 
