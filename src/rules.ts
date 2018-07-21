@@ -1,3 +1,5 @@
+import { Backend } from "backends";
+
 export interface RuleInfo {
   actionType: "redirect" | "rewrite",
   backendKey?: string,
@@ -12,8 +14,9 @@ export interface RuleInfo {
   responseReplacements?: [string, string][],
 }
 
+declare var app: any
 export interface BackendMap {
-  [key: string]: (req: RequestInfo, init?: RequestInit) => Promise<Response>
+  [key: string]: Backend
 }
 
 export default function rules(backends: BackendMap, rules: RuleInfo[]) {
@@ -29,9 +32,13 @@ export default function rules(backends: BackendMap, rules: RuleInfo[]) {
     const rule = match.rule
     // do the redirect
     if (rule.actionType === "redirect") {
-      let url = req.url
-      if (match.pathPattern && rule.pathReplacementPattern) {
-        url = url.replace(match.pathPattern, rule.pathReplacementPattern)
+      let original = new URL(req.url)
+      let url: string | undefined = undefined
+      if (match.pathPattern && rule.redirectURLPattern) {
+        url = original.pathname.replace(match.pathPattern, rule.redirectURLPattern)
+      }
+      if (!url || original.toString() === url) {
+        return new Response("Can't redirect to a bad URL", { status: 500 })
       }
       return new Response("Redirect", { status: 302, headers: { location: url.toString() } })
     }
@@ -45,7 +52,7 @@ export default function rules(backends: BackendMap, rules: RuleInfo[]) {
     // rewrite request if necessary
     if (match.pathPattern && rule.pathReplacementPattern) {
       let url = new URL(req.url)
-      url = new URL(url.pathname.replace(match.pathPattern, rule.pathReplacementPattern))
+      url = new URL(url.pathname.replace(match.pathPattern, rule.pathReplacementPattern), url)
       req = new Request(url.toString(), <RequestInit>req)
     }
     if (rule.responseReplacements && rule.responseReplacements.length > 0) {
@@ -79,15 +86,14 @@ async function applyReplacements(resp: Response, replacements?: [string, string]
 function compileRule(rule: RuleInfo) {
   const pathPattern = ensureRegExp(rule.pathPattern)
   const httpHeaderValue = ensureRegExp(rule.httpHeaderValue)
-  console.log("compiling rule:", rule)
   const fn = function compiledRule(req: Request) {
     const url = new URL(req.url)
     if (rule.matchScheme && rule.matchScheme != "") {
       const scheme = url.protocol.substring(0, -1)
-      if (scheme != rule.matchScheme) return false
+      if (scheme != rule.matchScheme || app.env === "development") return false
     }
     if (rule.hostname && rule.hostname != "") {
-      if (url.hostname != rule.hostname) {
+      if (url.hostname != rule.hostname || app.env !== "development") {
         return false
       }
     }

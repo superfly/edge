@@ -1,7 +1,7 @@
 import backend, { BackendInfo } from "./backends";
 import rules, { RuleInfo, BackendMap } from "./rules";
+import middleware, { MiddlewareConfig } from "./middleware";
 
-export type MiddlewareConfig = string | string[]
 export interface SiteConfig {
   middleware: MiddlewareConfig[],
   backends: {
@@ -22,7 +22,11 @@ export class Site {
       this.backends[k] = backend(config.backends[k])
     }
 
-    this.fetch = rules(this.backends, config.rules)
+    let fn = rules(this.backends, config.rules)
+
+    this.fetch = (config.middleware && config.middleware.length > 0) ?
+      middleware(fn, ...config.middleware) :
+      fn
   }
 }
 

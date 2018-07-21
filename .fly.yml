@@ -1,13 +1,33 @@
 config:
-  middleware:
-  - "https-upgrader"
   backends:
-    glitch:
-      origin: "https://fly-example.glitch.me"
+    ypk5go6e4d9em1lq:
+      type: github_page
+      origin: https://flyio.github.io
       headers:
-        host: "fly-example.glitch.me"
+        host: fly.io
+    qezyml67e2rg3xn9:
+      type: ''
+      origin: https://arstechnica.com
+      headers:
+        host: "arstechnica.com"
   rules:
   - actionType: rewrite
-    backendKey: glitch
-    responseReplacements:
-    - ["<canvas", "<h1>kurt</h1><canvas"]
+    backendKey: qezyml67e2rg3xn9
+    pathMatchMode: prefix
+    pathPattern: "^\\/ars\\/"
+    pathReplacementPattern: "/"
+  - actionType: redirect
+    backendKey: qezyml67e2rg3xn9
+    pathMatchMode: full
+    pathPattern: "^\\/ars$"
+    redirectURLPattern: "/ars/"
+  - actionType: rewrite
+    backendKey: ypk5go6e4d9em1lq
+    pathMatchMode: prefix
+    pathPattern: "^\\/"
+  middleware:
+  - https-upgrader
+  - - response-headers
+    - header_definition:
+        Powered-By: Caffeine
+        X-Frame-Options: false
