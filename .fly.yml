@@ -1,0 +1,13 @@
+config:
+  middleware:
+  - "https-upgrader"
+  backends:
+    glitch:
+      origin: "https://fly-example.glitch.me"
+      headers:
+        host: "fly-example.glitch.me"
+  rules:
+  - actionType: rewrite
+    backendKey: glitch
+    responseReplacements:
+    - ["<canvas", "<h1>kurt</h1><canvas"]

@@ -1,0 +1,33 @@
+{
+  "name": "fly-site",
+  "version": "1.0.0",
+  "description": "Fly Site implemented as an edge app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/superfly/fly.git"
+  },
+  "keywords": [
+    "routing",
+    "adn",
+    "cdn",
+    "flyio",
+    "onehostname",
+    "middleware"
+  ],
+  "author": "Kurt Mackey",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/superfly/fly/issues"
+  },
+  "homepage": "https://github.com/superfly/fly#readme",
+  "dependencies": {
+    "@fly/fly": "^0.38.1",
+    "@fly/load-balancer": "^0.1.1",
+    "@types/source-map": "^0.5.2",
+    "ts-loader": "^3.5.0"
+  }
+}
