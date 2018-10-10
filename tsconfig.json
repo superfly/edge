@@ -10,7 +10,8 @@
       "es2017",
       "dom"
     ],
-    //"outDir": "./dist", /* Redirect output structure to the directory. */
+    "outDir": "./dist", /* Redirect output structure to the directory. */
+    "declaration": true,
     //"outFile": "./index.js",
     "strict": true, /* Enable all strict type-checking options. */
     "noImplicitAny": true, /* Raise error on expressions and declarations with an implied 'any' type. */

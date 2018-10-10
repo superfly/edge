@@ -4,8 +4,9 @@
   "description": "Fly Site implemented as an edge app",
   "main": "index.ts",
   "scripts": {
-    "start": "fly server",
-    "test": "fly test"
+    "start": "yarn fly server",
+    "test": "yarn fly test",
+    "build": "yarn tsc"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
   "homepage": "https://github.com/superfly/fly#readme",
   "dependencies": {
     "@fly/fly": "^0.42.2",
+    "@fly/load-balancer": "^0.1.2",
     "@types/source-map": "^0.5.2",
     "ts-loader": "^3.5.0",
     "typescript": "^3.1.2"

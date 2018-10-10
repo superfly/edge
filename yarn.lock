@@ -46,6 +46,10 @@
     "@fly/core" "0.42.2"
     "@fly/v8env" "0.42.2"
 
+"@fly/load-balancer@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@fly/load-balancer/-/load-balancer-0.1.2.tgz#e01b97152e93ad8ceb7b2364667069d874103f69"
+
 "@fly/v8env@0.42.2":
   version "0.42.2"
   resolved "https://registry.yarnpkg.com/@fly/v8env/-/v8env-0.42.2.tgz#3eeb3b405061b803bbcf75a4855e239829b43d28"
