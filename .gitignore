@@ -4,3 +4,4 @@ node_modules
 bin/fly
 .fly
 package-lock.json
+.fly.yml

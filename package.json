@@ -2,9 +2,10 @@
   "name": "fly-site",
   "version": "1.0.0",
   "description": "Fly Site implemented as an edge app",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "fly server",
+    "test": "fly test"
   },
   "repository": {
     "type": "git",
@@ -25,9 +26,10 @@
   },
   "homepage": "https://github.com/superfly/fly#readme",
   "dependencies": {
-    "@fly/fly": "^0.38.1",
-    "@fly/load-balancer": "^0.1.1",
+    "@fly/fly": "^0.42.2",
     "@types/source-map": "^0.5.2",
-    "ts-loader": "^3.5.0"
-  }
+    "ts-loader": "^3.5.0",
+    "typescript": "^3.1.2"
+  },
+  "devDependencies": {}
 }

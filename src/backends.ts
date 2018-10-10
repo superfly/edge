@@ -1,4 +1,4 @@
-import proxy from "@fly/proxy"
+import proxy from "@fly/fetch/proxy"
 
 export interface BackendInfo {
   origin: string, // was upstream,

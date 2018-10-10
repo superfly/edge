@@ -20,7 +20,7 @@
     "baseUrl": ".",
     "paths": {
       "@fly/*": [
-        "./node_modules/@fly/fly/v8env/lib/fly/*"
+        "./node_modules/@fly/v8env/lib/fly/*"
       ],
       "*": [
         "*",
