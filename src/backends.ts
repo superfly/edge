@@ -12,6 +12,8 @@ export interface Backend {
   info: BackendInfo
 }
 
+export type BackendMap = Map<String, Backend>
+
 const notImplemented = ["aws_lambda", "aws_s3", "dropbox", "gravatar"]
 export default function backend(backend: BackendInfo): Backend {
   //TODO: Implement s3, dropbox, lamdba, etc

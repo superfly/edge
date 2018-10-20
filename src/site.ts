@@ -1,5 +1,5 @@
-import backend, { BackendInfo } from "./backends";
-import rules, { RuleInfo, BackendMap } from "./rules";
+import backend, { BackendInfo, BackendMap } from "./backends";
+import rules, { RuleInfo } from "./rules";
 import middleware, { MiddlewareConfig } from "./middleware";
 
 export interface SiteConfig {
@@ -17,9 +17,9 @@ export class Site {
     if (!isSite(config)) {
       throw new Error('Invalid site config')
     }
-    this.backends = {}
+    this.backends = new Map()
     for (const k of Object.getOwnPropertyNames(config.backends)) {
-      this.backends[k] = backend(config.backends[k])
+      this.backends.set(k, backend(config.backends[k]))
     }
 
     let fn = rules(this.backends, config.rules)

@@ -1,16 +1,20 @@
 {
-  "name": "fly-site",
-  "version": "1.0.0",
+  "name": "@fly/site",
+  "version": "0.1.0",
   "description": "Fly Site implemented as an edge app",
-  "main": "index.ts",
+  "main": "./dist/src/index.ts",
+  "files": [
+    "./dist/src/"
+  ],
   "scripts": {
     "start": "yarn fly server",
     "test": "yarn fly test",
-    "build": "yarn tsc"
+    "build": "yarn tsc",
+    "prepublishOnly": "yarn tsc"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/superfly/fly.git"
+    "url": "git+https://github.com/superfly/fl-site.git"
   },
   "keywords": [
     "routing",
@@ -28,10 +32,12 @@
   "homepage": "https://github.com/superfly/fly#readme",
   "dependencies": {
     "@fly/fly": "^0.42.2",
-    "@fly/load-balancer": "^0.1.2",
+    "@fly/load-balancer": "^0.1.2"
+  },
+  "devDependencies": {
     "@types/source-map": "^0.5.2",
+    "standard-version": "^4.4.0",
     "ts-loader": "^3.5.0",
     "typescript": "^3.1.2"
-  },
-  "devDependencies": {}
+  }
 }

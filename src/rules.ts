@@ -1,4 +1,4 @@
-import { Backend } from "./backends";
+import { BackendMap } from "./backends";
 import { applyReplacements } from "./text-replacements";
 
 export interface RuleInfo {
@@ -16,9 +16,6 @@ export interface RuleInfo {
 }
 
 declare var app: any
-export interface BackendMap {
-  [key: string]: Backend
-}
 
 export default function rules(backends: BackendMap, rules: RuleInfo[]) {
   const compiled = rules.map(compileRule)
@@ -46,7 +43,7 @@ export default function rules(backends: BackendMap, rules: RuleInfo[]) {
     if (rule.actionType !== "rewrite") {
       return new Response("Invalid rule action", { status: 500 })
     }
-    const backend = rule.backendKey && backends ? backends[rule.backendKey] : undefined
+    const backend = rule.backendKey && backends ? backends.get(rule.backendKey) : undefined
     if (!backend) {
       return new Response("No backend for rule", { status: 502 })
     }
