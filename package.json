@@ -1,6 +1,6 @@
 {
   "name": "@fly/site",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Fly Site implemented as an edge app",
   "main": "./dist/src/index.ts",
   "files": [
