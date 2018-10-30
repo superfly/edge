@@ -1,8 +1,8 @@
 {
-  "name": "@fly/site",
+  "name": "@fly/cdn",
   "version": "0.2.0",
-  "description": "Fly Site implemented as an edge app",
-  "main": "./dist/src/index.ts",
+  "description": "Fly's TypeScript CDN",
+  "main": "./dist/src/index.js",
   "files": [
     "./dist/src/"
   ],
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/superfly/fl-site.git"
+    "url": "git+https://github.com/superfly/cdn.git"
   },
   "keywords": [
     "routing",
@@ -27,9 +27,9 @@
   "author": "Kurt Mackey",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/superfly/fly/issues"
+    "url": "https://github.com/superfly/cdn/issues"
   },
-  "homepage": "https://github.com/superfly/fly#readme",
+  "homepage": "https://github.com/superfly/cdn#readme",
   "dependencies": {
     "@fly/fly": "^0.42.2",
     "@fly/load-balancer": "^0.1.2"
@@ -39,5 +39,8 @@
     "standard-version": "^4.4.0",
     "ts-loader": "^3.5.0",
     "typescript": "^3.1.2"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
