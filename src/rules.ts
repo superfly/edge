@@ -12,6 +12,7 @@ export interface RuleInfo {
   pathPattern?: RegExp | string,
   pathReplacementPattern?: string,
   redirectURLPattern?: string,
+  redirectStatus?: number,
   responseReplacements?: [string, string][],
 }
 
@@ -38,7 +39,8 @@ export default function rules(backends: BackendMap, rules: RuleInfo[]) {
       if (!url || original.toString() === url) {
         return new Response("Can't redirect to a bad URL", { status: 500 })
       }
-      return new Response("Redirect", { status: 302, headers: { location: url.toString() } })
+      const status = rule.redirectStatus || 302
+      return new Response("Redirect", { status: status, headers: { location: url.toString() } })
     }
     if (rule.actionType !== "rewrite") {
       return new Response("Invalid rule action", { status: 500 })
