@@ -1,28 +1,26 @@
+app: cdn
 config:
   backends:
-    ypk5go6e4d9em1lq:
+    example:
+      origin: https://example.com
+      headers:
+        host: example.com
+    onehostname:
       type: github_page
-      origin: https://flyio.github.io
+      origin: https://superfly.github.io
       headers:
-        host: fly.io
-    qezyml67e2rg3xn9:
-      type: ''
-      origin: https://arstechnica.com
-      headers:
-        host: "arstechnica.com"
+        host: onehostname.com
   rules:
   - actionType: rewrite
-    backendKey: qezyml67e2rg3xn9
+    backendKey: example
     pathMatchMode: prefix
-    pathPattern: "^\\/ars\\/"
-    pathReplacementPattern: "/"
+    pathPattern: "^\\/example\\/"
   - actionType: redirect
-    backendKey: qezyml67e2rg3xn9
     pathMatchMode: full
-    pathPattern: "^\\/ars$"
-    redirectURLPattern: "/ars/"
+    pathPattern: "^\\/example$"
+    redirectURLPattern: "/example/"
   - actionType: rewrite
-    backendKey: ypk5go6e4d9em1lq
+    backendKey: onehostname
     pathMatchMode: prefix
     pathPattern: "^\\/"
   middleware:
@@ -30,24 +28,3 @@ config:
   - - response-headers
     - header_definition:
         Powered-By: Caffeine
-        X-Frame-Options: false
-  - - inject-html
-    - html: |
-        <!-- BEGIN: Parse.ly snippet -->
-        <div id="parsely-root" style="display: none">
-          <span id="parsely-cfg" data-parsely-site="purplederple"></span>
-        </div>
-        <script>
-            (function(s, p, d) {
-              var h=d.location.protocol, i=p+"-"+s,
-                  e=d.getElementById(i), r=d.getElementById(p+"-root"),
-                  u=h==="https:"?"d1z2jf7jlzjs58.cloudfront.net"
-                  :"static."+p+".com";
-              if (e) return;
-              e = d.createElement(s); e.id = i; e.async = true;
-              e.src = h+"//"+u+"/p.js"; r.appendChild(e);
-            })("script", "parsely", document);
-        </script>
-        <!-- END: Parse.ly snippet -->
-      target_tag: "</body>"
-      parsely_site: purplederple
