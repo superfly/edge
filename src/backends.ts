@@ -1,6 +1,8 @@
 import proxy from "@fly/fetch/proxy"
 import balancer from "@fly/load-balancer"
 
+export { githubPages } from "./backends/github_pages"
+
 export interface BackendInfo {
   origin: string | string[], // was upstream,
   type?: string,

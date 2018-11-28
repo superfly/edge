@@ -35,7 +35,10 @@
     "@fly/load-balancer": "^0.1.2"
   },
   "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.5",
     "@types/source-map": "^0.5.2",
+    "chai": "^4.2.0",
     "standard-version": "^4.4.0",
     "ts-loader": "^3.5.0",
     "typescript": "^3.1.2"
