@@ -1,3 +1,7 @@
+/**
+ * @module Rules
+ * @ignore
+ * */
 import { BackendMap } from "./backends";
 import { applyReplacements } from "./text-replacements";
 

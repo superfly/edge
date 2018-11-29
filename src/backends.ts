@@ -1,22 +1,42 @@
+/**
+ * Functions for proxying requests to various backends.
+ * @module Backends
+ * @primary
+ * */
+
 import proxy from "@fly/fetch/proxy"
 import balancer from "@fly/load-balancer"
+import { FetchFunction } from "src";
 
 export { githubPages } from "./backends/github_pages"
 
+/**
+ * Proxy options for generic http/https backends
+ * See {@link Backends/backend}
+ */
 export interface BackendInfo {
   origin: string | string[], // was upstream,
   type?: string,
   headers?: { [name: string]: string | boolean | undefined }
 }
 
-export interface Backend {
-  (req: RequestInfo, init?: RequestInit): Promise<Response>,
+/**
+ * A `fetch` function generated with `BackendInfo.
+ */
+export interface Backend extends FetchFunction{
+  /** The config used to generate this function */
   info: BackendInfo
 }
 
+/** @ignore */
 export type BackendMap = Map<String, Backend>
 
 const notImplemented = ["aws_lambda", "aws_s3", "dropbox", "gravatar"]
+
+/**
+ * Create a generic http/https proxy backend
+ * @param backend Proxy configuration options
+ */
 export default function backend(backend: BackendInfo): Backend {
   //TODO: Implement s3, dropbox, lamdba, etc
   console.log("Proxying:", backend)

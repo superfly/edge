@@ -31,13 +31,9 @@
   },
   "typedocOptions": {
     "out": "./docs/",
-    "includeDeclarations": false,
+    "includeDeclarations": true,
     "excludeExternals": true,
     "excludeNotExported": true,
-    "excludePrivate": true,
-    "excludeProtected": true,
-    "mode": "file",
-    "theme": "minimal",
-    "readme": "none"
+    "mode": "modules"
   }
 }

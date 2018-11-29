@@ -3,17 +3,17 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>@fly/cdn</title>
+	<title>Rules | @fly/cdn</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="assets/css/main.css">
+	<link rel="stylesheet" href="../assets/css/main.css">
 </head>
 <body>
 <header>
 	<div class="tsd-page-toolbar">
 		<div class="container">
 			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
 					<div class="field">
 						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
 						<input id="tsd-search-field" type="text" />
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">@fly/cdn</a>
+					<a href="../index.html" class="title">@fly/cdn</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -49,54 +49,99 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="globals.html">Globals</a>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="rules.html">Rules</a>
 				</li>
 			</ul>
-			<h1> @fly/cdn</h1>
+			<h1>External module Rules</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<div class="tsd-panel tsd-typography">
-				<h1 id="fly-typescript-cdn">Fly TypeScript CDN</h1>
-				<p>This is an edge application that routes across multiple backends and supports middleware for applying extra logic to requests.</p>
-				<h2 id="getting-started">Getting Started</h2>
-				<p>You can download and run this application locally:</p>
-				<ul>
-					<li><code>git clone https://github.com/superfly/cdn.git flycdn</code> </li>
-					<li><code>cd flycdn</code></li>
-					<li><code>yarn install</code></li>
-					<li><code>yarn start</code> -&gt; <a href="http://localhost:3000">http://localhost:3000</a></li>
-				</ul>
-			</div>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Interfaces</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/rules.ruleinfo.html" class="tsd-kind-icon">Rule<wbr>Info</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Functions</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="rules.html#rules-1" class="tsd-kind-icon">rules</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="rules-1" class="tsd-anchor"></a>
+					<h3>rules</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">rules<span class="tsd-signature-symbol">(</span>backends<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BackendMap</span>, rules<span class="tsd-signature-symbol">: </span><a href="../interfaces/rules.ruleinfo.html" class="tsd-signature-type">RuleInfo</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ruleFetch</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/4fc8105/src/rules.ts#L25">rules.ts:25</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>backends: <span class="tsd-signature-type">BackendMap</span></h5>
+								</li>
+								<li>
+									<h5>rules: <a href="../interfaces/rules.ruleinfo.html" class="tsd-signature-type">RuleInfo</a><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ruleFetch</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
 					<li class="globals  ">
-						<a href="globals.html"><em>Globals</em></a>
+						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/backends.html">Backends</a>
+						<a href="backends.html">Backends</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/http.html">HTTP</a>
+						<a href="http.html">HTTP</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/middleware.html">Middleware</a>
+						<a href="middleware.html">Middleware</a>
+					</li>
+					<li class="current tsd-kind-external-module">
+						<a href="rules.html">Rules</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/rules.html">Rules</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/site.html">Site</a>
+						<a href="site.html">Site</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/rules.ruleinfo.html" class="tsd-kind-icon">Rule<wbr>Info</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="rules.html#rules-1" class="tsd-kind-icon">rules</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
@@ -165,7 +210,7 @@
 	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
-<script src="assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>

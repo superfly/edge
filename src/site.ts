@@ -1,3 +1,4 @@
+/** @module Site */
 import backend, { BackendInfo, BackendMap } from "./backends";
 import rules, { RuleInfo } from "./rules";
 import middleware, { MiddlewareConfig } from "./middleware";

@@ -1,30 +1,49 @@
+/**
+ * @module Backends
+ */
 import proxy from "@fly/fetch/proxy"
+import { FetchFunction } from "src";
 
 /**
  * GitHub Repository information, either a string formatted 
  * like <owner>/<repository> or an object with owner and repository fields.
  */
-export type GithubRepository = {
-  /**
-   * Repository owner
-   */
-  owner: string
-  /**
-   * Repository name <repository> format
-   */
+export interface GitHubRepository {
+
+  /** Repository owner */
+  owner: string,
+
+  /** Repository name <repository> format */
   repository: string,
-  /**
-   * The custom hostname on repository
-   */
+
+  /** The custom hostname on repository */
   hostname?: string
+}
+
+/**
+ * GitHub Pages need different fetch functions when they're configured 
+ * with custom hostnames. This is a wrapper `fetch` like function that
+ * keeps the proper inner function around based on the page config.
+ */
+export interface GitHubPagesFetch extends FetchFunction{
+  /** The underlying `fetch` function that makes GitHub origin requests */
+  githubFetch: FetchFunction & {
+    /** The GitHub <owner/repository> */
+    repository: string, 
+    /** Custom hostname on repository */
+    hostname?: string,
+    /** Unix time fetch function was generated */
+    buildTime: number
+  }
 }
 
 /**
  * Creates a fetch-like proxy function for making requests to GitHub pages
  * hosted sites.
  * @param config The Github repository to proxy to
+ * @module Backends
  */
-export function githubPages(config: GithubRepository | string){
+export function githubPages(config: GitHubRepository | string){
   if(typeof config === "string"){
     const [owner, repository] = config.split("/")
     config = { owner, repository }
@@ -78,7 +97,7 @@ export function githubPages(config: GithubRepository | string){
   return self
 }
 
-function buildGithubPagesProxy(config: GithubRepository){
+function buildGithubPagesProxy(config: GitHubRepository) {
   const {owner, repository, hostname} = config
   const ghHost = `${owner}.github.io`
   const headers = {

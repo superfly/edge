@@ -1,3 +1,7 @@
+/**
+ * @module Site
+ * @ignore
+ */
 export async function applyReplacements(resp: Response, replacements?: [string, string][]) {
   if (!replacements) return resp
   const contentType = resp.headers.get("content-type") || ""
