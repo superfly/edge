@@ -78,7 +78,7 @@ export function githubPages(config: GithubRepository | string){
   return self
 }
 
-export function buildGithubPagesProxy(config: GithubRepository){
+function buildGithubPagesProxy(config: GithubRepository){
   const {owner, repository, hostname} = config
   const ghHost = `${owner}.github.io`
   const headers = {
