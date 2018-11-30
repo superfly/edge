@@ -7,21 +7,21 @@ describe("backends", () => {
 
     it("works with plain repos", async ()=>{
       const fn = githubPages("superfly/cdn");
-      const ghFetch = fn.githubFetch
+      const config = fn.proxyConfig;
       
       const resp = await fn("https://fly.io/", { method: "HEAD"})
       expect(resp.status).to.eq(200)
-      expect(fn.githubFetch).to.eq(ghFetch, "ghFetch function changed when it shouldn't have")
+      expect(fn.proxyConfig).to.eq(config, "ghFetch function changed when it shouldn't have")
     })
 
     it("detects a custom domain and retries", async ()=>{
       const fn = githubPages("superfly/landing")
-      const ghFetch = fn.githubFetch
-      expect(ghFetch.hostname).to.be.undefined
+      const config = fn.proxyConfig;
+      expect(config.hostname).to.be.undefined
 
       const resp = await fn("https://fly.io/", { method: "HEAD"})
       expect(resp.status).to.eq(200)
-      expect(fn.githubFetch.hostname).to.eq("preview.fly.io")
+      expect(fn.proxyConfig.hostname).to.eq("preview.fly.io")
     })
 
     it("detects custom domain removal and retries", async ()=>{
@@ -30,12 +30,12 @@ describe("backends", () => {
         repository:"cdn",
         hostname: "docs.fly.io"
       })
-      const ghFetch = fn.githubFetch
-      expect(ghFetch.hostname).to.eq("docs.fly.io")
+      const config = fn.proxyConfig
+      expect(config.hostname).to.eq("docs.fly.io")
 
       const resp = await fn("https://fly.io/", { method: "HEAD"})
       expect(resp.status).to.eq(200)
-      expect(fn.githubFetch.hostname).to.be.undefined
+      expect(fn.proxyConfig.hostname).to.be.undefined
     })
   })
 })

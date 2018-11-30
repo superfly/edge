@@ -2,7 +2,7 @@
  * @module Backends
  */
 import proxy from "@fly/fetch/proxy"
-import { FetchFunction } from "src";
+import { FetchFunction, ProxyFunction } from "src";
 
 /**
  * GitHub Repository information.
@@ -20,49 +20,33 @@ export interface GitHubRepository {
 }
 
 /**
- * GitHub Pages need different fetch functions when they're configured 
- * with custom hostnames. This is a wrapper `fetch` like function that
- * keeps the proper inner function around based on the page config.
- */
-export interface GitHubPagesFetch extends FetchFunction{
-  /** The underlying `fetch` function that makes GitHub origin requests */
-  githubFetch: FetchFunction & {
-    /** The GitHub <owner/repository> */
-    repository: string, 
-    /** Custom hostname on repository */
-    hostname?: string,
-    /** Unix time fetch function was generated */
-    buildTime: number
-  }
-}
-
-/**
  * Creates a fetch-like proxy function for making requests to GitHub pages
  * hosted sites.
  * @param config The Github repository to proxy to
  * @module Backends
  */
-export function githubPages(config: GitHubRepository | string){
+export function githubPages(config: GitHubRepository | string): ProxyFunction<GitHubRepository>{
   if(typeof config === "string"){
     const [owner, repository] = config.split("/")
     config = { owner, repository }
   }
   let ghFetch = buildGithubPagesProxy(config)
-  ghFetch.buildTime = 0 // first failure might need a retry
+  let buildTime = 0 // first failure might need a retry
 
   const c = config
 
   const fn = async function githubPagesFetch(req: RequestInfo, init?: RequestInit) {
+    const original = ghFetch
     if(typeof req === "string"){
       req = new Request(req, init)
     }
-    console.debug("ghpages starting fetch:", req.url, ghFetch.buildTime)
+    console.debug("ghpages starting fetch:", req.url, buildTime)
     let resp = await ghFetch(req, init)
     console.debug("ghpages resp status:", resp.status)
-    if(resp.status === 404 && ghFetch.hostname){
+    if(resp.status === 404 && ghFetch.proxyConfig.hostname){
       // hostname might've been cleared
       const url = new URL(req.url)
-      const diff = Date.now() - ghFetch.buildTime
+      const diff = Date.now() - buildTime
       if(
         (url.pathname === "/" && diff > 10000) // retry after 10s for root
        || diff > 30000){ // wait 5min for everything else
@@ -73,7 +57,7 @@ export function githubPages(config: GitHubRepository | string){
         ghFetch = buildGithubPagesProxy(c)
       }
     }
-    if(resp.status === 301 && !ghFetch.hostname){
+    if(resp.status === 301 && !ghFetch.proxyConfig.hostname){
       // 301s happen when you request <org>.github.io/<repo> and need a custom domain
       let location = resp.headers.get("location")
       if(location){
@@ -83,20 +67,20 @@ export function githubPages(config: GitHubRepository | string){
         console.debug("ghpages found hostname:", c)
       }
     }
-    if(self.githubFetch != ghFetch){
+    if(original !== ghFetch){
       // underlying proxy function changed, store it and retry
-      console.debug("ghpages got a new fetch fn:", self.githubFetch.buildTime, ghFetch.buildTime)
-      self.githubFetch = ghFetch
+      console.debug("ghpages got a new fetch fn")
+      self.proxyConfig = ghFetch.proxyConfig
       resp = await ghFetch(req, init)
     }
     return resp
   }
 
-  let self = Object.assign(fn, { githubFetch: ghFetch})
+  let self = Object.assign(fn, { proxyConfig: ghFetch.proxyConfig})
   return self
 }
 
-function buildGithubPagesProxy(config: GitHubRepository) {
+function buildGithubPagesProxy(config: GitHubRepository): ProxyFunction<GitHubRepository> {
   const {owner, repository, hostname} = config
   const ghHost = `${owner}.github.io`
   const headers = {
@@ -119,9 +103,5 @@ function buildGithubPagesProxy(config: GitHubRepository) {
     stripPath: path
   })
 
-  return Object.assign(fn, {
-    repository: repository, 
-    hostname: hostname, 
-    buildTime: Date.now()
-  })
+  return Object.assign(fn, { proxyConfig: config } )
 }
