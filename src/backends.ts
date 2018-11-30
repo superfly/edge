@@ -13,6 +13,7 @@ export { ghostProBlog } from "./backends/ghost_pro"
 
 /**
  * Proxy options for generic http/https backends
+ * @ignore
  * See {@link Backends/backend}
  */
 export interface BackendInfo {
@@ -23,6 +24,7 @@ export interface BackendInfo {
 
 /**
  * A `fetch` function generated with `BackendInfo.
+ * @ignore
  */
 export interface Backend extends FetchFunction{
   /** The config used to generate this function */
@@ -37,6 +39,7 @@ const notImplemented = ["aws_lambda", "aws_s3", "dropbox", "gravatar"]
 /**
  * Create a generic http/https proxy backend
  * @param backend Proxy configuration options
+ * @ignore
  */
 export default function backend(backend: BackendInfo): Backend {
   //TODO: Implement s3, dropbox, lamdba, etc
