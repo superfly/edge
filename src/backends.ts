@@ -9,6 +9,7 @@ import balancer from "@fly/load-balancer"
 import { FetchFunction } from "src";
 
 export { githubPages } from "./backends/github_pages"
+export { ghostProBlog } from "./backends/ghost_pro"
 
 /**
  * Proxy options for generic http/https backends

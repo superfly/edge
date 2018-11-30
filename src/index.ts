@@ -15,6 +15,14 @@ export interface FetchFunction{
 }
 
 /**
+ * A proxy `fetch` like function. These functions include their 
+ * original configuration information.
+ */
+export interface ProxyFunction<T> extends FetchFunction{
+  proxyConfig: T
+}
+
+/**
  * Options for redirects
  */
 export interface RedirectOptions{

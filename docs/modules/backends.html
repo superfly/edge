@@ -71,6 +71,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/backends.backend.html" class="tsd-kind-icon">Backend</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/backends.backendinfo.html" class="tsd-kind-icon">Backend<wbr>Info</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/backends.ghostproblog.html" class="tsd-kind-icon">Ghost<wbr>Pro<wbr>Blog</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/backends.githubpagesfetch.html" class="tsd-kind-icon">Git<wbr>Hub<wbr>Pages<wbr>Fetch</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/backends.githubrepository.html" class="tsd-kind-icon">Git<wbr>Hub<wbr>Repository</a></li>
 							</ul>
@@ -79,6 +80,7 @@
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="backends.html#backend-1" class="tsd-kind-icon">backend</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="backends.html#ghostproblog-1" class="tsd-kind-icon">ghost<wbr>Pro<wbr>Blog</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="backends.html#githubpages" class="tsd-kind-icon">github<wbr>Pages</a></li>
 							</ul>
 						</section>
@@ -97,7 +99,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/4fc8105/src/backends.ts#L40">backends.ts:40</a></li>
+									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/56db8e0/src/backends.ts#L41">backends.ts:41</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -119,6 +121,37 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="ghostproblog-1" class="tsd-anchor"></a>
+					<h3>ghost<wbr>Pro<wbr>Blog</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">ghost<wbr>Pro<wbr>Blog<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="../interfaces/backends.ghostproblog.html" class="tsd-signature-type">GhostProBlog</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/http.proxyfunction.html" class="tsd-signature-type">ProxyFunction</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/backends.ghostproblog.html" class="tsd-signature-type">GhostProBlog</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/56db8e0/src/backends/ghost_pro.ts#L24">backends/ghost_pro.ts:24</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Creates a <code>fetch</code> like function for proxying requests to hosted Ghost Pro blogs.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>config: <a href="../interfaces/backends.ghostproblog.html" class="tsd-signature-type">GhostProBlog</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Ghost Pro blog information. Accepts subdomain as a string..</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/http.proxyfunction.html" class="tsd-signature-type">ProxyFunction</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/backends.ghostproblog.html" class="tsd-signature-type">GhostProBlog</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
 					<a name="githubpages" class="tsd-anchor"></a>
 					<h3>github<wbr>Pages</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
@@ -128,7 +161,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/4fc8105/src/backends/github_pages.ts#L46">backends/github_pages.ts:46</a></li>
+									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/56db8e0/src/backends/github_pages.ts#L45">backends/github_pages.ts:45</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -192,6 +225,9 @@
 						<a href="../interfaces/backends.backendinfo.html" class="tsd-kind-icon">Backend<wbr>Info</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/backends.ghostproblog.html" class="tsd-kind-icon">Ghost<wbr>Pro<wbr>Blog</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="../interfaces/backends.githubpagesfetch.html" class="tsd-kind-icon">Git<wbr>Hub<wbr>Pages<wbr>Fetch</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
@@ -199,6 +235,9 @@
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="backends.html#backend-1" class="tsd-kind-icon">backend</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="backends.html#ghostproblog-1" class="tsd-kind-icon">ghost<wbr>Pro<wbr>Blog</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="backends.html#githubpages" class="tsd-kind-icon">github<wbr>Pages</a>

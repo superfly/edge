@@ -5,8 +5,7 @@ import proxy from "@fly/fetch/proxy"
 import { FetchFunction } from "src";
 
 /**
- * GitHub Repository information, either a string formatted 
- * like <owner>/<repository> or an object with owner and repository fields.
+ * GitHub Repository information.
  */
 export interface GitHubRepository {
 
