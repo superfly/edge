@@ -4,7 +4,7 @@
  * @primary
  * */
 
-import proxy from "@fly/fetch/proxy"
+import { proxy } from "./proxy";
 import balancer from "@fly/load-balancer"
 import { FetchFunction } from "src";
 

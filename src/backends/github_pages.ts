@@ -1,8 +1,7 @@
 /**
  * @module Backends
  */
-import proxy from "@fly/fetch/proxy"
-import { FetchFunction, ProxyFunction } from "src";
+import { proxy, ProxyFunction } from "../proxy";
 
 /**
  * GitHub Repository information.

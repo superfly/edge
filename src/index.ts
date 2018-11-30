@@ -1,7 +1,29 @@
+import { FlyRequest } from "@fly/fetch";
+
 /**
  * HTTP helpers, utilities, etc.
  * @module HTTP
  */
+
+export { BackendInfo, BackendMap } from "./backends"
+export { RuleInfo } from "./rules"
+export { MiddlewareConfig } from "./middleware"
+export { SiteConfig } from "./site"
+
+/**
+ * Converts RequestInfo into a Request object.
+ * @param req raw request
+ */
+export function normalizeRequest(req: RequestInfo) {
+  if (typeof req === "string") {
+    req = new Request(req)
+  }
+  if (!(req instanceof Request)) {
+    throw new Error("req must be either a string or a Request object")
+  }
+  return req as FlyRequest
+}
+
 /**
  * A `fetch` like function. These functions accept HTTP 
  * requests, do some magic, and return HTTP responses.
@@ -14,13 +36,6 @@ export interface FetchFunction{
   (req: RequestInfo, init?: RequestInit): Promise<Response>
 }
 
-/**
- * A proxy `fetch` like function. These functions include their 
- * original configuration information.
- */
-export interface ProxyFunction<T> extends FetchFunction{
-  proxyConfig: T
-}
 
 /**
  * Options for redirects
@@ -32,8 +47,3 @@ export interface RedirectOptions{
   /** Text to send as response body. Defaults to "". */
   text?: string
 }
-
-export { BackendInfo, BackendMap } from "./backends"
-export { RuleInfo } from "./rules"
-export { MiddlewareConfig } from "./middleware"
-export { SiteConfig } from "./site"

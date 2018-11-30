@@ -2,8 +2,7 @@
  * @module Backends
  */
 
-import proxy from "@fly/fetch/proxy"
-import { ProxyFunction } from "src";
+import { proxy, ProxyFunction } from "../proxy";
  
 /**
  * Ghost Pro configugration.
