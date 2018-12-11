@@ -72,7 +72,7 @@ function compileRule(rule: RuleInfo) {
   const httpHeaderValue = ensureRegExp(rule.httpHeaderValue)
   const fn = function compiledRule(req: Request) {
     const url = new URL(req.url)
-    if (rule.matchScheme && rule.matchScheme != "") {
+    if (rule.matchScheme === "http" || rule.matchScheme === "https") {
       const scheme = url.protocol.substring(0, -1)
       if (scheme != rule.matchScheme || app.env === "development") return false
     }

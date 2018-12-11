@@ -13,7 +13,11 @@ export const availableMiddleware: { [key: string]: Middleware | undefined } = {
   "inject-html": injectHTML
 }
 /** @ignore */
-export type MiddlewareConfig = string | [string, any | undefined]
+export interface MiddlewareConfig {
+  type: string;
+  [prop: string]: unknown;
+}
+
 /** @ignore */
 export interface Middleware {
   (fetch: FetchFunction, options?: any): FetchFunction
@@ -42,7 +46,7 @@ export function responseHeaders(fetch: FetchFunction, options?: any) {
   return async function responseHeaders(req: RequestInfo, init?: RequestInit) {
     const resp = await fetch(req, init)
     if (options) {
-      const h = options['header_definition'] || {}
+      const h = options['headers'] || {}
       for (const k of Object.getOwnPropertyNames(h)) {
         const v = h[k]
         if (v === false) {
@@ -71,15 +75,13 @@ export function injectHTML(fetch: FetchFunction, options?: any) {
 /** @ignore */
 export default function middleware(fetch: FetchFunction, ...middleware: MiddlewareConfig[]) {
   const mw = middleware.map((m) => {
-    if (typeof m === "string") m = [m, undefined]
-    const fn = availableMiddleware[m[0]]
-    if (!fn) throw new Error(`Invalid middleware ${m[0]}`)
-    return <[Middleware, any]>[fn, m[1]]
+    const fn = availableMiddleware[m.type]
+    if (!fn) throw new Error(`Invalid middleware ${m}`)
+    return <[Middleware, any]>[fn, m]
   })
   for (let i = mw.length - 1; i >= 0; i--) {
     const [fn, opts] = mw[i]
     fetch = fn(fetch, opts)
-    //const mw = 
   }
   return fetch
 }

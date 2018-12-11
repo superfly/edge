@@ -24,7 +24,7 @@ config:
     pathMatchMode: prefix
     pathPattern: "^\\/"
   middleware:
-  - https-upgrader
-  - - response-headers
-    - header_definition:
-        Powered-By: Caffeine
+  - type: https-upgrader
+  - type: response-headers
+    headers:
+      Powered-By: Caffeine
