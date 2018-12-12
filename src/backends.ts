@@ -7,6 +7,7 @@
 import { proxy } from "./proxy";
 import balancer from "@fly/load-balancer"
 import { FetchFunction } from "src";
+import { githubPages, isGithubPages } from "./backends/github_pages";
 
 export { githubPages } from "./backends/github_pages"
 export { ghostProBlog } from "./backends/ghost_pro"
@@ -17,7 +18,7 @@ export { ghostProBlog } from "./backends/ghost_pro"
  * See {@link Backends/backend}
  */
 export interface BackendInfo {
-  origin: string | string[], // was upstream,
+  origin?: string | string[], // was upstream,
   type?: string,
   headers?: { [name: string]: string | boolean | undefined }
 }
@@ -44,10 +45,16 @@ const notImplemented = ["aws_lambda", "aws_s3", "dropbox", "gravatar"]
 export default function backend(backend: BackendInfo): Backend {
   //TODO: Implement s3, dropbox, lamdba, etc
   console.log("Proxying:", backend)
-  const b = notImplemented.filter((t) => t === backend.type).length == 0 ?
-    originFetch(backend) :
-    unsupportedBackend(backend.type || "default")
-  return Object.assign(b, { info: backend })
+
+  if (backend.type === "origin") {
+    return Object.assign(originFetch(backend), { info: backend });
+  }
+  
+  if (backend.type === "github_pages" && isGithubPages(backend)) {
+    return Object.assign(githubPages(backend), { info: backend });
+  }
+
+  return Object.assign(unsupportedBackend(backend.type || "none"), { info: backend });
 }
 
 function originFetch(backend: BackendInfo){

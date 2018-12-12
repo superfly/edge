@@ -5,11 +5,10 @@ config:
       origin: https://example.com
       headers:
         host: example.com
-    onehostname:
-      type: github_page
-      origin: https://superfly.github.io
-      headers:
-        host: onehostname.com
+    landing:
+      type: github_pages
+      owner: superfly
+      repository: landing
   rules:
   - actionType: rewrite
     backendKey: example
@@ -20,7 +19,7 @@ config:
     pathPattern: "^\\/example$"
     redirectURLPattern: "/example/"
   - actionType: rewrite
-    backendKey: onehostname
+    backendKey: landing
     pathMatchMode: prefix
     pathPattern: "^\\/"
   middleware:

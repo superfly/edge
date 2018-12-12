@@ -79,6 +79,21 @@ export function githubPages(config: GitHubRepository | string): ProxyFunction<Gi
   return self
 }
 
+export function isGithubPages(input: any): input is GitHubRepository {
+  if (typeof input !== "object") {
+    return false;
+  }
+  if (!input.owner) {
+    return false;
+  }
+
+  if (!input.repository) {
+    return false;
+  }
+    
+  return true;
+}
+
 function buildGithubPagesProxy(config: GitHubRepository): ProxyFunction<GitHubRepository> {
   const {owner, repository, hostname} = config
   const ghHost = `${owner}.github.io`

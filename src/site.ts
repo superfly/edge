@@ -64,8 +64,10 @@ function isBackendInfo(b: any): b is BackendInfo {
   if (typeof b !== "object") {
     throw new Error("must be a hash")
   }
-  if (!b.origin) {
-    throw new Error("origin is not defined")
+  if (b.type === "origin") {
+    if (!b.origin) {
+      throw new Error("origin is not defined")
+    }
   }
   return true
 }
