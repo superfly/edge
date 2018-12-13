@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.3.2"></a>
+## [0.3.2](https://github.com/superfly/cdn/compare/v0.3.1...v0.3.2) (2018-12-13)
+
+
+### Bug Fixes
+
+* need fly 0.44.2 ([aa5fd85](https://github.com/superfly/cdn/commit/aa5fd85))
+
+
+
 <a name="0.3.1"></a>
 ## [0.3.1](https://github.com/superfly/cdn/compare/v0.3.0...v0.3.1) (2018-12-13)
 
