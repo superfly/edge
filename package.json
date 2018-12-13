@@ -4,7 +4,7 @@
   "description": "Fly's TypeScript CDN",
   "main": "./dist/src/index.js",
   "files": [
-    "./dist/src/"
+    "./dist/src/**/*"
   ],
   "scripts": {
     "start": "yarn fly server",
