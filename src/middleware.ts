@@ -30,7 +30,9 @@ export interface Middleware {
  */
 export function httpsUpgrader(fetch: FetchFunction, options?: RedirectOptions) {
   return async function httpsUpgrader(req: RequestInfo, init?: RequestInit) {
-    const { status, text } = options || { status: 302, text: ""}
+    let { status, text } = options || { status: 302, text: ""}
+    status = status || 302
+    text = text || "Redirecting"
     if (app.env === "development") console.log("skipping httpsUpgrader in dev")
     const url = new URL(typeof req === "string" ? req : req.url)
     if (app.env != "development" && url.protocol != "https:") {
