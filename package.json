@@ -4,7 +4,7 @@
   "description": "Fly's TypeScript CDN",
   "main": "./dist/src/index.js",
   "files": [
-    "./dist/src/**/*"
+    "dist"
   ],
   "scripts": {
     "start": "yarn fly server",
@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/superfly/cdn#readme",
   "dependencies": {
-    "@fly/fly": "^0.42.2",
+    "@fly/fly": "^0.44.2",
     "@fly/load-balancer": "^0.1.2"
   },
   "devDependencies": {
