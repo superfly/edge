@@ -1,6 +1,6 @@
 {
   "name": "@fly/cdn",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Fly's TypeScript CDN",
   "main": "./dist/src/index.js",
   "files": [
