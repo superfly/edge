@@ -1,6 +1,5 @@
 {
   "include": [
-    "index.ts",
     "./src/**/*.ts"
   ],
   "compilerOptions": {
@@ -27,7 +26,8 @@
         "*",
         "./src/*"
       ]
-    }
+    },
+    "rootDir": "./src"
   },
   "typedocOptions": {
     "out": "./docs/",
