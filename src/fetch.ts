@@ -1,4 +1,4 @@
-import { FlyRequest } from "@fly/fetch";
+import { FlyRequest } from "@fly/v8env/lib/fly/fetch";
 
 /**
  * HTTP helpers, utilities, etc.
