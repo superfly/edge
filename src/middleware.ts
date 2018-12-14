@@ -2,8 +2,7 @@
  * @module Middleware
  */
 import { applyReplacements } from "./text-replacements";
-import { FetchFunction } from "@fly/fetch";
-import { RedirectOptions } from "src";
+import { FetchFunction, RedirectOptions } from "./fetch";
 
 declare var app: any
 /** @ignore */

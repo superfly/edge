@@ -30,7 +30,7 @@
  * @preferred
  * @module HTTP
  */
-import { normalizeRequest, FetchFunction } from "."
+import { normalizeRequest, FetchFunction } from "./fetch"
 
 /**
  * This generates a `fetch` like function for proxying requests to a given origin.

@@ -6,7 +6,7 @@
 
 import { proxy } from "./proxy";
 import balancer from "@fly/load-balancer"
-import { FetchFunction } from "src";
+import { FetchFunction } from "./fetch";
 import { githubPages, isGithubPages } from "./backends/github_pages";
 
 export { githubPages } from "./backends/github_pages"
