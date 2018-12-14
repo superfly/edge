@@ -17,7 +17,10 @@
     "inlineSourceMap": true, /* Emit a single file with source maps instead of having a separate file. */
     "inlineSources": true, /* Emit the source alongside the sourcemaps within a single file; requires '--inlineSourceMap' or '--sourceMap' to be set. */
     "baseUrl": ".",
-    "rootDir": "./src"
+    "rootDirs": [
+      "./src",
+      "./test",
+    ]
   },
   "typedocOptions": {
     "out": "./docs/",
