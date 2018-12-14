@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/superfly/cdn#readme",
   "dependencies": {
-    "@fly/fly": "latest",
+    "@fly/fly": "^0.44.5",
     "@fly/load-balancer": "^0.1.2"
   },
   "devDependencies": {
