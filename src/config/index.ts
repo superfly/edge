@@ -5,6 +5,8 @@ import { ProxyFunction } from "../proxy";
 import { RuleInfo, validateRule, buildRules } from "./rules";
 import { buildMiddleware, validateMiddleware } from "./middleware";
 
+export const CDNConfigKey = "flyCDN";
+
 export interface CdnConfig {
   backends: { [key: string]: ItemConfig },
   middleware: ItemConfig[],
@@ -101,8 +103,12 @@ export function buildCdn(config: CdnConfig): FetchFunction {
 
 export function buildCdnFromAppConfig(): FetchFunction {
   try {
-    const config = app.config;
+    const config = app.config[CDNConfigKey];
+    if (!config) {
+      throw new Error("flyCDN config property not found");
+    }
     if (!isCdnConfig(config)) {
+      // This is unreachable because isCdnConfig throws but typescript can't infer that so we throw too
       throw new Error("App config not supported");
     }
     return buildCdn(config)
