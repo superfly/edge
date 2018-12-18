@@ -2,6 +2,7 @@ app: cdn
 config:
   backends:
     example:
+      type: origin
       origin: https://example.com
       headers:
         host: example.com
