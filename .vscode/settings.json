@@ -1,4 +1,4 @@
 {
     "typescript.tsdk": "node_modules/typescript/lib",
-    "javascript.format.enable": false
+    "javascript.format.enable": true
 }
