@@ -1,10 +1,18 @@
-import { FlyRequest } from "@fly/v8env/lib/fly/fetch";
 
 /**
  * HTTP helpers, utilities, etc.
  * @module HTTP
  */
 
+
+/**
+ * Fly augmented Request, adds extra relevant fields for proxy level
+ * Requests.
+ */
+export interface FlyRequest extends Request {
+  remoteAddr?: string,
+  cookies: Map<string,string>
+}
 
 /**
  * Converts RequestInfo into a Request object.

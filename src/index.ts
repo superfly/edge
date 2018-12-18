@@ -9,4 +9,8 @@ export { isCdnConfig, buildCdn, buildCdnFromAppConfig } from "./config";
 
 declare global {
   var app: any
+  interface Request{
+    remoteAddr?: string,
+    cookies: Map<string,string>
+  }
 }
