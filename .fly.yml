@@ -1,29 +1,31 @@
 app: cdn
 config:
-  backends:
-    example:
-      origin: https://example.com
+  flyCDN:
+    backends:
+      example:
+        type: origin
+        origin: https://example.com
+        headers:
+          host: example.com
+      landing:
+        type: github_pages
+        owner: superfly
+        repository: landing
+    rules:
+    - actionType: rewrite
+      backendKey: example
+      pathMatchMode: prefix
+      pathPattern: "^\\/example\\/"
+    - actionType: redirect
+      pathMatchMode: full
+      pathPattern: "^\\/example$"
+      redirectURLPattern: "/example/"
+    - actionType: rewrite
+      backendKey: landing
+      pathMatchMode: prefix
+      pathPattern: "^\\/"
+    middleware:
+    - type: https-upgrader
+    - type: response-headers
       headers:
-        host: example.com
-    landing:
-      type: github_pages
-      owner: superfly
-      repository: landing
-  rules:
-  - actionType: rewrite
-    backendKey: example
-    pathMatchMode: prefix
-    pathPattern: "^\\/example\\/"
-  - actionType: redirect
-    pathMatchMode: full
-    pathPattern: "^\\/example$"
-    redirectURLPattern: "/example/"
-  - actionType: rewrite
-    backendKey: landing
-    pathMatchMode: prefix
-    pathPattern: "^\\/"
-  middleware:
-  - type: https-upgrader
-  - type: response-headers
-    headers:
-      Powered-By: Caffeine
+        Powered-By: Caffeine

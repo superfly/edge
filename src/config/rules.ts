@@ -2,8 +2,8 @@
  * @module Rules
  * @ignore
  * */
-import { BackendMap } from "./backends";
-import { applyReplacements } from "./text-replacements";
+import { applyReplacements } from "../text-replacements";
+import { BackendProxies } from "./index";
 
 export interface RuleInfo {
   actionType: "redirect" | "rewrite",
@@ -22,7 +22,23 @@ export interface RuleInfo {
 
 declare var app: any
 
-export default function rules(backends: BackendMap, rules: RuleInfo[]) {
+export function validateRule(r: any): r is RuleInfo {
+  if (typeof r !== "object") {
+    throw new Error("must be an object")
+  }
+  if (!r.actionType) {
+    throw new Error("actionType must be defined")
+  }
+  if (r.actionType !== "redirect" && r.actionType !== "rewrite") {
+    throw new Error("actionType must be either `redirect` or `rewrite`")
+  }
+  if (r.actionType === "rewrite" && !r.backendKey) {
+    throw new Error("must inclue `backendKey` when actionType is set to `rewrite`")
+  }
+  return true
+}
+
+export function buildRules(backends: BackendProxies, rules: RuleInfo[]) {
   const compiled = rules.map(compileRule)
   return async function ruleFetch(req: RequestInfo, init?: RequestInit) {
     if (typeof req === "string") {
@@ -97,6 +113,7 @@ function compileRule(rule: RuleInfo) {
   }
   return Object.assign(fn, { rule: rule, pathPattern: pathPattern })
 }
+
 function ensureRegExp(pattern?: string | RegExp) {
   if (!pattern || pattern == "") return null
   if (typeof pattern === "string") return new RegExp(pattern)

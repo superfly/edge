@@ -221,8 +221,12 @@ export interface ProxyOptions {
  * A proxy `fetch` like function. These functions include their 
  * original configuration information.
  */
-export interface ProxyFunction<T> extends FetchFunction{
+export interface ProxyFunction<T = unknown> extends FetchFunction {
   proxyConfig: T
+}
+
+export interface ProxyFactory<TOpts = any, TInput = any> {
+  (options: TInput): ProxyFunction<TOpts>;
 }
 
 

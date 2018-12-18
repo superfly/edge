@@ -42,3 +42,7 @@ export interface RedirectOptions {
   /** Text to send as response body. Defaults to "". */
   text?: string
 }
+
+export interface FetchFactory {
+  (fetch: FetchFunction, options?: any): FetchFunction;
+}

@@ -2,9 +2,10 @@
   "name": "@fly/cdn",
   "version": "0.3.2",
   "description": "Fly's TypeScript CDN",
-  "main": "./dist/src/index.js",
+  "main": "./lib/index.js",
+  "typings": "./lib/index.d.ts",
   "files": [
-    "dist"
+    "lib"
   ],
   "scripts": {
     "start": "yarn fly server",

@@ -2,11 +2,13 @@
  * @module Backends
  */
 import { proxy, ProxyFunction } from "../proxy";
+import { isObject } from "../util";
+
 
 /**
  * GitHub Repository information.
  */
-export interface GitHubRepository {
+export interface GitHubPagesOptions {
 
   /** Repository owner */
   owner: string,
@@ -24,15 +26,18 @@ export interface GitHubRepository {
  * @param config The Github repository to proxy to
  * @module Backends
  */
-export function githubPages(config: GitHubRepository | string): ProxyFunction<GitHubRepository>{
-  if(typeof config === "string"){
-    const [owner, repository] = config.split("/")
-    config = { owner, repository }
+export function githubPages(options: GitHubPagesOptions | string): ProxyFunction<GitHubPagesOptions> {
+  if (typeof options === "string") {
+    const [owner, repository] = options.split("/");
+    options = { owner, repository }
   }
-  let ghFetch = buildGithubPagesProxy(config)
+
+  isGithubPagesOptions(options);
+
+  let ghFetch = buildGithubPagesProxy(options)
   let buildTime = 0 // first failure might need a retry
 
-  const c = config
+  const c = options
 
   const fn = async function githubPagesFetch(req: RequestInfo, init?: RequestInit) {
     const original = ghFetch
@@ -79,23 +84,22 @@ export function githubPages(config: GitHubRepository | string): ProxyFunction<Gi
   return self
 }
 
-export function isGithubPages(input: any): input is GitHubRepository {
-  if (typeof input !== "object") {
-    return false;
+export function isGithubPagesOptions(input: unknown): input is GitHubPagesOptions {
+  if (!isObject(input)) {
+    throw new Error("config must be an object");
   }
   if (!input.owner) {
-    return false;
+    throw new Error("owner must be a string");
+  }
+  if (!input.repository) {
+    throw new Error("repository must be a string");
   }
 
-  if (!input.repository) {
-    return false;
-  }
-    
   return true;
 }
 
-function buildGithubPagesProxy(config: GitHubRepository): ProxyFunction<GitHubRepository> {
-  const {owner, repository, hostname} = config
+function buildGithubPagesProxy(options: GitHubPagesOptions): ProxyFunction<GitHubPagesOptions> {
+  const {owner, repository, hostname} = options
   const ghHost = `${owner}.github.io`
   const headers = {
     host: ghHost,
@@ -117,5 +121,5 @@ function buildGithubPagesProxy(config: GitHubRepository): ProxyFunction<GitHubRe
     stripPath: path
   })
 
-  return Object.assign(fn, { proxyConfig: config } )
+  return Object.assign(fn, { proxyConfig: options } )
 }

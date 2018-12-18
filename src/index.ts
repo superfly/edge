@@ -1,12 +1,12 @@
 
-export { BackendInfo, BackendMap } from "./backends"
-export { RuleInfo } from "./rules"
-import * as middleware from "./middleware"
-export { MiddlewareConfig } from "./middleware"
-export { middleware }
 export * from "./fetch";
+export * from "./proxy";
+import * as middleware from "./middleware"
+export { middleware }
+import * as backends from "./backends";
+export { backends };
+export { isCdnConfig, buildCdn, buildCdnFromAppConfig } from "./config";
 
-export { SiteConfig } from "./site"
-
-
-
+declare global {
+  var app: any
+}
