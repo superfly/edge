@@ -1,4 +1,4 @@
-import { buildCdnFromAppConfig } from "./src";
+import { buildCdnFromAppConfig } from "../src";
   
 declare var fly: any
 
