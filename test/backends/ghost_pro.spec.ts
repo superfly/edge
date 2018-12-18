@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { ghostProBlog } from "../src/backends"
+import { ghostProBlog } from "../../src/backends"
 
 
 describe("backends/ghostPro", function() {

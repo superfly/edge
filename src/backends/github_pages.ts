@@ -27,8 +27,8 @@ export interface GitHubPagesOptions {
  * @module Backends
  */
 export function githubPages(options: GitHubPagesOptions | string): ProxyFunction<GitHubPagesOptions> {
-  if(typeof options === "string"){
-    const [owner, repository] = options.split("/")
+  if (typeof options === "string") {
+    const [owner, repository] = options.split("/");
     options = { owner, repository }
   }
 
@@ -92,7 +92,7 @@ export function isGithubPagesOptions(input: unknown): input is GitHubPagesOption
     throw new Error("owner must be a string");
   }
   if (!input.repository) {
-    throw new Error("owner must be a string");
+    throw new Error("repository must be a string");
   }
 
   return true;
