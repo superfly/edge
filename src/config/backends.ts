@@ -7,10 +7,10 @@ export type BackendMap = Map<string, ProxyFactory>;
 // type FactoryDefinition =  [ProxyFactory, (options: any) => boolean];
 
 const factories = new Map<string, ProxyFactory>([
-  ["origin", backends.origin],
-  ["github_pages", backends.githubPages],
-  ["heroku", backends.heroku],
-  ["ghost_pro", backends.ghostProBlog],
+  // ["origin", backends.origin],
+  // ["github_pages", backends.githubPages],
+  // ["heroku", backends.heroku],
+  // ["ghost_pro", backends.ghostProBlog],
 ]);
 
 function getFactory(type: string): ProxyFactory {

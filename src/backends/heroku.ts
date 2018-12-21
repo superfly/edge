@@ -5,6 +5,7 @@
 import { proxy, ProxyFunction } from "../proxy";
 import { isObject, merge } from "../util";
 import * as errors from "../errors";
+import { Pipe } from "../pipeline";
  
 /**
  * Heroku application configugration.
@@ -18,7 +19,7 @@ export interface HerokuOptions {
  * Creates a `fetch` like function for proxying requests to a Heroku app.
  * @param config Heroku app information. Accepts appName as a string.
  */
-export function heroku(options: HerokuOptions | string): ProxyFunction<HerokuOptions>{
+export function heroku(options: HerokuOptions | string): Pipe {
   const config = normalizeOptions(options);
 
   const herokuHost = `${config.appName}.herokuapp.com`;
@@ -27,8 +28,7 @@ export function heroku(options: HerokuOptions | string): ProxyFunction<HerokuOpt
     "host": herokuHost
   };
 
-  const fn = proxy(uri, { headers });
-  return Object.assign(fn, { proxyConfig: config });
+  return proxy(uri, { headers });
 }
 
 heroku.normalizeOptions = normalizeOptions;

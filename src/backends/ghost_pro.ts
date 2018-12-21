@@ -5,6 +5,7 @@
 import { proxy, ProxyFunction } from "../proxy";
 import { isObject, merge } from "../util";
 import * as errors from "../errors";
+import { Pipe } from "../pipeline";
  
 /**
  * Ghost Pro configugration.
@@ -22,7 +23,7 @@ export interface GhostProOptions {
  * Creates a `fetch` like function for proxying requests to hosted Ghost Pro blogs.
  * @param options Ghost Pro blog information. Accepts subdomain as a string..
  */
-export function ghostProBlog(options: GhostProOptions | string): ProxyFunction<GhostProOptions> {
+export function ghostProBlog(options: GhostProOptions | string): Pipe {
   const config = normalizeOptions(options);
 
   const ghostHost = `${config.subdomain}.ghost.io`
@@ -32,8 +33,8 @@ export function ghostProBlog(options: GhostProOptions | string): ProxyFunction<G
     "x-forwarded-host": config.hostname || false
   }
 
-  const fn = proxy(uri, { headers: headers })
-  return Object.assign(fn, { proxyConfig: config})
+  return proxy(uri, { headers: headers })
+  // return Object.assign(fn, { proxyConfig: config})
 }
 
 function normalizeOptions(input: unknown): GhostProOptions {

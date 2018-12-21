@@ -31,6 +31,7 @@
  * @module HTTP
  */
 import { normalizeRequest, FetchFunction } from "./fetch"
+import { Pipe, pipe } from "./pipeline";
 
 /**
  * This generates a `fetch` like function for proxying requests to a given origin.
@@ -40,24 +41,27 @@ import { normalizeRequest, FetchFunction } from "./fetch"
  * @param origin A URL to an origin, can include a path to rebase requests.
  * @param options Options and headers to control origin request.
  */
-export function proxy(origin: string | URL, options?: ProxyOptions): ProxyFunction<ProxyOptions> {
+export function proxy(origin: string | URL, options?: ProxyOptions): Pipe {
   if (!options) {
     options = {}
   }
-  async function proxyFetch(req: RequestInfo, init?: RequestInit) {
-    req = normalizeRequest(req)
-    if (!options) {
-      options = {}
-    }
-    const breq = buildProxyRequest(origin, options, req, init)
-    let bresp = await fetch(breq)
-    if(options.rewriteLocationHeaders !== false){
-      bresp = rewriteLocationHeader(req.url, breq.url, bresp)
-    }
-    return bresp
-  }
 
-  return Object.assign(proxyFetch, { proxyConfig: options})
+  return pipe("proxy", (fetch) => {
+    return async function proxyFetch(req: RequestInfo, init?: RequestInit) {
+      req = normalizeRequest(req)
+      if (!options) {
+        options = {}
+      }
+      const breq = buildProxyRequest(origin, options, req, init)
+      let bresp = await fetch(breq)
+      if (options.rewriteLocationHeaders !== false) {
+        bresp = rewriteLocationHeader(req.url, breq.url, bresp)
+      }
+      return bresp
+    }
+  });
+
+  // return Object.assign(proxyFetch, { proxyConfig: options})
 }
 
 /**

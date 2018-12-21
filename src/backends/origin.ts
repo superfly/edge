@@ -2,6 +2,7 @@ import { ProxyFunction, proxy } from "../proxy";
 import { isObject, merge } from "../util";
 import { FetchFunction } from "../fetch";
 import * as errors from "../errors";
+import { Pipe } from "../pipeline";
 
 /**
  * Proxy options for generic http/https backends
@@ -17,12 +18,12 @@ export interface OriginOptions {
  * Creates a fetch-like proxy function for making requests to http/https origins
  * @module Backends
  */
-export function origin(options: OriginOptions | string | URL): ProxyFunction<OriginOptions> {
+export function origin(options: OriginOptions | string | URL): Pipe {
   const config = normalizeOptions(options);
   
-  const fn = proxy(config.origin, { forwardHostHeader: true, headers: config.headers });
+  return proxy(config.origin, { forwardHostHeader: true, headers: config.headers });
 
-  return Object.assign(fn, { proxyConfig: config });
+  // return Object.assign(fn, { proxyConfig: config });
 }
 
 origin.normalizeOptions = normalizeOptions;

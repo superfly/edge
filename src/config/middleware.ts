@@ -5,9 +5,9 @@ import { ItemConfig } from "./index";
 type FactoryDefinition = [FetchFactory, ((options: any) => boolean)?];
 
 const factories = new Map<string, FactoryDefinition>([
-  ["https-upgrader", [middleware.httpsUpgrader]],
-  ["response-headers", [middleware.responseHeaders]],
-  ["inject-html", [middleware.injectHTML]],
+  // ["https-upgrader", [middleware.httpsUpgrader]],
+  // ["response-headers", [middleware.responseHeaders]],
+  // ["inject-html", [middleware.injectHTML]],
 ]);
 
 function getFactory(type: string): FactoryDefinition {

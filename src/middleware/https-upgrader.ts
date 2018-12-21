@@ -1,21 +1,27 @@
-import { FetchFunction, RedirectOptions } from "../fetch";
+import { RedirectOptions } from "../fetch";
+import { Pipe, pipe } from "../pipeline";
 
 /**
- * Redirects http requests to https in production.
+ * Redirects http requests to https
  * 
- * In development, this only logs a message
+ * This pipe is skipped in development
  */
-export function httpsUpgrader(fetch: FetchFunction, options?: RedirectOptions): FetchFunction {
-  return async function httpsUpgrader(req: RequestInfo, init?: RequestInit) {
-    let { status, text } = options || { status: 302, text: "" }
-    status = status || 302
-    text = text || "Redirecting"
-    if (app.env === "development") console.log("skipping httpsUpgrader in dev")
-    const url = new URL(typeof req === "string" ? req : req.url)
-    if (app.env != "development" && url.protocol != "https:") {
-      url.protocol = "https:"
-      return new Response(text, { status: status, headers: { location: url.toString() } })
+export function httpsUpgrader(options?: RedirectOptions): Pipe {
+  const { status = 302 } = options || {};
+
+  return pipe("httpsUpgrader", (fetch) => {
+    if (app.env === "development") {
+      console.log("skipping httpsUpgrader in dev");
+      return fetch;
     }
-    return fetch(req, init)
-  }
+
+    return async function (req: RequestInfo, init?: RequestInit) {
+      const url = new URL(typeof req === "string" ? req : req.url);
+      if (url.protocol !== "https:") {
+        url.protocol = "https:";
+        return Response.redirect(url.href, status);
+      }
+      return fetch(req, init)
+    }
+  });
 }

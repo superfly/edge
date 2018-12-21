@@ -38,9 +38,6 @@ export interface FetchFunction {
 export interface RedirectOptions {
   /** The HTTP status code to send (defaults to 302) */
   status?: number,
-
-  /** Text to send as response body. Defaults to "". */
-  text?: string
 }
 
 export interface FetchFactory {
