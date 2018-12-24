@@ -1,46 +1,33 @@
 import { expect } from 'chai';
 import { githubPages } from "../../src/backends"
-import * as errors from "../../src/errors";
 
 
 describe("backends/githubPages", function() {
   this.timeout(15000)
 
-  describe("options", () => {
-    const validOptions = [
-      [
-        "superfly/cdn",
-        { owner: "superfly", repository: "cdn" }
-      ],
-      [
-        { owner: "superfly", repository: "cdn" },
-        { owner: "superfly", repository: "cdn" }
-      ],
-      [
-        { owner: "superfly", repository: "cdn", hostname: "host.name" },
-        { owner: "superfly", repository: "cdn", hostname: "host.name" }
-      ],
-    ];
+  describe("factory", () => {
+    it("accepts a owner/repo string", () => {
+      const fn = githubPages("superfly/cdn");
+      expect(fn.proxyConfig.owner).equal("superfly");
+      expect(fn.proxyConfig.repository).equal("cdn");
+      expect(fn.proxyConfig.hostname).to.be.undefined;
+    })
 
-    for (const [input, config] of validOptions) {
-      it(`accepts ${JSON.stringify(input)}`, () => {
-        expect(githubPages(input as any).proxyConfig).to.eql(config);
-      })
-    }
+    it("accepts an object", () => {
+      const fn = githubPages({ owner: "superfly", repository: "cdn" });
+      expect(fn.proxyConfig.owner).equal("superfly");
+      expect(fn.proxyConfig.repository).equal("cdn");
+      expect(fn.proxyConfig.hostname).to.be.undefined;
+    })
 
-    const invalidOptions = [
-      [undefined, errors.InputError],
-      ["", errors.InputError],
-      [{ }, /owner is required/],
-      [{ owner: "", repository: "cdn" }, /owner is required/],
-      [{ repository: "cdn" }, /owner is required/],
-      [{ owner: "superfly", repository: "" }, /repository is required/],
-      [{ owner: "superfly" }, /repository is required/],
+    const testCases = [
+      ["invalid-repo", /repository/]
     ]
 
-    for (const [input, err] of invalidOptions) {
-      it(`rejects ${JSON.stringify(input)}`, () => {
-        expect(() => { githubPages(input as any) }).throw(err as any);
+    for (const [input, err] of testCases) {
+      it(`rejects invalid input: ${input}`, () => {
+        const x = () => { githubPages(input as any) };
+        expect(x).throws(err);
       })
     }
   })

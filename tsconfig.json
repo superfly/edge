@@ -17,6 +17,7 @@
     "esModuleInterop": false,
     "inlineSourceMap": true,
     "inlineSources": true,
+    "baseUrl": ".",
     "rootDirs": [
       "./src",
       "./test",

@@ -227,8 +227,8 @@ export interface ProxyFunction<T = unknown> extends FetchFunction {
 
 export interface ProxyFactory<TOpts = any, TInput = any> {
   (options: TInput): ProxyFunction<TOpts>;
-  normalizeOptions?: (input: any) => TOpts;
 }
+
 
 /*
  Requests with rewrites:

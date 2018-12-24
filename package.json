@@ -34,11 +34,10 @@
   "homepage": "https://github.com/superfly/cdn#readme",
   "dependencies": {
     "@fly/fly": "^0.44.5",
-    "lodash": "^4.17.11"
+    "@fly/load-balancer": "^0.1.2"
   },
   "devDependencies": {
     "@types/chai": "^4.1.7",
-    "@types/lodash": "^4.14.119",
     "@types/mocha": "^5.2.5",
     "@types/source-map": "^0.5.2",
     "chai": "^4.2.0",
