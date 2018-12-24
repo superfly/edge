@@ -1,5 +1,3 @@
-import { FetchFunction } from "../fetch";
-import { ProxyFunction } from "../proxy";
 import { Pipe, pipe } from "../pipeline";
 
 export interface ResponseHeadersOptions {
@@ -15,8 +13,8 @@ export function responseHeaders(options: ResponseHeadersOptions = {}): Pipe {
       return fetch;
     }
 
-    return async function responseHeaders(req: RequestInfo, init?: RequestInit) {
-      const resp = await fetch(req, init)
+    return async (req) => {
+      const resp = await fetch(req)
 
       for (const [k, v] of Object.entries(headers)) {
         if (v === false) {

@@ -15,13 +15,13 @@ export function httpsUpgrader(options?: RedirectOptions): Pipe {
       return fetch;
     }
 
-    return async function (req: RequestInfo, init?: RequestInit) {
+    return async (req) => {
       const url = new URL(typeof req === "string" ? req : req.url);
       if (url.protocol !== "https:") {
         url.protocol = "https:";
         return Response.redirect(url.href, status);
       }
-      return fetch(req, init)
+      return fetch(req);
     }
   });
 }

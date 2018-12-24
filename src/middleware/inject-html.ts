@@ -15,8 +15,8 @@ export function injectHTML(options: InjectHTMLOptions): Pipe {
       return fetch;
     }
 
-    return async function injectHTML(req: RequestInfo, init?: RequestInit) {
-      const resp = await fetch(req, init)
+    return async (req) => {
+      const resp = await fetch(req)
       return await applyReplacements(resp, [[targetTag, html]]);
     }
   });

@@ -6,7 +6,7 @@ declare var fly: any
 
 function say(message: string) {
   return pipe(`say ${message}`, (fetch) => {
-    return (req, init) => {
+    return (req) => {
       return Promise.resolve(new Response(message));
     }
   })
@@ -14,8 +14,7 @@ function say(message: string) {
 
 function echoPath() {
   return pipe(`echoPath`, (fetch) => {
-    return (req, init) => {
-      req = normalizeRequest(req);
+    return (req) => {
       const url = new URL(req.url);
       return Promise.resolve(new Response(url.pathname));
     }

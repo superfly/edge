@@ -1,7 +1,7 @@
-import { FetchFunction, normalizeRequest } from "./fetch";
+import { FlyFetch } from "./fetch";
 
 export interface FetchFactory {
-  (fetch: FetchFunction): FetchFunction;
+  (fetch: FlyFetch): FlyFetch;
 }
 
 export interface Pipe<T = any> extends FetchFactory {
@@ -51,24 +51,17 @@ export function gate(condition: GateExpression, child: Pipe): Pipe {
   const p = pipe("gate", (fetch) => {
     const handler = child(fetch);
 
-    return (req, init) => {
-      req = normalizeRequest(req);
-
+    return (req) => {
       if (!condition(req)) {
         throw abortPipeHandle;
       }
       
-      return handler(req, init);
+      return handler(req);
     }
   });
   p.children = [child];
   return p;
 }
-
-// export function when(condition: ): Pipe {
-
-// }
-
 
 type RewritePathOptions = { stripPrefix: string }
 
@@ -77,14 +70,14 @@ export function rewritePath(options: RewritePathOptions): Pipe {
     const prefix = options.stripPrefix;
     const length = prefix.length;
 
-    return (req, init) => {
-      req = normalizeRequest(req);
+    return (req) => {
       const url = new URL(req.url);
       if (url.pathname.startsWith(prefix)) {
         url.pathname = url.pathname.substring(length);
-        return fetch(url.href, req);
+        req = new Request(url.href, req);
+        return fetch(req);
       }
-      return fetch(req, init);
+      return fetch(req);
     }
   })
 }

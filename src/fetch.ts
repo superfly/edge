@@ -5,6 +5,9 @@ import { FlyRequest } from "@fly/v8env/lib/fly/fetch";
  * @module HTTP
  */
 
+export interface FlyFetch {
+  (req: Request): Promise<Response>;
+}
 
 /**
  * Converts RequestInfo into a Request object.
