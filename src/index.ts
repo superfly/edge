@@ -6,6 +6,7 @@ export { middleware }
 import * as backends from "./backends";
 export { backends };
 export { isCdnConfig, buildCdn, buildCdnFromAppConfig } from "./config";
+export * from "./pipeline";
 
 declare global {
   var app: any

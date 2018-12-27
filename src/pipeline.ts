@@ -1,16 +1,16 @@
 import { FlyFetch } from "./fetch";
 
-export interface FetchFactory {
+export interface FlyFetchFactory {
   (fetch: FlyFetch): FlyFetch;
 }
 
-export interface Pipe<T = any> extends FetchFactory {
+export interface Pipe<T = any> extends FlyFetchFactory {
   pipeName: string;
   children?: Pipe[];
   props?: T;
 }
 
-export function pipe(name: string, handler: FetchFactory): Pipe {
+export function pipe(name: string, handler: FlyFetchFactory): Pipe {
   return Object.assign(handler, {
     pipeName: name
   });
