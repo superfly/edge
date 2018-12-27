@@ -75,9 +75,11 @@ export function buildRules(backends: BackendProxies, rules: RuleInfo[]) {
       url = new URL(url.pathname.replace(match.pathPattern, rule.pathReplacementPattern), url)
       req = new Request(url.toString(), <RequestInit>req)
     }
-    if (rule.responseReplacements && rule.responseReplacements.length > 0) {
-      req.headers.delete("accept-encoding")
+    if (!rule.responseReplacements || rule.responseReplacements.length === 0) {
+      return await backend(req, init)
     }
+
+    req.headers.delete("accept-encoding")
     let resp = await backend(req, init)
     return applyReplacements(resp, rule.responseReplacements)
   }
