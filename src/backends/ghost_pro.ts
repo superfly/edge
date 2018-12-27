@@ -3,8 +3,9 @@
  */
 
 import { proxy, ProxyFunction } from "../proxy";
-import { isObject } from "../util";
- 
+import { isObject, merge } from "../util";
+import * as errors from "../errors";
+
 /**
  * Ghost Pro configugration.
  */
@@ -19,17 +20,10 @@ export interface GhostProOptions {
 
 /**
  * Creates a `fetch` like function for proxying requests to hosted Ghost Pro blogs.
- * @param config Ghost Pro blog information. Accepts subdomain as a string..
+ * @param options Ghost Pro blog information. Accepts subdomain as a string..
  */
-export function ghostProBlog(config: GhostProOptions | string): ProxyFunction<GhostProOptions> {
-  if(typeof config === "string") {
-    config = { subdomain: config }
-  }
-  if(!config.directory) {
-    config.directory = "/"
-  }
-
-  isGhostProOptions(config);
+export function ghostProBlog(options: GhostProOptions | string): ProxyFunction<GhostProOptions> {
+  const config = normalizeOptions(options);
 
   const ghostHost = `${config.subdomain}.ghost.io`
   const uri = `https://${ghostHost}${config.directory}`
@@ -38,21 +32,29 @@ export function ghostProBlog(config: GhostProOptions | string): ProxyFunction<Gh
     "x-forwarded-host": config.hostname || false
   }
 
-  const fn = proxy(uri, { headers: headers} )
-  const f = Object.assign(fn, { proxyConfig: config})
-  return f
+  const fn = proxy(uri, { headers: headers })
+  return Object.assign(fn, { proxyConfig: config })
 }
 
-export function isGhostProOptions(input: unknown): input is GhostProOptions {
-  if (!isObject(input)) {
-    throw new Error("config must be an object");
-  }
-  if (!input.subdomain) {
-    throw new Error("subdomain must be a string");
-  }
-  if (!input.directory) {
-    throw new Error("subdomain must be a string");
+function normalizeOptions(input: unknown): GhostProOptions {
+  const options: GhostProOptions = {
+    subdomain: "",
+    directory: "/"
+  };
+
+  if (typeof input === "string") {
+    options.subdomain = input;
+  } else if (isObject(input)) {
+    merge(options, input, ["subdomain", "directory", "hostname"]);
+  } else {
+    throw errors.invalidInput("options must be a GhostProOptions object or string");
   }
 
-  return true;
+  if (!options.subdomain) {
+    throw errors.invalidProperty("subdomain", "is required");
+  }
+
+  return options;
 }
+
+ghostProBlog.normalizeOptions = normalizeOptions;

@@ -3,8 +3,9 @@
  */
 
 import { proxy, ProxyFunction } from "../proxy";
-import { isObject } from "../util";
- 
+import { isObject, merge } from "../util";
+import * as errors from "../errors";
+
 /**
  * Heroku application configugration.
  */
@@ -17,30 +18,35 @@ export interface HerokuOptions {
  * Creates a `fetch` like function for proxying requests to a Heroku app.
  * @param config Heroku app information. Accepts appName as a string.
  */
-export function heroku(options: HerokuOptions | string): ProxyFunction<HerokuOptions>{
-  if(typeof options === "string"){
-    options = { appName: options }
-  }
+export function heroku(options: HerokuOptions | string): ProxyFunction<HerokuOptions> {
+  const config = normalizeOptions(options);
 
-  isHerokuOptions(options);
-
-  const herokuHost = `${options.appName}.herokuapp.com`
-  const uri = `https://${herokuHost}`
+  const herokuHost = `${config.appName}.herokuapp.com`;
+  const uri = `https://${herokuHost}`;
   const headers = {
     "host": herokuHost
-  }
+  };
 
-  const fn = proxy(uri, { headers } )
-  return Object.assign(fn, { proxyConfig: options})
+  const fn = proxy(uri, { headers });
+  return Object.assign(fn, { proxyConfig: config });
 }
 
-export function isHerokuOptions(input: unknown): input is HerokuOptions {
-  if (!isObject(input)) {
-    throw new Error("config must be an object");
-  }
-  if (!input.appName) {
-    throw new Error("appName must be a string");
+heroku.normalizeOptions = normalizeOptions;
+
+function normalizeOptions(input: unknown): HerokuOptions {
+  const options: HerokuOptions = { appName: "" };
+
+  if (typeof input === "string") {
+    options.appName = input;
+  } else if (isObject(input)) {
+    merge(options, input, ["appName"]);
+  } else {
+    throw errors.invalidInput("options must be a HerokuOptions object or string");
   }
 
-  return true;
+  if (!options.appName) {
+    throw errors.invalidProperty("appName", "is required");
+  }
+
+  return options;
 }

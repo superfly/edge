@@ -1,4 +1,4 @@
-import { FetchFunction } from "../fetch";
+import { FetchFunction, normalizeRequest } from "../fetch";
 import { applyReplacements } from "../text-replacements";
 
 export interface InjectHTMLOptions {
@@ -15,6 +15,8 @@ export function injectHTML(fetch: FetchFunction, options?: InjectHTMLOptions): F
   }
 
   return async function injectHTML(req: RequestInfo, init?: RequestInit) {
+    req = normalizeRequest(req);
+    req.headers.delete("accept-encoding")
     const resp = await fetch(req, init)
     return applyReplacements(resp, [[targetTag, html]])
   }

@@ -37,7 +37,7 @@ export function isCdnConfig(input: unknown): input is CdnConfig {
     throw new Error("config must be an object")
   }
 
-  const { backendConfigs = { }, ruleConfigs = [], middlewareConfigs = [] } = input;
+  const { backendConfigs = {}, ruleConfigs = [], middlewareConfigs = [] } = input;
 
   if (!isObject(backendConfigs)) {
     throw new Error("backends property must be a map of keys -> Backend definition");
@@ -90,7 +90,7 @@ export function buildCdn(config: CdnConfig): FetchFunction {
   }
 
   let fn = buildRules(backends, config.rules)
-  
+
   const middleware = config.middleware;
   if (middleware && middleware.length > 0) {
     for (let i = middleware.length - 1; i >= 0; i--) {

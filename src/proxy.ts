@@ -51,13 +51,13 @@ export function proxy(origin: string | URL, options?: ProxyOptions): ProxyFuncti
     }
     const breq = buildProxyRequest(origin, options, req, init)
     let bresp = await fetch(breq)
-    if(options.rewriteLocationHeaders !== false){
+    if (options.rewriteLocationHeaders !== false) {
       bresp = rewriteLocationHeader(req.url, breq.url, bresp)
     }
     return bresp
   }
 
-  return Object.assign(proxyFetch, { proxyConfig: options})
+  return Object.assign(proxyFetch, { proxyConfig: options })
 }
 
 /**
@@ -122,42 +122,42 @@ export function buildProxyRequest(origin: string | URL, options: ProxyOptions, r
   return breq;
 }
 
-export function rewriteLocationHeader(url: URL | string, burl: URL | string, resp: Response){
+export function rewriteLocationHeader(url: URL | string, burl: URL | string, resp: Response) {
   const locationHeader = resp.headers.get("location")
-  if(!locationHeader){
+  if (!locationHeader) {
     return resp
   }
-  if(typeof url === "string"){
+  if (typeof url === "string") {
     url = new URL(url)
   }
-  if(typeof burl === "string"){
+  if (typeof burl === "string") {
     burl = new URL(burl)
   }
   const location = new URL(locationHeader, burl)
 
-  if(location.hostname !== burl.hostname || location.protocol !== burl.protocol){
+  if (location.hostname !== burl.hostname || location.protocol !== burl.protocol) {
     return resp
   }
 
 
   let pathname = location.pathname
-  if(url.pathname.endsWith(burl.pathname)){
+  if (url.pathname.endsWith(burl.pathname)) {
     // url path: /original/path/
     // burl path: /path/
     // need to prefix base
     const prefix = url.pathname.substring(0, url.pathname.length - burl.pathname.length)
     pathname = prefix + location.pathname
 
-  } else if(burl.pathname.endsWith(url.pathname)) {
+  } else if (burl.pathname.endsWith(url.pathname)) {
     // url path: /original/path/
     // burl path: /path/
     // need to remove prefix
     const remove = burl.pathname.substring(0, burl.pathname.length - url.pathname.length)
-    if(location.pathname.startsWith(remove)){
+    if (location.pathname.startsWith(remove)) {
       pathname = location.pathname.substring(remove.length, location.pathname.length)
     }
   }
-  if(pathname !== location.pathname){
+  if (pathname !== location.pathname) {
     // do the rewrite
     location.pathname = pathname
     location.protocol = url.protocol
@@ -227,8 +227,8 @@ export interface ProxyFunction<T = unknown> extends FetchFunction {
 
 export interface ProxyFactory<TOpts = any, TInput = any> {
   (options: TInput): ProxyFunction<TOpts>;
+  normalizeOptions?: (input: any) => TOpts;
 }
-
 
 /*
  Requests with rewrites:

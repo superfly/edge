@@ -2,7 +2,8 @@
  * @module Backends
  */
 import { proxy, ProxyFunction } from "../proxy";
-import { isObject } from "../util";
+import { isObject, merge } from "../util";
+import * as errors from "../errors";
 
 
 /**
@@ -27,33 +28,28 @@ export interface GitHubPagesOptions {
  * @module Backends
  */
 export function githubPages(options: GitHubPagesOptions | string): ProxyFunction<GitHubPagesOptions> {
-  if (typeof options === "string") {
-    const [owner, repository] = options.split("/");
-    options = { owner, repository }
-  }
+  const config = normalizeOptions(options);
 
-  isGithubPagesOptions(options);
-
-  let ghFetch = buildGithubPagesProxy(options)
+  let ghFetch = buildGithubPagesProxy(config)
   let buildTime = 0 // first failure might need a retry
 
-  const c = options
+  const c = config
 
   const fn = async function githubPagesFetch(req: RequestInfo, init?: RequestInit) {
     const original = ghFetch
-    if(typeof req === "string"){
+    if (typeof req === "string") {
       req = new Request(req, init)
     }
     console.debug("ghpages starting fetch:", req.url, buildTime)
     let resp = await ghFetch(req, init)
     console.debug("ghpages resp status:", resp.status)
-    if(resp.status === 404 && ghFetch.proxyConfig.hostname){
+    if (resp.status === 404 && ghFetch.proxyConfig.hostname) {
       // hostname might've been cleared
       const url = new URL(req.url)
       const diff = Date.now() - buildTime
-      if(
+      if (
         (url.pathname === "/" && diff > 10000) // retry after 10s for root
-       || diff > 30000){ // wait 5min for everything else
+        || diff > 30000) { // wait 5min for everything else
 
 
         console.debug("ghpages hostname request got 404:", c.hostname)
@@ -61,17 +57,17 @@ export function githubPages(options: GitHubPagesOptions | string): ProxyFunction
         ghFetch = buildGithubPagesProxy(c)
       }
     }
-    if(resp.status === 301 && !ghFetch.proxyConfig.hostname){
+    if (resp.status === 301 && !ghFetch.proxyConfig.hostname) {
       // 301s happen when you request <org>.github.io/<repo> and need a custom domain
       let location = resp.headers.get("location")
-      if(location){
+      if (location) {
         const url = new URL(location)
         c.hostname = url.hostname
         ghFetch = buildGithubPagesProxy(c)
         console.debug("ghpages found hostname:", c)
       }
     }
-    if(original !== ghFetch){
+    if (original !== ghFetch) {
       // underlying proxy function changed, store it and retry
       console.debug("ghpages got a new fetch fn")
       self.proxyConfig = ghFetch.proxyConfig
@@ -80,34 +76,43 @@ export function githubPages(options: GitHubPagesOptions | string): ProxyFunction
     return resp
   }
 
-  let self = Object.assign(fn, { proxyConfig: ghFetch.proxyConfig})
+  let self = Object.assign(fn, { proxyConfig: ghFetch.proxyConfig })
   return self
 }
 
-export function isGithubPagesOptions(input: unknown): input is GitHubPagesOptions {
-  if (!isObject(input)) {
-    throw new Error("config must be an object");
-  }
-  if (!input.owner) {
-    throw new Error("owner must be a string");
-  }
-  if (!input.repository) {
-    throw new Error("repository must be a string");
+githubPages.normalizeOptions = normalizeOptions;
+
+function normalizeOptions(input: unknown): GitHubPagesOptions {
+  const options: GitHubPagesOptions = { owner: "", repository: "" };
+
+  if (typeof input === "string" && input.includes("/")) {
+    [options.owner, options.repository] = input.split("/");
+  } else if (isObject(input)) {
+    merge(options, input, ["owner", "repository", "hostname"]);
+  } else {
+    throw errors.invalidInput("options must be a GitHubPagesOptions object or `owner/repo` string");
   }
 
-  return true;
+  if (!options.owner) {
+    throw errors.invalidProperty("owner", "is required");
+  }
+  if (!options.repository) {
+    throw errors.invalidProperty("repository", "is required");
+  }
+
+  return options;
 }
 
 function buildGithubPagesProxy(options: GitHubPagesOptions): ProxyFunction<GitHubPagesOptions> {
-  const {owner, repository, hostname} = options
+  const { owner, repository, hostname } = options
   const ghHost = `${owner}.github.io`
   const headers = {
     host: ghHost,
     "x-forwarded-host": false
   }
-  let path  = `/${repository}/`
-  
-  if(hostname){
+  let path = `/${repository}/`
+
+  if (hostname) {
     path = '/' // no repo path when hostname exists
     headers.host = hostname
   }
@@ -121,5 +126,5 @@ function buildGithubPagesProxy(options: GitHubPagesOptions): ProxyFunction<GitHu
     stripPath: path
   })
 
-  return Object.assign(fn, { proxyConfig: options } )
+  return Object.assign(fn, { proxyConfig: options })
 }
