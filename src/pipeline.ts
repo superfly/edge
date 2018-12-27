@@ -26,6 +26,35 @@ export function pipeline(...pipes: Pipe[]): Pipe {
   return pipeline;
 }
 
+type RequestAction = (req: Request) => Request | void;
+
+export function onRequest(action: RequestAction): Pipe {
+  return pipe("requestModifier", (fetch) => {
+    return (req) => {
+      const maybeReq = action(req);
+      if (maybeReq) {
+        req = maybeReq;
+      }
+      return fetch(req);
+    }
+  })
+}
+
+type ResponseAction = (req: Request, resp: Response) => Response | Promise<Response | void> | void;
+
+export function onResponse(action: ResponseAction): Pipe {
+  return pipe("responseModifier", (fetch) => {
+    return async (req) => {
+      const resp = await fetch(req);
+      const maybeReq = await action(req, resp);
+      if (maybeReq) {
+        return maybeReq;
+      }
+      return resp;
+    }
+  })
+}
+
 export function match(...pipes: Pipe[]): Pipe {
   return pipe("match", (fetch) => {
     const handlers = pipes.map(s => s(fetch));
