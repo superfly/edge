@@ -2,8 +2,7 @@
  * @module Backends
  */
 import { proxy, ProxyFunction } from "../proxy";
-import { isObject, merge } from "../util";
-import * as errors from "../errors";
+import { isObject } from "../util";
 
 
 /**
@@ -28,12 +27,17 @@ export interface GitHubPagesOptions {
  * @module Backends
  */
 export function githubPages(options: GitHubPagesOptions | string): ProxyFunction<GitHubPagesOptions> {
-  const config = normalizeOptions(options);
+  if (typeof options === "string") {
+    const [owner, repository] = options.split("/");
+    options = { owner, repository }
+  }
 
-  let ghFetch = buildGithubPagesProxy(config)
+  isGithubPagesOptions(options);
+
+  let ghFetch = buildGithubPagesProxy(options)
   let buildTime = 0 // first failure might need a retry
 
-  const c = config
+  const c = options
 
   const fn = async function githubPagesFetch(req: RequestInfo, init?: RequestInit) {
     const original = ghFetch
@@ -80,27 +84,18 @@ export function githubPages(options: GitHubPagesOptions | string): ProxyFunction
   return self
 }
 
-githubPages.normalizeOptions = normalizeOptions;
-
-function normalizeOptions(input: unknown): GitHubPagesOptions {
-  const options: GitHubPagesOptions = { owner: "", repository: "" };
-
-  if (typeof input === "string" && input.includes("/")) {
-    [options.owner, options.repository] = input.split("/");
-  } else if (isObject(input)) {
-    merge(options, input, ["owner", "repository", "hostname"]);
-  } else {
-    throw errors.invalidInput("options must be a GitHubPagesOptions object or `owner/repo` string");
+export function isGithubPagesOptions(input: unknown): input is GitHubPagesOptions {
+  if (!isObject(input)) {
+    throw new Error("config must be an object");
+  }
+  if (!input.owner) {
+    throw new Error("owner must be a string");
+  }
+  if (!input.repository) {
+    throw new Error("repository must be a string");
   }
 
-  if (!options.owner) {
-    throw errors.invalidProperty("owner", "is required");
-  }
-  if (!options.repository) {
-    throw errors.invalidProperty("repository", "is required");
-  }
-
-  return options;
+  return true;
 }
 
 function buildGithubPagesProxy(options: GitHubPagesOptions): ProxyFunction<GitHubPagesOptions> {

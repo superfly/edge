@@ -1,53 +1,18 @@
 import { expect } from "chai";
 import { ghostProBlog } from "../../src/backends"
-import * as errors from "../../src/errors";
 
 
 describe("backends/ghostPro", function() {
   this.timeout(15000)
-
-  describe("options", () => {
-    const validOptions = [
-      [
-        "subdomain",
-        { subdomain: "subdomain", directory: "/" }
-      ],
-      [
-        { subdomain: "subdomain" },
-        { subdomain: "subdomain", directory: "/" }
-      ],
-      [
-        { subdomain: "subdomain", hostname: "host.name" },
-        { subdomain: "subdomain", directory: "/", hostname: "host.name" }
-      ],
-      [
-        { subdomain: "subdomain", directory: "/" },
-        { subdomain: "subdomain", directory: "/" }
-      ]
-    ];
-
-    for (const [input, config] of validOptions) {
-      it(`accepts ${JSON.stringify(input)}`, () => {
-        expect(ghostProBlog(input as any).proxyConfig).to.eql(config);
-      })
-    }
-
-    const invalidOptions = [
-      [undefined, errors.InputError],
-      ["", /subdomain is required/],
-      [{}, /subdomain is required/],
-      [{ subdomain: "" }, /subdomain is required/],
-    ];
-
-    for (const [input, err] of invalidOptions) {
-      it(`rejects ${JSON.stringify(input)}`, () => {
-        expect(() => { ghostProBlog(input as any) }).throw(err as any);
-      })
-    }
+  it('generated config from subdomain only', () => {
+    const fn = ghostProBlog("demo")
+    expect(fn.proxyConfig.subdomain).to.eq("demo")
+    expect(fn.proxyConfig.directory).to.eq("/")
+    expect(fn.proxyConfig.hostname).to.be.undefined
   })
 
-  it('works with just a subdomain', async () => {
-    const fn = ghostProBlog({ subdomain: "demo" });
+  it('works with just a subdomain', async () =>{
+    const fn = ghostProBlog("demo")
 
     const resp = await fn("https://ghostpro/", { method: "HEAD"})
     expect(resp.status).to.eq(200)
