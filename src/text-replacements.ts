@@ -3,7 +3,7 @@
  * @ignore
  */
 export async function applyReplacements(resp: Response, replacements?: [string, string][]) {
-  if (!replacements || !isTextContentType(resp)) {
+  if (!replacements || replacements.length === 0 || !isTextContentType(resp)) {
     return resp;
   }
 

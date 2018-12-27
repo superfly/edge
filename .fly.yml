@@ -2,30 +2,13 @@ app: cdn
 config:
   flyCDN:
     backends:
-      example:
+      getting-started:
         type: origin
-        origin: https://example.com
+        origin: https://getting-started.edgeapp.net
         headers:
-          host: example.com
-      landing:
-        type: github_pages
-        owner: superfly
-        repository: landing
+          host: getting-started.edgeapp.net
     rules:
     - actionType: rewrite
-      backendKey: example
-      pathMatchMode: prefix
-      pathPattern: "^\\/example\\/"
-    - actionType: redirect
-      pathMatchMode: full
-      pathPattern: "^\\/example$"
-      redirectURLPattern: "/example/"
-    - actionType: rewrite
-      backendKey: landing
-      pathMatchMode: prefix
-      pathPattern: "^\\/"
+      backendKey: getting-started
     middleware:
     - type: https-upgrader
-    - type: response-headers
-      headers:
-        Powered-By: Caffeine
