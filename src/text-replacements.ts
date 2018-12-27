@@ -3,7 +3,7 @@
  * @ignore
  */
 export async function applyReplacements(resp: Response, replacements?: [string, string][]) {
-  if (!replacements) return resp
+  if (!replacements || replacements.length === 0) return resp
   const contentType = resp.headers.get("content-type") || ""
   if (
     contentType.includes("/html") ||
