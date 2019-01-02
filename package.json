@@ -34,7 +34,9 @@
   "homepage": "https://github.com/superfly/cdn#readme",
   "dependencies": {
     "@fly/fly": "^0.44.5",
-    "lodash": "^4.17.11"
+    "@types/ua-parser-js": "^0.7.32",
+    "lodash": "^4.17.11",
+    "ua-parser-js": "^0.7.19"
   },
   "peerDependencies": {},
   "devDependencies": {
