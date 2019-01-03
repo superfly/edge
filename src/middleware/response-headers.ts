@@ -5,6 +5,11 @@ export interface ResponseHeadersOptions {
   headers?: {};
 }
 
+/**
+ * Middleware to set headers on every response.
+ * @param fetch 
+ * @param options 
+ */
 export function responseHeaders(fetch: FetchFunction, options?: ResponseHeadersOptions): FetchFunction {
   const headers = options;
 
