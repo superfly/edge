@@ -1,6 +1,6 @@
 # Fly CDN
 
-The Fly CDN implements a fully functional CDN as a Fly [Edge App](https://fly.io/docs/#edge-applications) in plain JavaScript. Out of the box, you're just a `fly deploy` away from leveraging a scalable CDN, infinitely customizable to your needs through code. It's easy to run locally, you can write tests for it, and even integrate it into your normal CI / CD / build pipelines.
+The Fly CDN implements a fully functional CDN as a Fly [Edge App](https://fly.io/docs/#edge-applications) in TypeScript. Out of the box, you're just a `fly deploy` away from leveraging a scalable CDN, infinitely customizable to your needs through code. It's easy to run locally, you can write tests for it, and even integrate it into your normal CI / CD / build pipelines.
 
 ## Getting Started
 
