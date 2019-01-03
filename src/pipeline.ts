@@ -1,4 +1,5 @@
 import { FlyFetch } from "./fetch";
+import { rewriteLocationHeader } from "./proxy";
 
 export interface FlyFetchFactory {
   (fetch: FlyFetch): FlyFetch;
@@ -55,7 +56,7 @@ export function onResponse(action: ResponseAction): Pipe {
   })
 }
 
-export function match(...pipes: Pipe[]): Pipe {
+export function sequence(...pipes: Pipe[]): Pipe {
   return pipe("match", (fetch) => {
     const handlers = pipes.map(s => s(fetch));
 
@@ -69,19 +70,25 @@ export function match(...pipes: Pipe[]): Pipe {
           }
         }
       }
-      throw abortPipeHandle;
+      return new Response("not found", { status: 404 });
+      // throw abortPipeHandle;
     }
   });
 }
 
-type GateExpression = (req: Request) => boolean;
+type GateExpression = (req: Request) => boolean | Promise<boolean>;
 
 export function gate(condition: GateExpression, child: Pipe): Pipe {
   const p = pipe("gate", (fetch) => {
     const handler = child(fetch);
 
-    return (req) => {
-      if (!condition(req)) {
+    return async (req) => {
+      let expResult = condition(req);
+      if (expResult instanceof Promise) {
+        expResult = await expResult;
+      }
+      
+      if (!expResult) {
         throw abortPipeHandle;
       }
       
@@ -118,10 +125,14 @@ export function mount(pathPrefix: string, child: Pipe): Pipe {
       rewritePath({ stripPrefix: pathPrefix }),
       child,
     )
-  )
+  );
 }
 
-function matchPathPrefix(prefix: string): GateExpression {
+export function match(pathPrefix: string, child: Pipe): Pipe {
+  return gate(matchPathPrefix(pathPrefix), child);
+}
+
+export function matchPathPrefix(prefix: string): GateExpression {
   return (req) => {
     const url = new URL(req.url);
     return url.pathname.startsWith(prefix);
@@ -130,8 +141,5 @@ function matchPathPrefix(prefix: string): GateExpression {
 
 const abortPipeHandle = Symbol();
 
-export function abortPipe(): never {
-  throw abortPipeHandle 
-}
 
 export const connect = pipeline;
