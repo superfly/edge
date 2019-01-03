@@ -1,6 +1,6 @@
 # Fly CDN
 
-The Fly CDN is a developer friendly, open source CDN you can run out of the box — or use as the basis for a more custom CDN-like service. It's easy to run locally, you can write tests for it, and even integrate it into your normal CI / CD / build pipelines.
+The Fly CDN implements a fully functional CDN as a Fly [Edge App](https://fly.io/docs/#edge-applications) in plain JavaScript. Out of the box, you're just a `fly deploy` away from leveraging a scalable CDN, infinitely customizable to your needs through code. It's easy to run locally, you can write tests for it, and even integrate it into your normal CI / CD / build pipelines.
 
 ## Getting Started
 
