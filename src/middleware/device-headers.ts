@@ -1,5 +1,5 @@
-import { FetchFunction } from "../fetch";
 import { UAParser } from "ua-parser-js";
+import { requestModifier } from "./builder";
 
 /**
  * Appends device headers to a request.
@@ -21,17 +21,12 @@ import { UAParser } from "ua-parser-js";
  * ```
  * @param fetch a fetch function to forward the request to
  */
-export function deviceHeaders(fetch: FetchFunction): FetchFunction {
-  return async function deviceHeaders(req: RequestInfo, init?: RequestInit){
-    if(typeof req === "string"){
-      req = new Request(req, init)
-      init = undefined
-    }
-    addDeviceHeaders(req);
-    return fetch(req, init)
-  }
-}
+export const deviceHeaders = requestModifier(addDeviceHeaders)
 
+/**
+ * Parses the user agent header from a request, then sets a `Fly-Device-Type` header.
+ * @param req 
+ */
 export function addDeviceHeaders(req: Request){
   const ua = req.headers.get("user-agent")
   console.log("User Agent:", ua)
