@@ -29,9 +29,9 @@ export function assertUrl(value: string | URL, propertyName: string) {
 
   if (typeof value === "string") {
     try {
-      console.log("assertUrl", {value})
+      //console.log("assertUrl", {value})
       const x = new URL(value);
-      console.log("after url assertUrl", { value, x })
+      //console.log("after url assertUrl", { value, x })
       return;
     } catch (err) { }
   }

@@ -46,7 +46,7 @@ describe("backends/origin", function() {
   })
 
   it('works', async () => {
-    const fn = origin("https://fly.io");
+    const fn = origin("https://example.com");
 
     const resp = await fn("https://origin/", { method: "HEAD"})
     expect(resp.status).to.eq(200)

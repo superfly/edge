@@ -1,6 +1,8 @@
 
 export * from "./fetch";
 export * from "./proxy";
+export * from "./pipeline";
+
 import * as middleware from "./middleware"
 export { middleware }
 import * as backends from "./backends";
