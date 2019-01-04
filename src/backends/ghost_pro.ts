@@ -7,7 +7,17 @@ import { SubdomainOptions, normalizeOptions } from "./subdomain_service";
 
 /**
  * Creates a `fetch` like function for proxying requests to hosted Ghost Pro blogs.
- * @param options Ghost Pro blog information. Accepts subdomain as a string..
+ * 
+ * Example:
+ * ```typescript
+ * import { ghost } from "./src/backends";
+ * const backend = ghost({
+ *  subdomain: "fly-io",
+ *  directory: "/articles/",
+ *  hostname: "fly.io"
+ * });
+ * ```
+ * @param options Ghost Pro blog information. Accepts subdomain as a string.
  */
 export function ghostProBlog(options: SubdomainOptions | string): ProxyFunction<SubdomainOptions> {
   const config = normalizeOptions(options);

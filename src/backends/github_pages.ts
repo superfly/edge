@@ -24,6 +24,17 @@ export interface GitHubPagesOptions {
 /**
  * Creates a fetch-like proxy function for making requests to GitHub pages
  * hosted sites.
+ * 
+ * Example:
+ * 
+ * ```typescript
+ * import { githubPages } from "./src/backends";
+ * const backend = githubPages({
+ *  owner: "superfly",
+ *  repo: "cdn",
+ *  hostname: "docs.fly.io"
+ * });
+ * ```
  * @param config The Github repository to proxy to
  * @module Backends
  */

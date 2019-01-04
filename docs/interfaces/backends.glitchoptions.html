@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>GitHubPagesOptions | @fly/cdn</title>
+	<title>GlitchOptions | @fly/cdn</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,10 +55,10 @@
 					<a href="../modules/backends.html">Backends</a>
 				</li>
 				<li>
-					<a href="backends.githubpagesoptions.html">GitHubPagesOptions</a>
+					<a href="backends.glitchoptions.html">GlitchOptions</a>
 				</li>
 			</ul>
-			<h1>Interface GitHubPagesOptions</h1>
+			<h1>Interface GlitchOptions</h1>
 		</div>
 	</div>
 </header>
@@ -68,7 +68,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>GitHub Repository information.</p>
+						<p>Glitch configugration.</p>
 					</div>
 				</div>
 			</section>
@@ -76,7 +76,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">GitHubPagesOptions</span>
+						<span class="target">GlitchOptions</span>
 					</li>
 				</ul>
 			</section>
@@ -87,9 +87,7 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="backends.githubpagesoptions.html#hostname" class="tsd-kind-icon">hostname</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="backends.githubpagesoptions.html#owner" class="tsd-kind-icon">owner</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="backends.githubpagesoptions.html#repository" class="tsd-kind-icon">repository</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="backends.glitchoptions.html#appname" class="tsd-kind-icon">app<wbr>Name</a></li>
 							</ul>
 						</section>
 					</div>
@@ -98,47 +96,17 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="hostname" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> hostname</h3>
-					<div class="tsd-signature tsd-kind-icon">hostname<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<a name="appname" class="tsd-anchor"></a>
+					<h3>app<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">app<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/5a01206/src/backends/github_pages.ts#L21">backends/github_pages.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/5a01206/src/backends/glitch.ts#L13">backends/glitch.ts:13</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The custom hostname on repository</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="owner" class="tsd-anchor"></a>
-					<h3>owner</h3>
-					<div class="tsd-signature tsd-kind-icon">owner<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/5a01206/src/backends/github_pages.ts#L15">backends/github_pages.ts:15</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Repository owner</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="repository" class="tsd-anchor"></a>
-					<h3>repository</h3>
-					<div class="tsd-signature tsd-kind-icon">repository<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/5a01206/src/backends/github_pages.ts#L18">backends/github_pages.ts:18</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Repository name <repository> format</p>
+							<p>Glitch application name: <appName>.glitch.me</p>
 						</div>
 					</div>
 				</section>
@@ -166,27 +134,21 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="backends.githubpagesoptions.html" class="tsd-kind-icon">Git<wbr>Hub<wbr>Pages<wbr>Options</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="backends.githubpagesoptions.html" class="tsd-kind-icon">Git<wbr>Hub<wbr>Pages<wbr>Options</a>
+						<a href="backends.glitchoptions.html" class="tsd-kind-icon">Glitch<wbr>Options</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="backends.githubpagesoptions.html#hostname" class="tsd-kind-icon">hostname</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="backends.githubpagesoptions.html#owner" class="tsd-kind-icon">owner</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="backends.githubpagesoptions.html#repository" class="tsd-kind-icon">repository</a>
+								<a href="backends.glitchoptions.html#appname" class="tsd-kind-icon">app<wbr>Name</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="backends.glitchoptions.html" class="tsd-kind-icon">Glitch<wbr>Options</a>
-					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="backends.herokuoptions.html" class="tsd-kind-icon">Heroku<wbr>Options</a>
 					</li>

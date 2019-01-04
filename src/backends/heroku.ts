@@ -6,17 +6,26 @@ import { proxy, ProxyFunction } from "../proxy";
 import { SubdomainOptions, optionNormalizer } from "./subdomain_service";
  
 /**
- * Heroku application configugration.
+ * Heroku application configuration.
  */
 export interface HerokuOptions {
-  /** Blog's subdomain: <subdomain>.ghost.io */
+  /** Heroku App name: <appName>.herokuapp.com */
   appName: string,
+
+  /** If Heroku is configured with a custom domain name, use it. */
   hostname?: string
 }
 const normalizeOptions = optionNormalizer({subdomain: "appName"})
 
 /**
  * Creates a `fetch` like function for proxying requests to a Heroku app.
+ * Example:
+ * ```typescript
+ * import { heroku } from "./src/backends";
+ * const backend = heroku({
+ *  appName: "example"
+ * });
+ * ```
  * @param config Heroku app information. Accepts appName as a string.
  */
 export function heroku(options: HerokuOptions | string): ProxyFunction<SubdomainOptions>{
@@ -25,7 +34,8 @@ export function heroku(options: HerokuOptions | string): ProxyFunction<Subdomain
   const herokuHost = `${config.subdomain}.herokuapp.com`;
   const uri = `https://${herokuHost}`;
   const headers = {
-    "host": herokuHost
+    "host": herokuHost,
+    "x-forwarded-host": config.hostname
   };
 
   const fn = proxy(uri, { headers });

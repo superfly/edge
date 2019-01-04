@@ -69,19 +69,20 @@
 						<section class="tsd-index-section ">
 							<h3>Interfaces</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/backends.ghostprooptions.html" class="tsd-kind-icon">Ghost<wbr>Pro<wbr>Options</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/backends.githubpagesoptions.html" class="tsd-kind-icon">Git<wbr>Hub<wbr>Pages<wbr>Options</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/backends.glitchoptions.html" class="tsd-kind-icon">Glitch<wbr>Options</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/backends.herokuoptions.html" class="tsd-kind-icon">Heroku<wbr>Options</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/backends.subdomainoptions.html" class="tsd-kind-icon">Subdomain<wbr>Options</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="backends.html#echo" class="tsd-kind-icon">echo</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="backends.html#ghostproblog" class="tsd-kind-icon">ghost<wbr>Pro<wbr>Blog</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="backends.html#githubpages" class="tsd-kind-icon">github<wbr>Pages</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="backends.html#glitch" class="tsd-kind-icon">glitch</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="backends.html#heroku" class="tsd-kind-icon">heroku</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="backends.html#origin" class="tsd-kind-icon">origin</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="backends.html#netlify" class="tsd-kind-icon">netlify</a></li>
 							</ul>
 						</section>
 					</div>
@@ -90,71 +91,40 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-					<a name="echo" class="tsd-anchor"></a>
-					<h3>echo</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">echo<span class="tsd-signature-symbol">(</span>req<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RequestInfo</span>, init<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RequestInit</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/fac4cc0/src/backends/echo.ts#L10">backends/echo.ts:10</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>A useful fetch-like function for debugging. Echos request information
-									as a JSON response.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>req: <span class="tsd-signature-type">RequestInfo</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The request to echo</p>
-									</div>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> init: <span class="tsd-signature-type">RequestInit</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>Request init information</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
 					<a name="ghostproblog" class="tsd-anchor"></a>
 					<h3>ghost<wbr>Pro<wbr>Blog</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">ghost<wbr>Pro<wbr>Blog<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/backends.ghostprooptions.html" class="tsd-signature-type">GhostProOptions</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/http.proxyfunction.html" class="tsd-signature-type">ProxyFunction</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/backends.ghostprooptions.html" class="tsd-signature-type">GhostProOptions</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">ghost<wbr>Pro<wbr>Blog<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/backends.subdomainoptions.html" class="tsd-signature-type">SubdomainOptions</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/http.proxyfunction.html" class="tsd-signature-type">ProxyFunction</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/backends.subdomainoptions.html" class="tsd-signature-type">SubdomainOptions</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/fac4cc0/src/backends/ghost_pro.ts#L25">backends/ghost_pro.ts:25</a></li>
+									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/5a01206/src/backends/ghost_pro.ts#L22">backends/ghost_pro.ts:22</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Creates a <code>fetch</code> like function for proxying requests to hosted Ghost Pro blogs.</p>
 								</div>
+								<p>Example:</p>
+								<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { ghost } <span class="hljs-keyword">from</span> <span class="hljs-string">"./src/backends"</span>;
+<span class="hljs-keyword">const</span> backend = ghost({
+ subdomain: <span class="hljs-string">"fly-io"</span>,
+ directory: <span class="hljs-string">"/articles/"</span>,
+ hostname: <span class="hljs-string">"fly.io"</span>
+});</code></pre>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>options: <a href="../interfaces/backends.ghostprooptions.html" class="tsd-signature-type">GhostProOptions</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+									<h5>options: <a href="../interfaces/backends.subdomainoptions.html" class="tsd-signature-type">SubdomainOptions</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>Ghost Pro blog information. Accepts subdomain as a string..</p>
+										<p>Ghost Pro blog information. Accepts subdomain as a string.</p>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="../interfaces/http.proxyfunction.html" class="tsd-signature-type">ProxyFunction</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/backends.ghostprooptions.html" class="tsd-signature-type">GhostProOptions</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/http.proxyfunction.html" class="tsd-signature-type">ProxyFunction</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/backends.subdomainoptions.html" class="tsd-signature-type">SubdomainOptions</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -168,7 +138,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/fac4cc0/src/backends/github_pages.ts#L30">backends/github_pages.ts:30</a></li>
+									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/5a01206/src/backends/github_pages.ts#L41">backends/github_pages.ts:41</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -176,6 +146,13 @@
 									<p>Creates a fetch-like proxy function for making requests to GitHub pages
 									hosted sites.</p>
 								</div>
+								<p>Example:</p>
+								<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { githubPages } <span class="hljs-keyword">from</span> <span class="hljs-string">"./src/backends"</span>;
+<span class="hljs-keyword">const</span> backend = githubPages({
+ owner: <span class="hljs-string">"superfly"</span>,
+ repo: <span class="hljs-string">"cdn"</span>,
+ hostname: <span class="hljs-string">"docs.fly.io"</span>
+});</code></pre>
 								<dl class="tsd-comment-tags">
 									<dt>module</dt>
 									<dd><p>Backends</p>
@@ -193,21 +170,63 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-					<a name="heroku" class="tsd-anchor"></a>
-					<h3>heroku</h3>
+					<a name="glitch" class="tsd-anchor"></a>
+					<h3>glitch</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">heroku<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/backends.herokuoptions.html" class="tsd-signature-type">HerokuOptions</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/http.proxyfunction.html" class="tsd-signature-type">ProxyFunction</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/backends.herokuoptions.html" class="tsd-signature-type">HerokuOptions</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">glitch<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/backends.glitchoptions.html" class="tsd-signature-type">GlitchOptions</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/http.proxyfunction.html" class="tsd-signature-type">ProxyFunction</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/backends.subdomainoptions.html" class="tsd-signature-type">SubdomainOptions</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/fac4cc0/src/backends/heroku.ts#L21">backends/heroku.ts:21</a></li>
+									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/5a01206/src/backends/glitch.ts#L33">backends/glitch.ts:33</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Creates a <code>fetch</code> like function for proxying requests to a Heroku app.</p>
+									<p>Creates a <code>fetch</code> like function for proxying requests to Glitch apps.</p>
+								</div>
+								<p>Example:</p>
+								<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { glitch } <span class="hljs-keyword">from</span> <span class="hljs-string">"./src/backends"</span>;
+
+<span class="hljs-keyword">const</span> backend = glitch({
+ appName: <span class="hljs-string">"fly-example"</span>
+})</code></pre>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <a href="../interfaces/backends.glitchoptions.html" class="tsd-signature-type">GlitchOptions</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Glitch app information. Accepts <code>appName</code> as a string.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/http.proxyfunction.html" class="tsd-signature-type">ProxyFunction</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/backends.subdomainoptions.html" class="tsd-signature-type">SubdomainOptions</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="heroku" class="tsd-anchor"></a>
+					<h3>heroku</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">heroku<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/backends.herokuoptions.html" class="tsd-signature-type">HerokuOptions</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/http.proxyfunction.html" class="tsd-signature-type">ProxyFunction</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/backends.subdomainoptions.html" class="tsd-signature-type">SubdomainOptions</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/5a01206/src/backends/heroku.ts#L31">backends/heroku.ts:31</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Creates a <code>fetch</code> like function for proxying requests to a Heroku app.
+									Example:</p>
+									<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { heroku } <span class="hljs-keyword">from</span> <span class="hljs-string">"./src/backends"</span>;
+<span class="hljs-keyword">const</span> backend = heroku({
+ appName: <span class="hljs-string">"example"</span>
+});</code></pre>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -216,40 +235,43 @@
 									<h5>options: <a href="../interfaces/backends.herokuoptions.html" class="tsd-signature-type">HerokuOptions</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="../interfaces/http.proxyfunction.html" class="tsd-signature-type">ProxyFunction</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/backends.herokuoptions.html" class="tsd-signature-type">HerokuOptions</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/http.proxyfunction.html" class="tsd-signature-type">ProxyFunction</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/backends.subdomainoptions.html" class="tsd-signature-type">SubdomainOptions</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-					<a name="origin" class="tsd-anchor"></a>
-					<h3>origin</h3>
+					<a name="netlify" class="tsd-anchor"></a>
+					<h3>netlify</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">origin<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">OriginOptions</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">URL</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/http.proxyfunction.html" class="tsd-signature-type">ProxyFunction</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">OriginOptions</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">netlify<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/backends.subdomainoptions.html" class="tsd-signature-type">SubdomainOptions</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/http.proxyfunction.html" class="tsd-signature-type">ProxyFunction</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/backends.subdomainoptions.html" class="tsd-signature-type">SubdomainOptions</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/fac4cc0/src/backends/origin.ts#L22">backends/origin.ts:22</a></li>
+									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/5a01206/src/backends/netlify.ts#L20">backends/netlify.ts:20</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Creates a fetch-like proxy function for making requests to http/https origins</p>
+									<p>Creates a <code>fetch</code> like function for proxying requests to hosted Netlify sites.</p>
 								</div>
-								<dl class="tsd-comment-tags">
-									<dt>module</dt>
-									<dd><p>Backends</p>
-									</dd>
-								</dl>
+								<p>Example:</p>
+								<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { netlify } <span class="hljs-keyword">from</span> <span class="hljs-string">"./src/backends"</span>;
+<span class="hljs-keyword">const</span> backend = netlify({
+ subdomain: <span class="hljs-string">"example"</span>
+});</code></pre>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>options: <span class="tsd-signature-type">OriginOptions</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">URL</span></h5>
+									<h5>options: <a href="../interfaces/backends.subdomainoptions.html" class="tsd-signature-type">SubdomainOptions</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Netlify site information. Accepts subdomain as a string.</p>
+									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="../interfaces/http.proxyfunction.html" class="tsd-signature-type">ProxyFunction</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">OriginOptions</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/http.proxyfunction.html" class="tsd-signature-type">ProxyFunction</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/backends.subdomainoptions.html" class="tsd-signature-type">SubdomainOptions</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -278,16 +300,16 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/backends.ghostprooptions.html" class="tsd-kind-icon">Ghost<wbr>Pro<wbr>Options</a>
+						<a href="../interfaces/backends.githubpagesoptions.html" class="tsd-kind-icon">Git<wbr>Hub<wbr>Pages<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/backends.githubpagesoptions.html" class="tsd-kind-icon">Git<wbr>Hub<wbr>Pages<wbr>Options</a>
+						<a href="../interfaces/backends.glitchoptions.html" class="tsd-kind-icon">Glitch<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="../interfaces/backends.herokuoptions.html" class="tsd-kind-icon">Heroku<wbr>Options</a>
 					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="backends.html#echo" class="tsd-kind-icon">echo</a>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/backends.subdomainoptions.html" class="tsd-kind-icon">Subdomain<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="backends.html#ghostproblog" class="tsd-kind-icon">ghost<wbr>Pro<wbr>Blog</a>
@@ -296,10 +318,13 @@
 						<a href="backends.html#githubpages" class="tsd-kind-icon">github<wbr>Pages</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="backends.html#glitch" class="tsd-kind-icon">glitch</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="backends.html#heroku" class="tsd-kind-icon">heroku</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="backends.html#origin" class="tsd-kind-icon">origin</a>
+						<a href="backends.html#netlify" class="tsd-kind-icon">netlify</a>
 					</li>
 				</ul>
 			</nav>

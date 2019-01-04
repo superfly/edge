@@ -74,16 +74,24 @@
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
+							<h3>Type aliases</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="middleware.html#responsemodifierresult" class="tsd-kind-icon">Response<wbr>Modifier<wbr>Result</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Variables</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="middleware.html#httpsupgrader" class="tsd-kind-icon">https<wbr>Upgrader</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="middleware.html#responseheaders" class="tsd-kind-icon">response<wbr>Headers</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="middleware.html#addresponseheaders" class="tsd-kind-icon">add<wbr>Response<wbr>Headers</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="middleware.html#httpsupgrader" class="tsd-kind-icon">https<wbr>Upgrader</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-private"><a href="middleware.html#addresponseheaders" class="tsd-kind-icon">add<wbr>Response<wbr>Headers</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="middleware.html#httpsredirect" class="tsd-kind-icon">https<wbr>Redirect</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter"><a href="middleware.html#requestmodifier" class="tsd-kind-icon">request<wbr>Modifier</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter"><a href="middleware.html#responsemodifier" class="tsd-kind-icon">response<wbr>Modifier</a></li>
 							</ul>
 						</section>
@@ -91,14 +99,67 @@
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Type aliases</h2>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module">
+					<a name="responsemodifierresult" class="tsd-anchor"></a>
+					<h3>Response<wbr>Modifier<wbr>Result</h3>
+					<div class="tsd-signature tsd-kind-icon">Response<wbr>Modifier<wbr>Result<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Response</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/5a01206/src/middleware/builder.ts#L6">middleware/builder.ts:6</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Variables</h2>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module">
+					<a name="httpsupgrader" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> https<wbr>Upgrader</h3>
+					<div class="tsd-signature tsd-kind-icon">https<wbr>Upgrader<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> =&nbsp;requestModifier(httpsRedirect)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/5a01206/src/middleware/https-upgrader.ts#L12">middleware/https-upgrader.ts:12</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Redirects http requests to https in production.</p>
+						</div>
+						<p>In development, this only logs a message</p>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-siganture">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-variable tsd-is-not-exported">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>fetch<span class="tsd-signature-symbol">: </span><a href="../interfaces/http.fetchfunction.html" class="tsd-signature-type">FetchFunction</a>, options<span class="tsd-signature-symbol">?: </span><a href="" class="tsd-signature-type">T</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/http.fetchfunction.html" class="tsd-signature-type">FetchFunction</a></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>fetch: <a href="../interfaces/http.fetchfunction.html" class="tsd-signature-type">FetchFunction</a></h5>
+											</li>
+											<li>
+												<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="" class="tsd-signature-type">T</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <a href="../interfaces/http.fetchfunction.html" class="tsd-signature-type">FetchFunction</a></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module">
 					<a name="responseheaders" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> response<wbr>Headers</h3>
-					<div class="tsd-signature tsd-kind-icon">response<wbr>Headers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> =&nbsp;builder.responseModifier(addResponseHeaders)</span></div>
+					<div class="tsd-signature tsd-kind-icon">response<wbr>Headers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> =&nbsp;responseModifier(addResponseHeaders)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/fac4cc0/src/middleware/response-headers.ts#L34">middleware/response-headers.ts:34</a></li>
+							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/5a01206/src/middleware/response-headers.ts#L18">middleware/response-headers.ts:18</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -140,17 +201,17 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-private">
 					<a name="addresponseheaders" class="tsd-anchor"></a>
-					<h3>add<wbr>Response<wbr>Headers</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> add<wbr>Response<wbr>Headers</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-private">
 						<li class="tsd-signature tsd-kind-icon">add<wbr>Response<wbr>Headers<span class="tsd-signature-symbol">(</span>resp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span>, headers<span class="tsd-signature-symbol">: </span><a href="../interfaces/middleware.responseheadersoptions.html" class="tsd-signature-type">ResponseHeadersOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/fac4cc0/src/middleware/response-headers.ts#L15">middleware/response-headers.ts:15</a></li>
+									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/5a01206/src/middleware/response-headers.ts#L26">middleware/response-headers.ts:26</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -172,34 +233,102 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-					<a name="httpsupgrader" class="tsd-anchor"></a>
-					<h3>https<wbr>Upgrader</h3>
+					<a name="httpsredirect" class="tsd-anchor"></a>
+					<h3>https<wbr>Redirect</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">https<wbr>Upgrader<span class="tsd-signature-symbol">(</span>fetch<span class="tsd-signature-symbol">: </span><a href="../interfaces/http.fetchfunction.html" class="tsd-signature-type">FetchFunction</a>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/http.redirectoptions.html" class="tsd-signature-type">RedirectOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/http.fetchfunction.html" class="tsd-signature-type">FetchFunction</a></li>
+						<li class="tsd-signature tsd-kind-icon">https<wbr>Redirect<span class="tsd-signature-symbol">(</span>req<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Request</span>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/http.redirectoptions.html" class="tsd-signature-type">RedirectOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Response</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/fac4cc0/src/middleware/https-upgrader.ts#L11">middleware/https-upgrader.ts:11</a></li>
+									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/5a01206/src/middleware/https-upgrader.ts#L22">middleware/https-upgrader.ts:22</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Redirects http requests to https in production.</p>
+									<p>Checks request protocol, returns Redirect response if request is http.</p>
 								</div>
-								<p>In development, this only logs a message</p>
+								<p>In development, this function just logs a message to the console.</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>fetch: <a href="../interfaces/http.fetchfunction.html" class="tsd-signature-type">FetchFunction</a></h5>
+									<h5>req: <span class="tsd-signature-type">Request</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The request to check</p>
+									</div>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/http.redirectoptions.html" class="tsd-signature-type">RedirectOptions</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Options for the resulting redirect</p>
+									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="../interfaces/http.fetchfunction.html" class="tsd-signature-type">FetchFunction</a></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span>
+								<span class="tsd-signature-symbol"> | </span>
+								<span class="tsd-signature-type">Response</span>
+							</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
+					<a name="requestmodifier" class="tsd-anchor"></a>
+					<h3>request<wbr>Modifier</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">request<wbr>Modifier&lt;J&gt;<span class="tsd-signature-symbol">(</span>fn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="http.html#fetchgeneratorwithoptions" class="tsd-signature-type">FetchGeneratorWithOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">J</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/5a01206/src/middleware/builder.ts#L11">middleware/builder.ts:11</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>A convenience function for building middleware that only operates on a request.</p>
+								</div>
+							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>J</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>fn: <span class="tsd-signature-type">function</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+										</div>
+									</div>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-siganture">
+											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>req<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Request</span>, options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">J</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="middleware.html#responsemodifierresult" class="tsd-signature-type">ResponseModifierResult</a></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>req: <span class="tsd-signature-type">Request</span></h5>
+														</li>
+														<li>
+															<h5>options: <span class="tsd-signature-type">J</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <a href="middleware.html#responsemodifierresult" class="tsd-signature-type">ResponseModifierResult</a></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="http.html#fetchgeneratorwithoptions" class="tsd-signature-type">FetchGeneratorWithOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">J</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -213,7 +342,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/fac4cc0/src/middleware/builder.ts#L10">middleware/builder.ts:10</a></li>
+									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/5a01206/src/middleware/builder.ts#L40">middleware/builder.ts:40</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -295,14 +424,23 @@
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="../interfaces/middleware.responseheadersoptions.html" class="tsd-kind-icon">Response<wbr>Headers<wbr>Options</a>
 					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
+						<a href="middleware.html#responsemodifierresult" class="tsd-kind-icon">Response<wbr>Modifier<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
+						<a href="middleware.html#httpsupgrader" class="tsd-kind-icon">https<wbr>Upgrader</a>
+					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
 						<a href="middleware.html#responseheaders" class="tsd-kind-icon">response<wbr>Headers</a>
 					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-private">
 						<a href="middleware.html#addresponseheaders" class="tsd-kind-icon">add<wbr>Response<wbr>Headers</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="middleware.html#httpsupgrader" class="tsd-kind-icon">https<wbr>Upgrader</a>
+						<a href="middleware.html#httpsredirect" class="tsd-kind-icon">https<wbr>Redirect</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="middleware.html#requestmodifier" class="tsd-kind-icon">request<wbr>Modifier</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
 						<a href="middleware.html#responsemodifier" class="tsd-kind-icon">response<wbr>Modifier</a>

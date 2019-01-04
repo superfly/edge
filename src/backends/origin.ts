@@ -7,7 +7,7 @@ import * as errors from "../errors";
 
 /**
  * Proxy options for generic http/https backends
- * @ignore
+ * @hidden
  * See {@link Backends/backend}
  */
 export interface OriginOptions {
@@ -17,7 +17,7 @@ export interface OriginOptions {
 
 /**
  * Creates a fetch-like proxy function for making requests to http/https origins
- * @module Backends
+ * @hidden
  */
 export function origin(options: OriginOptions | string | URL): ProxyFunction<OriginOptions> {
   const config = normalizeOptions(options);

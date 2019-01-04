@@ -9,6 +9,7 @@ import { SubdomainOptions, optionNormalizer } from "./subdomain_service";
  * Glitch configugration.
  */
 export interface GlitchOptions {
+  /** Glitch application name: <appName>.glitch.me */
   appName: string
 }
 
@@ -17,7 +18,17 @@ const normalizeOptions = optionNormalizer({hostname: false, subdomain: "appName"
 
 /**
  * Creates a `fetch` like function for proxying requests to Glitch apps.
- * @param options Glitch app information. Accepts subdomain as a string.
+ * 
+ * Example:
+ * ```typescript
+ * import { glitch } from "./src/backends";
+ * 
+ * const backend = glitch({
+ *  appName: "fly-example"
+ * })
+ * ```
+ * 
+ * @param options Glitch app information. Accepts `appName` as a string.
  */
 export function glitch(options: GlitchOptions | string): ProxyFunction<SubdomainOptions> {
   const config = normalizeOptions(options);

@@ -4,6 +4,7 @@
 /**
  * A useful fetch-like function for debugging. Echos request information
  * as a JSON response.
+ * @hidden
  * @param req The request to echo
  * @param init Request init information
  */

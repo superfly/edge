@@ -1,15 +1,23 @@
+/**
+ * @module Backends
+ */
 import { isObject, merge } from "../util";
 import * as errors from "../errors";
+
+/**
+ * Settings for backends that use subdomains
+ */
 export interface SubdomainOptions {
   [k: string]: string | undefined
-  /** Blog's subdomain: <subdomain>.netlify.com */
+  /** Backend's subdomain: <subdomain>.example.com */
   subdomain: string,
   /** Subdirectory site is served from (if any) */
   directory?: string,
-  /** Netlify sites can be configured with a custom hostname, we need that to proxy properly */
+  /** If the Backend expects a specific x-forwarded-host, we need that to proxy properly */
   hostname?: string
 }
 
+/** @hidden */
 export function optionNormalizer(map?: {[k:string]: string | false | undefined}){
   return function normalizeOptions(input: unknown): SubdomainOptions {
     if(!map) map = {}
@@ -45,4 +53,5 @@ export function optionNormalizer(map?: {[k:string]: string | false | undefined})
 
 optionNormalizer.default = optionNormalizer();
 
+/** @hidden */
 export const normalizeOptions = optionNormalizer.default;
