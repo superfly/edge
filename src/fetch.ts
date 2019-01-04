@@ -35,7 +35,8 @@ export interface FetchFunction {
 /**
  * A function that generates a fetch-like function with additional logic
  */
-export type FetchGenerator = (...args: any[]) => FetchFunction
+export type FetchGenerator = (fetch: FetchFunction, ...args: any[]) => FetchFunction
+export type FetchGeneratorWithOptions<T> = (fetch: FetchFunction, options?: T) => FetchFunction
 
 /**
  * Options for redirects

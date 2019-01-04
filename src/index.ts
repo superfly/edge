@@ -18,6 +18,7 @@ declare global {
   }
   const app: {
     env: "production" | "development" | "test",
-    region: string
+    region: string,
+    config: any
   }
 }

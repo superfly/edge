@@ -1,30 +1,33 @@
 import { FetchFunction } from "../fetch";
 import { ProxyFunction } from "../proxy";
+import * as builder from "./builder";
 
 export interface ResponseHeadersOptions {
-  headers?: {};
+  [name: string]: string | boolean
 }
 
 /**
- * Middleware to set headers on every response.
+ * Sets provided headers on a response object
+ * @param resp 
+ * @param options 
+ */
+export async function addResponseHeaders(resp: Response, headers: ResponseHeadersOptions){
+  if (headers) {
+    for (const [k, v] of Object.entries(headers)) {
+      if (v === false) {
+        resp.headers.delete(k)
+      }
+      if (v) {
+        resp.headers.set(k, v.toString())
+      }
+    }
+  }
+  return resp
+}
+
+/**
+ * Middleware to set headers on responses
  * @param fetch 
  * @param options 
  */
-export function responseHeaders(fetch: FetchFunction, options?: ResponseHeadersOptions): FetchFunction {
-  const headers = options;
-
-  return async function responseHeaders(req: RequestInfo, init?: RequestInit) {
-    const resp = await fetch(req, init)
-    if (headers) {
-      for (const [k, v] of Object.entries(headers)) {
-        if (v === false) {
-          resp.headers.delete(k)
-        }
-        if (v) {
-          resp.headers.set(k, v.toString())
-        }
-      }
-    }
-    return resp
-  }
-}
+export const responseHeaders = builder.responseModifier(addResponseHeaders)
