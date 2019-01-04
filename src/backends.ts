@@ -6,4 +6,5 @@ export * from "./backends/glitch";
 export * from "./backends/github_pages";
 export * from "./backends/ghost_pro";
 export * from "./backends/heroku";
+export * from "./backends/netlify";
 export * from "./backends/echo";

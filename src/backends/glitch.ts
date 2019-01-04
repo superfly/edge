@@ -3,15 +3,13 @@
  */
 
 import { proxy, ProxyFunction } from "../proxy";
-import { isObject, merge } from "../util";
-import * as errors from "../errors";
+import { SubdomainOptions, normalizeOptions } from "./subdomain_service";
  
 /**
  * Glitch configugration.
  */
-export interface GlitchOptions {
-  /** Blog's subdomain: <subdomain>.glitch.com */
-  subdomain: string
+export interface GlitchOptions extends SubdomainOptions {
+  hostname?: undefined
 }
 
 /**
@@ -20,6 +18,9 @@ export interface GlitchOptions {
  */
 export function glitch(options: GlitchOptions | string): ProxyFunction<GlitchOptions> {
   const config = normalizeOptions(options);
+  if(config.hostname){
+    delete config.hostname
+  }
 
   const glitchHost = `${config.subdomain}.glitch.me`
   const uri = `https://${glitchHost}`
@@ -28,27 +29,7 @@ export function glitch(options: GlitchOptions | string): ProxyFunction<GlitchOpt
   }
 
   const fn = proxy(uri, { headers: headers })
-  return Object.assign(fn, { proxyConfig: config})
-}
-
-function normalizeOptions(input: unknown): GlitchOptions {
-  const options: GlitchOptions = {
-    subdomain: ""
-  };
-
-  if (typeof input === "string") {
-    options.subdomain = input;
-  } else if (isObject(input)) {
-    merge(options, input, ["subdomain"]);
-  } else {
-    throw errors.invalidInput("options must be a GlitchOptions object or string");
-  }
-
-  if (!options.subdomain) {
-    throw errors.invalidProperty("subdomain", "is required");
-  }
-  
-  return options;
+  return Object.assign(fn, { proxyConfig: (config as GlitchOptions)})
 }
 
 glitch.normalizeOptions = normalizeOptions;
