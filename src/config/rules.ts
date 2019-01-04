@@ -1,5 +1,5 @@
 /**
- * @module Rules
+ * @module Config
  * @ignore
  * */
 import { applyReplacements } from "../text-replacements";

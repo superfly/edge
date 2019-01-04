@@ -1,5 +1,5 @@
 /**
- * @module Site
+ * @module HTTP
  * @ignore
  */
 export async function applyReplacements(resp: Response, replacements?: [string, string][]) {

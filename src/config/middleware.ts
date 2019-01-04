@@ -1,3 +1,4 @@
+/** @module Config */
 import { FetchFactory, FetchFunction } from "../fetch";
 import * as middleware from "../middleware";
 import { ItemConfig } from "./index";

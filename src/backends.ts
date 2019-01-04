@@ -1,3 +1,6 @@
+/**
+ * @module Backends
+ */
 export * from "./backends/origin";
 export * from "./backends/github_pages";
 export * from "./backends/ghost_pro";

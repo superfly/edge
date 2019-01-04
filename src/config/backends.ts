@@ -1,3 +1,4 @@
+/** @module Config */
 import * as backends from "../backends";
 import { ProxyFunction, ProxyFactory } from "../proxy";
 import { ItemConfig } from "./index";

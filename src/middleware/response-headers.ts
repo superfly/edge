@@ -1,5 +1,6 @@
-import { FetchFunction } from "../fetch";
-import { ProxyFunction } from "../proxy";
+/**
+ * @module Middleware
+ */
 import * as builder from "./builder";
 
 export interface ResponseHeadersOptions {

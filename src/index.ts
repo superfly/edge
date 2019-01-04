@@ -1,4 +1,5 @@
 
+/** @module HTTP */
 export * from "./fetch";
 export * from "./proxy";
 export * from "./pipeline";

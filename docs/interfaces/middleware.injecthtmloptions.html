@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>GitHubRepository | @fly/cdn</title>
+	<title>InjectHTMLOptions | @fly/cdn</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -52,31 +52,24 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/backends.html">Backends</a>
+					<a href="../modules/middleware.html">Middleware</a>
 				</li>
 				<li>
-					<a href="backends.githubrepository.html">GitHubRepository</a>
+					<a href="middleware.injecthtmloptions.html">InjectHTMLOptions</a>
 				</li>
 			</ul>
-			<h1>Interface GitHubRepository</h1>
+			<h1>Interface InjectHTMLOptions</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>GitHub Repository information.</p>
-					</div>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">GitHubRepository</span>
+						<span class="target">InjectHTMLOptions</span>
 					</li>
 				</ul>
 			</section>
@@ -87,9 +80,8 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="backends.githubrepository.html#hostname" class="tsd-kind-icon">hostname</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="backends.githubrepository.html#owner" class="tsd-kind-icon">owner</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="backends.githubrepository.html#repository" class="tsd-kind-icon">repository</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="middleware.injecthtmloptions.html#html" class="tsd-kind-icon">html</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="middleware.injecthtmloptions.html#targettag" class="tsd-kind-icon">target<wbr>Tag</a></li>
 							</ul>
 						</section>
 					</div>
@@ -98,49 +90,24 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="hostname" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> hostname</h3>
-					<div class="tsd-signature tsd-kind-icon">hostname<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<a name="html" class="tsd-anchor"></a>
+					<h3>html</h3>
+					<div class="tsd-signature tsd-kind-icon">html<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/dc1fca5/src/backends/github_pages.ts#L19">backends/github_pages.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/fac4cc0/src/middleware/inject-html.ts#L9">middleware/inject-html.ts:9</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The custom hostname on repository</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="owner" class="tsd-anchor"></a>
-					<h3>owner</h3>
-					<div class="tsd-signature tsd-kind-icon">owner<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="targettag" class="tsd-anchor"></a>
+					<h3>target<wbr>Tag</h3>
+					<div class="tsd-signature tsd-kind-icon">target<wbr>Tag<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/dc1fca5/src/backends/github_pages.ts#L13">backends/github_pages.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/fac4cc0/src/middleware/inject-html.ts#L8">middleware/inject-html.ts:8</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Repository owner</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="repository" class="tsd-anchor"></a>
-					<h3>repository</h3>
-					<div class="tsd-signature tsd-kind-icon">repository<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/dc1fca5/src/backends/github_pages.ts#L16">backends/github_pages.ts:16</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Repository name <repository> format</p>
-						</div>
-					</div>
 				</section>
 			</section>
 		</div>
@@ -150,54 +117,51 @@
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/backends.html">Backends</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/config.html">Config</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/http.html">HTTP</a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="../modules/middleware.html">Middleware</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/rules.html">Rules</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/site.html">Site</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="backends.ghostproblog.html" class="tsd-kind-icon">Ghost<wbr>Pro<wbr>Blog</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="backends.githubpagesfetch.html" class="tsd-kind-icon">Git<wbr>Hub<wbr>Pages<wbr>Fetch</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="backends.githubrepository.html" class="tsd-kind-icon">Git<wbr>Hub<wbr>Repository</a>
+						<a href="middleware.injecthtmloptions.html" class="tsd-kind-icon">InjectHTMLOptions</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="backends.githubrepository.html#hostname" class="tsd-kind-icon">hostname</a>
+								<a href="middleware.injecthtmloptions.html#html" class="tsd-kind-icon">html</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="backends.githubrepository.html#owner" class="tsd-kind-icon">owner</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="backends.githubrepository.html#repository" class="tsd-kind-icon">repository</a>
+								<a href="middleware.injecthtmloptions.html#targettag" class="tsd-kind-icon">target<wbr>Tag</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="../modules/backends.html#ghostproblog-1" class="tsd-kind-icon">ghost<wbr>Pro<wbr>Blog</a>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="middleware.responseheadersoptions.html" class="tsd-kind-icon">Response<wbr>Headers<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
+						<a href="../modules/middleware.html#responseheaders" class="tsd-kind-icon">response<wbr>Headers</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="../modules/backends.html#githubpages" class="tsd-kind-icon">github<wbr>Pages</a>
+						<a href="../modules/middleware.html#addresponseheaders" class="tsd-kind-icon">add<wbr>Response<wbr>Headers</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="../modules/middleware.html#httpsupgrader" class="tsd-kind-icon">https<wbr>Upgrader</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="../modules/middleware.html#responsemodifier" class="tsd-kind-icon">response<wbr>Modifier</a>
 					</li>
 				</ul>
 			</nav>

@@ -1,3 +1,6 @@
+/**
+ * @module Middleware
+ */
 import { FetchFunction, FetchGeneratorWithOptions, FetchGenerator } from "../fetch";
 
 /**

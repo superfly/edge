@@ -67,27 +67,121 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
+							<h3>Interfaces</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/middleware.injecthtmloptions.html" class="tsd-kind-icon">InjectHTMLOptions</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/middleware.responseheadersoptions.html" class="tsd-kind-icon">Response<wbr>Headers<wbr>Options</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Variables</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="middleware.html#responseheaders" class="tsd-kind-icon">response<wbr>Headers</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="middleware.html#addresponseheaders" class="tsd-kind-icon">add<wbr>Response<wbr>Headers</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="middleware.html#httpsupgrader" class="tsd-kind-icon">https<wbr>Upgrader</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter"><a href="middleware.html#responsemodifier" class="tsd-kind-icon">response<wbr>Modifier</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Variables</h2>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module">
+					<a name="responseheaders" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> response<wbr>Headers</h3>
+					<div class="tsd-signature tsd-kind-icon">response<wbr>Headers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> =&nbsp;builder.responseModifier(addResponseHeaders)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/fac4cc0/src/middleware/response-headers.ts#L34">middleware/response-headers.ts:34</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Middleware to set headers on responses</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd></dd>
+							<dt>param</dt>
+							<dd></dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-siganture">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-variable tsd-is-not-exported">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>fetch<span class="tsd-signature-symbol">: </span><a href="../interfaces/http.fetchfunction.html" class="tsd-signature-type">FetchFunction</a>, options<span class="tsd-signature-symbol">?: </span><a href="" class="tsd-signature-type">T</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/http.fetchfunction.html" class="tsd-signature-type">FetchFunction</a></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>fetch: <a href="../interfaces/http.fetchfunction.html" class="tsd-signature-type">FetchFunction</a></h5>
+											</li>
+											<li>
+												<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="" class="tsd-signature-type">T</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <a href="../interfaces/http.fetchfunction.html" class="tsd-signature-type">FetchFunction</a></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-					<a name="httpsupgrader" class="tsd-anchor"></a>
-					<h3>https<wbr>Upgrader</h3>
+					<a name="addresponseheaders" class="tsd-anchor"></a>
+					<h3>add<wbr>Response<wbr>Headers</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">https<wbr>Upgrader<span class="tsd-signature-symbol">(</span>fetch<span class="tsd-signature-symbol">: </span><a href="../interfaces/http.fetchfunction.html" class="tsd-signature-type">FetchFunction</a>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/http.redirectoptions.html" class="tsd-signature-type">RedirectOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">httpsUpgrader</span></li>
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Response<wbr>Headers<span class="tsd-signature-symbol">(</span>resp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span>, headers<span class="tsd-signature-symbol">: </span><a href="../interfaces/middleware.responseheadersoptions.html" class="tsd-signature-type">ResponseHeadersOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/dc1fca5/src/middleware.ts#L27">middleware.ts:27</a></li>
+									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/fac4cc0/src/middleware/response-headers.ts#L15">middleware/response-headers.ts:15</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets provided headers on a response object</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>resp: <span class="tsd-signature-type">Response</span></h5>
+								</li>
+								<li>
+									<h5>headers: <a href="../interfaces/middleware.responseheadersoptions.html" class="tsd-signature-type">ResponseHeadersOptions</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="httpsupgrader" class="tsd-anchor"></a>
+					<h3>https<wbr>Upgrader</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">https<wbr>Upgrader<span class="tsd-signature-symbol">(</span>fetch<span class="tsd-signature-symbol">: </span><a href="../interfaces/http.fetchfunction.html" class="tsd-signature-type">FetchFunction</a>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/http.redirectoptions.html" class="tsd-signature-type">RedirectOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/http.fetchfunction.html" class="tsd-signature-type">FetchFunction</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/fac4cc0/src/middleware/https-upgrader.ts#L11">middleware/https-upgrader.ts:11</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -105,7 +199,69 @@
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/http.redirectoptions.html" class="tsd-signature-type">RedirectOptions</a></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">httpsUpgrader</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/http.fetchfunction.html" class="tsd-signature-type">FetchFunction</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
+					<a name="responsemodifier" class="tsd-anchor"></a>
+					<h3>response<wbr>Modifier</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">response<wbr>Modifier&lt;J&gt;<span class="tsd-signature-symbol">(</span>fn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="http.html#fetchgeneratorwithoptions" class="tsd-signature-type">FetchGeneratorWithOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">J</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/fac4cc0/src/middleware/builder.ts#L10">middleware/builder.ts:10</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>A convenience function for building middleware that only operates on a response.</p>
+								</div>
+							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>J</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>fn: <span class="tsd-signature-type">function</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+										</div>
+									</div>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-siganture">
+											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>resp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span>, options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">J</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Response</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>resp: <span class="tsd-signature-type">Response</span></h5>
+														</li>
+														<li>
+															<h5>options: <span class="tsd-signature-type">J</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol">&gt;</span>
+														<span class="tsd-signature-symbol"> | </span>
+														<span class="tsd-signature-type">Response</span>
+													</h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="http.html#fetchgeneratorwithoptions" class="tsd-signature-type">FetchGeneratorWithOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">J</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -121,23 +277,35 @@
 						<a href="backends.html">Backends</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="config.html">Config</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="http.html">HTTP</a>
 					</li>
 					<li class="current tsd-kind-external-module">
 						<a href="middleware.html">Middleware</a>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="rules.html">Rules</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="site.html">Site</a>
-					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/middleware.injecthtmloptions.html" class="tsd-kind-icon">InjectHTMLOptions</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/middleware.responseheadersoptions.html" class="tsd-kind-icon">Response<wbr>Headers<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
+						<a href="middleware.html#responseheaders" class="tsd-kind-icon">response<wbr>Headers</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="middleware.html#addresponseheaders" class="tsd-kind-icon">add<wbr>Response<wbr>Headers</a>
+					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="middleware.html#httpsupgrader" class="tsd-kind-icon">https<wbr>Upgrader</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="middleware.html#responsemodifier" class="tsd-kind-icon">response<wbr>Modifier</a>
 					</li>
 				</ul>
 			</nav>

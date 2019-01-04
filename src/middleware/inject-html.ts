@@ -1,3 +1,6 @@
+/**
+ * @module Middleware
+ */
 import { FetchFunction } from "../fetch";
 import { applyReplacements } from "../text-replacements";
 

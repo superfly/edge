@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>GhostProBlog | @fly/cdn</title>
+	<title>FetchFactory | @fly/cdn</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -52,96 +52,51 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/backends.html">Backends</a>
+					<a href="../modules/http.html">HTTP</a>
 				</li>
 				<li>
-					<a href="backends.ghostproblog.html">GhostProBlog</a>
+					<a href="http.fetchfactory.html">FetchFactory</a>
 				</li>
 			</ul>
-			<h1>Interface GhostProBlog</h1>
+			<h1>Interface FetchFactory</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Ghost Pro configugration.</p>
-					</div>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">GhostProBlog</span>
+						<span class="target">FetchFactory</span>
 					</li>
 				</ul>
 			</section>
-			<section class="tsd-panel-group tsd-index-group">
-				<h2>Index</h2>
-				<section class="tsd-panel tsd-index-panel">
-					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
-							<h3>Properties</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="backends.ghostproblog.html#directory" class="tsd-kind-icon">directory</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="backends.ghostproblog.html#hostname" class="tsd-kind-icon">hostname</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="backends.ghostproblog.html#subdomain" class="tsd-kind-icon">subdomain</a></li>
+			<section class="tsd-panel">
+				<h3 class="tsd-before-signature">Callable</h3>
+				<ul class="tsd-signatures tsd-kind-interface tsd-parent-kind-external-module">
+					<li class="tsd-signature tsd-kind-icon">__call<span class="tsd-signature-symbol">(</span>fetch<span class="tsd-signature-symbol">: </span><a href="http.fetchfunction.html" class="tsd-signature-type">FetchFunction</a>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="http.fetchfunction.html" class="tsd-signature-type">FetchFunction</a></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/superfly/fly-site/blob/fac4cc0/src/fetch.ts#L50">fetch.ts:50</a></li>
 							</ul>
-						</section>
-					</div>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="directory" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> directory</h3>
-					<div class="tsd-signature tsd-kind-icon">directory<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/dc1fca5/src/backends/ghost_pro.ts#L15">backends/ghost_pro.ts:15</a></li>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>fetch: <a href="http.fetchfunction.html" class="tsd-signature-type">FetchFunction</a></h5>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">any</span></h5>
+							</li>
 						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Subdirectory blog is served from (if any)</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="hostname" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> hostname</h3>
-					<div class="tsd-signature tsd-kind-icon">hostname<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/dc1fca5/src/backends/ghost_pro.ts#L17">backends/ghost_pro.ts:17</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Ghost Pro blogs can be configured with a custom hostname, we need that to proxy properly</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="subdomain" class="tsd-anchor"></a>
-					<h3>subdomain</h3>
-					<div class="tsd-signature tsd-kind-icon">subdomain<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/dc1fca5/src/backends/ghost_pro.ts#L13">backends/ghost_pro.ts:13</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Blog&#39;s subdomain: <subdomain>.ghost.io</p>
-						</div>
-					</div>
-				</section>
+						<h4 class="tsd-returns-title">Returns <a href="http.fetchfunction.html" class="tsd-signature-type">FetchFunction</a></h4>
+					</li>
+				</ul>
 			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -150,20 +105,17 @@
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/backends.html">Backends</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="../modules/config.html">Config</a>
+					</li>
+					<li class="current tsd-kind-external-module">
 						<a href="../modules/http.html">HTTP</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/middleware.html">Middleware</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/rules.html">Rules</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/site.html">Site</a>
 					</li>
 				</ul>
 			</nav>
@@ -172,32 +124,45 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="backends.ghostproblog.html" class="tsd-kind-icon">Ghost<wbr>Pro<wbr>Blog</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="backends.ghostproblog.html#directory" class="tsd-kind-icon">directory</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="backends.ghostproblog.html#hostname" class="tsd-kind-icon">hostname</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="backends.ghostproblog.html#subdomain" class="tsd-kind-icon">subdomain</a>
-							</li>
-						</ul>
+						<a href="http.fetchfactory.html" class="tsd-kind-icon">Fetch<wbr>Factory</a>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="backends.githubpagesfetch.html" class="tsd-kind-icon">Git<wbr>Hub<wbr>Pages<wbr>Fetch</a>
+						<a href="http.fetchfunction.html" class="tsd-kind-icon">Fetch<wbr>Function</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="http.proxyfactory.html" class="tsd-kind-icon">Proxy<wbr>Factory</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="http.proxyfunction.html" class="tsd-kind-icon">Proxy<wbr>Function</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="backends.githubrepository.html" class="tsd-kind-icon">Git<wbr>Hub<wbr>Repository</a>
+						<a href="http.proxyoptions.html" class="tsd-kind-icon">Proxy<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="http.redirectoptions.html" class="tsd-kind-icon">Redirect<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
+						<a href="../modules/http.html#fetchgenerator" class="tsd-kind-icon">Fetch<wbr>Generator</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="../modules/http.html#fetchgeneratorwithoptions" class="tsd-kind-icon">Fetch<wbr>Generator<wbr>With<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
+						<a href="../modules/http.html#pipelinestage" class="tsd-kind-icon">Pipeline<wbr>Stage</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="../modules/backends.html#ghostproblog-1" class="tsd-kind-icon">ghost<wbr>Pro<wbr>Blog</a>
+						<a href="../modules/http.html#normalizerequest" class="tsd-kind-icon">normalize<wbr>Request</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="../modules/backends.html#githubpages" class="tsd-kind-icon">github<wbr>Pages</a>
+						<a href="../modules/http.html#pipeline" class="tsd-kind-icon">pipeline</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="../modules/http.html#proxy" class="tsd-kind-icon">proxy</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="../modules/http.html#rewritelocationheader" class="tsd-kind-icon">rewrite<wbr>Location<wbr>Header</a>
 					</li>
 				</ul>
 			</nav>

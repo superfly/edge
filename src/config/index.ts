@@ -1,3 +1,4 @@
+/** @module Config */
 import { validateBackend, buildBackend } from "./backends";
 import { isObject } from "../util";
 import { FetchFunction } from "../fetch";

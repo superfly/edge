@@ -1,6 +1,8 @@
+/**
+ * @module Backends
+ */
 import { ProxyFunction, proxy } from "../proxy";
 import { isObject, merge } from "../util";
-import { FetchFunction } from "../fetch";
 import * as errors from "../errors";
 
 /**

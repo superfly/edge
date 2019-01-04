@@ -1,10 +1,8 @@
-import { FlyRequest } from "@fly/v8env/lib/fly/fetch";
-
 /**
  * HTTP helpers, utilities, etc.
  * @module HTTP
  */
-
+import { FlyRequest } from "@fly/v8env/lib/fly/fetch";
 
 /**
  * Converts RequestInfo into a Request object.

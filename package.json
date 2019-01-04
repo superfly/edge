@@ -12,7 +12,7 @@
     "test": "yarn fly test",
     "build": "yarn tsc",
     "prepublishOnly": "yarn tsc",
-    "doc": "yarn doc"
+    "doc": "typedoc"
   },
   "repository": {
     "type": "git",

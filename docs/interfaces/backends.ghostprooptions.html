@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>SiteConfig | @fly/cdn</title>
+	<title>GhostProOptions | @fly/cdn</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -52,24 +52,31 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/site.html">Site</a>
+					<a href="../modules/backends.html">Backends</a>
 				</li>
 				<li>
-					<a href="site.siteconfig.html">SiteConfig</a>
+					<a href="backends.ghostprooptions.html">GhostProOptions</a>
 				</li>
 			</ul>
-			<h1>Interface SiteConfig</h1>
+			<h1>Interface GhostProOptions</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Ghost Pro configugration.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">SiteConfig</span>
+						<span class="target">GhostProOptions</span>
 					</li>
 				</ul>
 			</section>
@@ -80,9 +87,9 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="site.siteconfig.html#backends" class="tsd-kind-icon">backends</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="site.siteconfig.html#middleware" class="tsd-kind-icon">middleware</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="site.siteconfig.html#rules" class="tsd-kind-icon">rules</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="backends.ghostprooptions.html#directory" class="tsd-kind-icon">directory</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="backends.ghostprooptions.html#hostname" class="tsd-kind-icon">hostname</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="backends.ghostprooptions.html#subdomain" class="tsd-kind-icon">subdomain</a></li>
 							</ul>
 						</section>
 					</div>
@@ -91,42 +98,49 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="backends" class="tsd-anchor"></a>
-					<h3>backends</h3>
-					<div class="tsd-signature tsd-kind-icon">backends<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<a name="directory" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> directory</h3>
+					<div class="tsd-signature tsd-kind-icon">directory<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/dc1fca5/src/site.ts#L8">site.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/fac4cc0/src/backends/ghost_pro.ts#L16">backends/ghost_pro.ts:16</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-index-signature">
-								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">BackendInfo</span></h5>
-							</li>
-						</ul>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Subdirectory blog is served from (if any)</p>
+						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="middleware" class="tsd-anchor"></a>
-					<h3>middleware</h3>
-					<div class="tsd-signature tsd-kind-icon">middleware<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">MiddlewareConfig</span><span class="tsd-signature-symbol">[]</span></div>
+					<a name="hostname" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> hostname</h3>
+					<div class="tsd-signature tsd-kind-icon">hostname<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/dc1fca5/src/site.ts#L7">site.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/fac4cc0/src/backends/ghost_pro.ts#L18">backends/ghost_pro.ts:18</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Ghost Pro blogs can be configured with a custom hostname, we need that to proxy properly</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="rules" class="tsd-anchor"></a>
-					<h3>rules</h3>
-					<div class="tsd-signature tsd-kind-icon">rules<span class="tsd-signature-symbol">:</span> <a href="rules.ruleinfo.html" class="tsd-signature-type">RuleInfo</a><span class="tsd-signature-symbol">[]</span></div>
+					<a name="subdomain" class="tsd-anchor"></a>
+					<h3>subdomain</h3>
+					<div class="tsd-signature tsd-kind-icon">subdomain<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/dc1fca5/src/site.ts#L11">site.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/fac4cc0/src/backends/ghost_pro.ts#L14">backends/ghost_pro.ts:14</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Blog&#39;s subdomain: <subdomain>.ghost.io</p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -136,8 +150,11 @@
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="../modules/backends.html">Backends</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/config.html">Config</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/http.html">HTTP</a>
@@ -145,37 +162,49 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/middleware.html">Middleware</a>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/rules.html">Rules</a>
-					</li>
-					<li class="current tsd-kind-external-module">
-						<a href="../modules/site.html">Site</a>
-					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="../classes/site.site-1.html" class="tsd-kind-icon">Site</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="site.siteconfig.html" class="tsd-kind-icon">Site<wbr>Config</a>
+						<a href="backends.ghostprooptions.html" class="tsd-kind-icon">Ghost<wbr>Pro<wbr>Options</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="site.siteconfig.html#backends" class="tsd-kind-icon">backends</a>
+								<a href="backends.ghostprooptions.html#directory" class="tsd-kind-icon">directory</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="site.siteconfig.html#middleware" class="tsd-kind-icon">middleware</a>
+								<a href="backends.ghostprooptions.html#hostname" class="tsd-kind-icon">hostname</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="site.siteconfig.html#rules" class="tsd-kind-icon">rules</a>
+								<a href="backends.ghostprooptions.html#subdomain" class="tsd-kind-icon">subdomain</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="backends.githubpagesoptions.html" class="tsd-kind-icon">Git<wbr>Hub<wbr>Pages<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="backends.herokuoptions.html" class="tsd-kind-icon">Heroku<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="../modules/backends.html#echo" class="tsd-kind-icon">echo</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="../modules/backends.html#ghostproblog" class="tsd-kind-icon">ghost<wbr>Pro<wbr>Blog</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="../modules/backends.html#githubpages" class="tsd-kind-icon">github<wbr>Pages</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="../modules/backends.html#heroku" class="tsd-kind-icon">heroku</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="../modules/backends.html#origin" class="tsd-kind-icon">origin</a>
+					</li>
 				</ul>
 			</nav>
 		</div>

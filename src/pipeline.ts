@@ -2,7 +2,7 @@
  * A library for composing `fetch` generators into a single pipeline.
  *
  * @preferred
- * @module fly/fetch/pipeline
+ * @module HTTP
  */
 
 import { FetchGenerator, FetchFunction } from "./fetch"

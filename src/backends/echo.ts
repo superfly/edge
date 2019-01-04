@@ -1,4 +1,7 @@
 /**
+ * @module Backends
+ */
+/**
  * A useful fetch-like function for debugging. Echos request information
  * as a JSON response.
  * @param req The request to echo

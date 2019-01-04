@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Rules | @fly/cdn</title>
+	<title>HerokuOptions | @fly/cdn</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -52,62 +52,63 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="rules.html">Rules</a>
+					<a href="../modules/backends.html">Backends</a>
+				</li>
+				<li>
+					<a href="backends.herokuoptions.html">HerokuOptions</a>
 				</li>
 			</ul>
-			<h1>External module Rules</h1>
+			<h1>Interface HerokuOptions</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Heroku application configugration.</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">HerokuOptions</span>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Interfaces</h3>
+							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/rules.ruleinfo.html" class="tsd-kind-icon">Rule<wbr>Info</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Functions</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="rules.html#rules-1" class="tsd-kind-icon">rules</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="backends.herokuoptions.html#appname" class="tsd-kind-icon">app<wbr>Name</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Functions</h2>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-					<a name="rules-1" class="tsd-anchor"></a>
-					<h3>rules</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">rules<span class="tsd-signature-symbol">(</span>backends<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BackendMap</span>, rules<span class="tsd-signature-symbol">: </span><a href="../interfaces/rules.ruleinfo.html" class="tsd-signature-type">RuleInfo</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ruleFetch</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/dc1fca5/src/rules.ts#L25">rules.ts:25</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>backends: <span class="tsd-signature-type">BackendMap</span></h5>
-								</li>
-								<li>
-									<h5>rules: <a href="../interfaces/rules.ruleinfo.html" class="tsd-signature-type">RuleInfo</a><span class="tsd-signature-symbol">[]</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ruleFetch</span></h4>
-						</li>
-					</ul>
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="appname" class="tsd-anchor"></a>
+					<h3>app<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">app<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/fac4cc0/src/backends/heroku.ts#L14">backends/heroku.ts:14</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Blog&#39;s subdomain: <subdomain>.ghost.io</p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -117,30 +118,54 @@
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="backends.html">Backends</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="http.html">HTTP</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="middleware.html">Middleware</a>
-					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="rules.html">Rules</a>
+						<a href="../modules/backends.html">Backends</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="site.html">Site</a>
+						<a href="../modules/config.html">Config</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/http.html">HTTP</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/middleware.html">Middleware</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/rules.ruleinfo.html" class="tsd-kind-icon">Rule<wbr>Info</a>
+						<a href="backends.ghostprooptions.html" class="tsd-kind-icon">Ghost<wbr>Pro<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="backends.githubpagesoptions.html" class="tsd-kind-icon">Git<wbr>Hub<wbr>Pages<wbr>Options</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="backends.herokuoptions.html" class="tsd-kind-icon">Heroku<wbr>Options</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="backends.herokuoptions.html#appname" class="tsd-kind-icon">app<wbr>Name</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="../modules/backends.html#echo" class="tsd-kind-icon">echo</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="rules.html#rules-1" class="tsd-kind-icon">rules</a>
+						<a href="../modules/backends.html#ghostproblog" class="tsd-kind-icon">ghost<wbr>Pro<wbr>Blog</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="../modules/backends.html#githubpages" class="tsd-kind-icon">github<wbr>Pages</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="../modules/backends.html#heroku" class="tsd-kind-icon">heroku</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="../modules/backends.html#origin" class="tsd-kind-icon">origin</a>
 					</li>
 				</ul>
 			</nav>
