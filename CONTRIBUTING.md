@@ -6,7 +6,7 @@ Thanks for stopping by! We'd like to make it as easy as possible for you to get 
 
 If you want to suggest a new feature, found a bug, or have a question, [search the issue tracker](https://github.com/superfly/cdn/issues) to see if
 someone else in the community has already created a ticket. If not, go ahead and create one
-[here](https://github.com/superfly/fly/issues/new)!
+[here](https://github.com/superfly/cdn/issues/new)!
 
 ## Workflow
 
@@ -16,11 +16,11 @@ We try to work through pull requests as quickly as we can, but some large or far
 
 ### 1. Fork & create a branch
 
-When you're ready to start contributing, [fork the CDN](https://help.github.com/articles/fork-a-repo/) and clone to your machine:
+When you're ready to start contributing, [fork](https://help.github.com/articles/fork-a-repo/) the CDN and clone to your machine:
 
 ```sh
-git clone https://github.com/<your_username>/fly
-cd fly
+git clone https://github.com/superfly/cdn.git flycdn
+cd flycdn
 
 ```
 
@@ -34,16 +34,10 @@ A good branch name, for example, where issue #156 is the ticket you're working o
 
 ### 2. Install dependencies
 
-Fly uses [Yarn](https://yarnpkg.com/en/) to manage dependencies and run development scripts. If you don't already have yarn installed, follow [these directions](https://yarnpkg.com/en/docs/install).
+The Fly CDN uses [Yarn](https://yarnpkg.com/en/) to manage dependencies and run development scripts. If you don't already have yarn installed, follow [these directions](https://yarnpkg.com/en/docs/install).
 
 ```sh
 yarn install
-```
-
-Fly also includes 3rd party dependencies as git submodules. Initialize them with:
-
-```sh
-git submodule update --init
 ```
 
 ### 3. Get the test suite running
@@ -67,13 +61,11 @@ If the test suite passed, your environment is ready to go.
 
 You're now ready to make your changes!
 
-If you add code that should be tested, which is usually the case, please add tests. You'll need to recompile using `yarn build` to see your changes. You can also use `yarn build:watch` to continually watch and build. Changes to `v8env` also need to be bundled with `yarn bundle` to take effect.
-
 ### 5. Make a Pull Request
 
 Once you're happy with your changes and the test suite is passing locally, it's time to prepare your code for a pull request.
 
-It's good practice to update your code with the latest changes on fly's `master` branch before publishing. To do this you'll need to update your local copy of master and merge any changes into your branch:
+It's good practice to update your code with the latest changes on the Fly CDN's `master` branch before publishing. To do this you'll need to update your local copy of master and merge any changes into your branch:
 
 ```sh
 git remote add upstream https://github.com/superfly/cdn.git
@@ -95,3 +87,34 @@ Finally, go to GitHub and [make a Pull Request](https://github.com/superfly/cdn/
 [make a pull request]: https://help.github.com/articles/creating-a-pull-request
 [git rebasing]: http://git-scm.com/book/en/Git-Branching-Rebasing
 [interactive rebase]: https://help.github.com/articles/interactive-rebase
+
+---
+
+## Getting Started with your new Fly CDN
+
+### Want a UI?
+
+Sign up for an account on fly.io and use the `create app` button.
+
+### Clone and run tests.
+
+* `git clone https://github.com/superfly/cdn.git flycdn` 
+* `cd flycdn`
+* `yarn install`
+* `yarn test`
+
+### Local development server
+
+Run `yarn start` to launch a local development server on port 3000, then have a look in your browser: http://localhost:3000
+
+### Deploy to production
+
+You can deploy this app to the Fly hosting service using the CLI. Sign up at fly.io, then run:
+
+* `yarn fly login`
+* `yarn fly app create <name-of-your-app>`
+* `yarn fly deploy`
+
+### Questions? Feedback?
+
+We're active in [Gitter](https://gitter.im/superfly/fly) (you do not need to sign in to view recent chat) and on [Twitter](https://twitter.com/flydotio) or you can drop us a line at support@fly.io. Thanks!  
