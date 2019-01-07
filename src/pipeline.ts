@@ -7,6 +7,14 @@
 
 import { FetchGenerator, FetchFunction } from "./fetch"
 
+export interface PipelineFetch extends FetchFunction{
+  stages: PipelineStage[]
+}
+
+export interface PipelineFetchGenerator extends FetchGenerator{
+  stages: PipelineStage[]
+}
+
 /**
  * PipeplineStage can either be a FetchGenerator function, or a tuple of
  * FetchGenerator + args.
@@ -32,15 +40,19 @@ export type PipelineStage = FetchGenerator | [FetchGenerator, any[]]
  * const p = pipeline(fetch, addHeader)
  *
  * fly.http.respondWith(p)
- *
+ *```
+ * 
  * @param stages fetch generator functions that apply additional logic
  * @returns a combinedfunction that can be used anywhere that wants `fetch`
  */
-export function pipeline(...stages: PipelineStage[]) {
+export function pipeline(...stages: PipelineStage[]): FetchGenerator {
   /**
    * @param fetch the "origin" fetch function to call at the end of the pipeline
    */
-  function pipelineFetch(fetch: FetchFunction) {
+  function pipelineFetch(fetch: FetchFunction): PipelineFetch {
+    if(!fetch){
+      fetch = async (req: RequestInfo, init?: RequestInit) => new Response("not found", { status: 404 })
+    }
     for (let i = stages.length - 1; i >= 0; i--) {
       const s = stages[i]
       const fn = typeof s === "function" ? s : s[0]
