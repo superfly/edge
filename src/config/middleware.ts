@@ -9,6 +9,7 @@ const factories = new Map<string, FactoryDefinition>([
   ["https-upgrader", [middleware.httpsUpgrader]],
   ["response-headers", [middleware.responseHeaders]],
   ["inject-html", [middleware.injectHTML]],
+  ["http-cache", [middleware.httpCache]]
 ]);
 
 function getFactory(type: string): FactoryDefinition {

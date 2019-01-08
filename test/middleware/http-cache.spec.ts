@@ -15,6 +15,7 @@ function withHeaders(headers:any){
 const noCacheHeaders = [
   ["response", {"vary": "any", "cache-control": "public, max-age=3600"}],
   ["response", {"cache-control": "no-cache"}],
+  ["response", {"cache-control": "public, max-age=0"}],
   ["request", { "authorization": "blerp" }],
   ["request", { "cookie": "blerp" }]
 ]
@@ -52,6 +53,19 @@ describe("middleware/httpCache", function() {
     ]);
 
     expect(body1).to.eq(body2);
+  })
+
+  it("accepts max-age overrides", async () => {
+    const generator = httpCache.configure({ overrideMaxAge: 100})
+    const fn = generator(withHeaders({
+      "cache-control": "public, max-age=0"
+    }))
+
+    const resp1 = await fn("http://anyurl.com/cached-url-max-age");
+    const resp2 = await fn("http://anyurl.com/cached-url-max-age");
+
+    expect(resp1.headers.get('fly-cache')).to.eq('miss');
+    expect(resp2.headers.get("fly-cache")).to.eq('hit')
   })
 //   it("redirects with default options", async ()=>{
 //     const fn = httpsUpgrader(echo);

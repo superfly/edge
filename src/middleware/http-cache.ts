@@ -1,25 +1,37 @@
 /**
- * @module fly
- * @private
+ * @module Middleware
  */
 import cache from "@fly/v8env/lib/fly/cache";
 import { FetchFunction } from "../fetch";
 
 /**
+ * HTTP caching options.
+ */
+export interface HTTPCacheOptions{
+  /** Overrides the cache TTL for all cacheable requests */
+  overrideMaxAge?: number
+}
+/**
+ * Cache HTTP responses with `cache-control` headers.
+ * 
+ * Basic example:
  * ```typescript
  * import httpCache from "./src/middleware/http-cache";
  * import backends from "./src/backends";
  * 
  * const glitch = backends.glitch("fly-example");
  * 
- * const origin = httpCache(glitch);
+ * const origin = httpCache(glitch, { overrideMaxAge: 3600 });
  * 
  * fly.http.respondWith(origin);
  * ```
+ * 
+ * @param fetch 
+ * @param options 
  */
-
-export function httpCache(fetch: FetchFunction): FetchFunction{
-  return async function httpCache(req: RequestInfo, init?: RequestInit): Promise<Response>{
+export function httpCache(fetch: FetchFunction, options?: HTTPCacheOptions): FetchFunction{
+  return async function httpCacheFetch(req: RequestInfo, init?: RequestInit): Promise<Response>{
+    if(!options) options = {};
     if(typeof req === "string"){
       req = new Request(req, init);
       init = undefined;
@@ -44,13 +56,28 @@ export function httpCache(fetch: FetchFunction): FetchFunction{
     resp = await fetch(req, init);
 
     // this should do nothing if the response can't be cached
-    const cacheHappened = cacheable ? await storage.put(req, resp) : false;
+    const cacheHappened = cacheable ? await storage.put(req, resp, options.overrideMaxAge) : false;
 
     if(cacheHappened){
       resp.headers.set("Fly-Cache", "miss");
     }
     return resp;
   }
+}
+
+/**
+ * Configurable HTTP caching middleware. This is extremely useful within a `pipeline`:
+ * 
+ * ```typescript
+ * const app = pipeline(
+ *     httpsUpgrader,
+ *     httpCaching.configure({overrideMaxAge: 3600}),
+ *     glitch("fly-example")
+ * )
+ * 
+ */
+httpCache.configure = (options?: HTTPCacheOptions) => {
+  return (fetch: FetchFunction) => httpCache(fetch, options)
 }
 
 // copied from fly v8env
@@ -100,7 +127,7 @@ const storage = {
     const res = await fetch(req)
     return await storage.put(req, res)
   },
-  async put(req: Request, res: Response): Promise<boolean> {
+  async put(req: Request, res: Response, ttl?: number): Promise<boolean> {
     const resHeaders: any = {}
     const key = hashData(req)
 
@@ -125,7 +152,12 @@ const storage = {
       cacheableRes
     )
 
-    const ttl = Math.floor(policy.timeToLive() / 1000)
+    if(typeof ttl === "number"){
+      policy._rescc['max-age'] = ttl; // hack to make policy handle overridden ttl
+      console.warn("ttl:", ttl, "storable:", policy.storable());
+    }
+
+    ttl = typeof ttl === "number" ? ttl : Math.floor(policy.timeToLive() / 1000);
     if (policy.storable() && ttl > 0) {
       console.debug("Setting cache policy:", "httpcache:policy:" + key, ttl)
       await cache.set("httpcache:policy:" + key, JSON.stringify(policy.toObject()), ttl)
