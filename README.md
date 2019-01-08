@@ -15,8 +15,8 @@ Sign up for an account on fly.io and use the `create app` button.
 
 ### Clone and run tests.
 
-* `git clone https://github.com/superfly/cdn.git flycdn` 
-* `cd flycdn`
+* `git clone https://github.com/superfly/cdn.git <name-of-your-app>` 
+* `cd <name-of-your-app>`
 * `yarn install`
 * `yarn test`
 
