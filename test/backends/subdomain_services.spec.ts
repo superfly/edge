@@ -18,7 +18,8 @@ const defs: any[] = [
     { subdomain: "example" }
   ]},
   { backend: squarespace, tests: [
-    { subdomain: "example", status: 302 }
+    { subdomain: "archmotorcycle" },// whoah
+    { subdomain: "archmotorcycle", hostname: "www.archmotorcycle.com" } // whoah
   ]}
 ]
 for(const d of defs){
@@ -36,7 +37,7 @@ for(const d of defs){
             "User-Agent": "flyio test suite"
           }
         })
-        expect(resp.status).to.eq(t.status || 200)
+        expect(resp.status).to.eq(200);
       })
     }
   })
