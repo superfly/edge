@@ -8,9 +8,9 @@ import { FlyRequest } from "@fly/v8env/lib/fly/fetch";
  * Converts RequestInfo into a Request object.
  * @param req raw request
  */
-export function normalizeRequest(req: RequestInfo) {
+export function normalizeRequest(req: RequestInfo, init?: RequestInit) {
   if (typeof req === "string") {
-    req = new Request(req)
+    req = new Request(req, init)
   }
   if (!(req instanceof Request)) {
     throw new Error("req must be either a string or a Request object")
