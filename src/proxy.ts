@@ -44,6 +44,7 @@ export function proxy(origin: string | URL, options?: ProxyOptions): ProxyFuncti
   if (!options) {
     options = {}
   }
+  options.origin = origin.toString();
   async function proxyFetch(req: RequestInfo, init?: RequestInit) {
     req = normalizeRequest(req)
     if (!options) {
@@ -214,6 +215,9 @@ export interface ProxyOptions {
      */
     host?: string | boolean
   }
+
+  /** @private */
+  origin?: string
 }
 
 

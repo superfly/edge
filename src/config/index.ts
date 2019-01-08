@@ -5,6 +5,7 @@ import { FetchFunction } from "../fetch";
 import { ProxyFunction } from "../proxy";
 import { RuleInfo, validateRule, buildRules } from "./rules";
 import { buildMiddleware, validateMiddleware } from "./middleware";
+import { stringify } from "querystring";
 
 export const CDNConfigKey = "flyCDN";
 
@@ -83,12 +84,14 @@ export function isCdnConfig(input: unknown): input is CdnConfig {
   return true;
 }
 
-export function buildCdn(config: CdnConfig): FetchFunction {
+export function buildCdn(config: CdnConfig) {
   const backends = new Map<string, ProxyFunction>();
 
   for (const [key, cfg] of Object.entries(config.backends)) {
-    backends.set(key, buildBackend(cfg));
+    const b = buildBackend(cfg);
+    backends.set(key, b);
   }
+  console.log("Built backends:", Object.getOwnPropertyNames(config.backends));
 
   let fn = buildRules(backends, config.rules)
   
@@ -99,12 +102,14 @@ export function buildCdn(config: CdnConfig): FetchFunction {
     }
   }
 
-  return fn
+  return Object.assign(fn, {
+    backends: backends
+  })
 }
 
-export function buildCdnFromAppConfig(): FetchFunction {
+export function buildCdnFromAppConfig(c?: any) {
   try {
-    const config = app.config[CDNConfigKey];
+    const config = c || app.config[CDNConfigKey];
     if (!config) {
       throw new Error("flyCDN config property not found");
     }
@@ -114,8 +119,9 @@ export function buildCdnFromAppConfig(): FetchFunction {
     }
     return buildCdn(config)
   } catch (error) {
-    return (req, init) => {
+    const fn = (...args: any[]) => {
       return Promise.resolve(new Response(`Invalid CDN Config: ${error.message || error}`));
     }
+    return Object.assign(fn, { backends: new Map<string, ProxyFunction>()})
   }
 }

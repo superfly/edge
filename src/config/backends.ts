@@ -12,6 +12,7 @@ const factories = new Map<string, ProxyFactory>([
   ["github_pages", backends.githubPages],
   ["heroku", backends.heroku],
   ["ghost_pro", backends.ghostProBlog],
+  ["glitch", backends.glitch],
 ]);
 
 function getFactory(type: string): ProxyFactory {
@@ -23,8 +24,14 @@ function getFactory(type: string): ProxyFactory {
 }
 
 export function buildBackend(config: ItemConfig): ProxyFunction<any> {
-  const factory = getFactory(config.type);
-  return factory(config);
+  try{
+    const factory = getFactory(config.type);
+    return factory(config);
+  }catch(err){
+    console.error("Exception building backend:", err, config)
+    const backendError = async (..._: any[]) => new Response(err.toString(), { status: 500 } )
+    return Object.assign(backendError, { proxyConfig: config} )
+  }
 }
 
 export function validateBackend(config: ItemConfig) {
