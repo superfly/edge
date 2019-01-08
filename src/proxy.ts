@@ -45,7 +45,10 @@ export function proxy(origin: string | URL, options?: ProxyOptions): ProxyFuncti
     options = {}
   }
   async function proxyFetch(req: RequestInfo, init?: RequestInit) {
-    req = normalizeRequest(req)
+    if(!(req instanceof Request)){
+      req = normalizeRequest(req, init);
+      init = undefined;
+    }
     if (!options) {
       options = {}
     }
@@ -100,7 +103,9 @@ export function buildProxyRequest(origin: string | URL, options: ProxyOptions, r
     breq = new Request(url.toString(), breq)
   }
   // we extend req with remoteAddr
-  breq.headers.set("x-forwarded-for", req.remoteAddr || "")
+  if(req.remoteAddr){
+    breq.headers.set("x-forwarded-for", req.remoteAddr)
+  }
   breq.headers.set("x-forwarded-host", requestedHostname)
   breq.headers.set("x-forwarded-proto", url.protocol.replace(":", ""))
 
