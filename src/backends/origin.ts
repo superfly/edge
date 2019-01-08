@@ -12,6 +12,7 @@ import * as errors from "../errors";
  */
 export interface OriginOptions {
   origin: string | URL,
+  forwardHostHeader?: boolean,
   headers?: { [name: string]: string | boolean | undefined },
 }
 
@@ -44,6 +45,10 @@ function normalizeOptions(input: unknown): OriginOptions {
 
   errors.assertPresent(options.origin, "origin");
   errors.assertUrl(options.origin, "origin");
+
+  if(options.forwardHostHeader === undefined){
+    options.forwardHostHeader = false;
+  }
 
   return options;
 }

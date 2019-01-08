@@ -10,15 +10,15 @@ describe("backends/origin", function() {
     const validOptions = [
       [
         "https://fly.io",
-        { origin: "https://fly.io" }
+        { origin: "https://fly.io", forwardHostHeader: false }
       ],
       [
         new URL("https://fly.io"),
-        { origin: new URL("https://fly.io") }
+        { origin: new URL("https://fly.io"), forwardHostHeader: false }
       ],
       [
         { origin: "https://fly.io" },
-        { origin: "https://fly.io" },
+        { origin: "https://fly.io", forwardHostHeader: false },
       ]
     ];
 
