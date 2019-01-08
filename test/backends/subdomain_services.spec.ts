@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { ghostProBlog, glitch, netlify, heroku } from "../../src/backends"
+import { squarespace, ghostProBlog, glitch, netlify, heroku } from "../../src/backends"
 import * as errors from "../../src/errors";
 import { normalizeOptions } from "../../src/backends/subdomain_service";
 
@@ -9,13 +9,16 @@ const defs = [
     { subdomain: "demo" }
   ]},
   { backend: glitch, options: ["subdomain"], tests: [
-    {appName: "fly-example" },
+    { appName: "fly-example" },
   ]},
   { backend: heroku, tests: [
-    { appName: "example"}
+    { appName: "example" }
   ]},
-  { backend: netlify, options: ["subdomain", "directory"], tests: [{
-    subdomain: "example"}
+  { backend: netlify, options: ["subdomain", "directory"], tests: [
+    { subdomain: "example" }
+  ]},
+  { backend: squarespace, tests: [
+    { subdomain: "example" }
   ]}
 ]
 for(const d of defs){
@@ -26,7 +29,7 @@ for(const d of defs){
     for(const t of d.tests){
       it(`works with settings: ${JSON.stringify(t)}`, async () => {
         const fn = backend(t as any);
-  
+
         const resp = await fn("https://backend/", { method: "HEAD"})
         expect(resp.status).to.eq(200)
       })
