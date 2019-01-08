@@ -42,7 +42,7 @@ You can deploy this app to the Fly hosting service using the CLI. Sign up at fly
 * [Heroku](https://github.com/superfly/cdn/blob/master/src/backends/heroku.ts)
 * [Ghost Pro](https://github.com/superfly/cdn/blob/master/src/backends/ghost_pro.ts)
 
-Want to help out? Write a new backend type and open a pull request!
+Want to help out? Write a new backend type and open a [pull request](https://github.com/superfly/cdn/compare?template=backend_type.md)!
 
 ### Middleware
 
