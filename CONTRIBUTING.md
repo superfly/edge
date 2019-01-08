@@ -42,14 +42,7 @@ yarn install
 
 ### 3. Get the test suite running
 
-Build the code and bundle for execution:
-
-```sh
-yarn build
-yarn bundle
-```
-
-You can now run the test suite:
+Run the test suite:
 
 ```sh
 yarn test
