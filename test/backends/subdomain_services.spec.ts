@@ -30,7 +30,12 @@ for(const d of defs){
       it(`works with settings: ${JSON.stringify(t)}`, async () => {
         const fn = backend(t as any);
 
-        const resp = await fn("https://backend/", { method: "HEAD"})
+        const resp = await fn("https://backend/", {
+          method: "HEAD",
+          headers: {
+            "User-Agent": "flyio test suite"
+          }
+        })
         expect(resp.status).to.eq(200)
       })
     }
