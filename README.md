@@ -36,17 +36,30 @@ You can deploy this app to the Fly hosting service using the CLI. Sign up at fly
 
 ### Backends
 
-[Backends](https://github.com/superfly/cdn/tree/master/src/backends) are origin services you can route requests to. The project includes a backend type [any HTTP service](https://github.com/superfly/cdn/blob/master/src/backends/origin.ts), and more specialized types for proxying to third party services.
+[Backends](https://github.com/superfly/cdn/tree/master/src/backends) are origin services you can route requests to. The project includes a backend type [any HTTP service](https://github.com/superfly/cdn/blob/master/src/backends/origin.ts), and more specialized types for proxying to third party services. 
 
 * [GitHub Pages](https://github.com/superfly/cdn/blob/master/src/backends/github_pages.ts)
 * [Heroku](https://github.com/superfly/cdn/blob/master/src/backends/heroku.ts)
 * [Ghost Pro](https://github.com/superfly/cdn/blob/master/src/backends/ghost_pro.ts)
 
-Want to help out? Write a new backend type and open a [pull request](https://github.com/superfly/cdn/compare?template=backend_type.md)!
+You can route requests to different backends by importing functions from `/backends/`. This will create a `fetch`-like, proxy function for making requests to either generic http/https backends or more specific origins like GitHub pages hosted sites. 
+
+```import { heroku } from "./src/backends"; 
+const backend = heroku({ 
+    appName: "example" 
+});
+```
+
+Want to help out? Write a new backend type and [open a Pull Request](https://github.com/superfly/cdn/compare).
 
 ### Middleware
 
-[Middleware](https://github.com/superfly/cdn/tree/master/src/middleware) applies logic to requests before they're sent to the backend, and responses before they're sent to users.
+[Middleware](https://github.com/superfly/cdn/tree/master/src/middleware) applies logic to requests before they're sent to the backend, and responses before they're sent to users. We’ve included middleware functions to help you do a number of things such as: 
+
+- Add, remove or overwrite response headers before they're sent to visitors
+- Redirect http requests to https in production 
+- [Inject HTML](https://fly.io/articles/fly-edge-apps-advanced-http-routing/)
+- Build middleware that only operates on a response
 
 ## Configuration vs code
 
