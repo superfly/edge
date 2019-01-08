@@ -29,7 +29,7 @@ export function squarespace(options: SubdomainOptions | string): ProxyFunction<S
     "x-forwarded-host": config.hostname || false
   }
 
-  const fn = proxy(uri, { headers: headers })
+  const fn = proxy(uri, { headers: headers, rewriteLocationHeaders: true })
   return Object.assign(fn, { proxyConfig: config})
 }
 

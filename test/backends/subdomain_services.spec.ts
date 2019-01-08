@@ -3,7 +3,7 @@ import { squarespace, ghostProBlog, glitch, netlify, heroku } from "../../src/ba
 import * as errors from "../../src/errors";
 import { normalizeOptions } from "../../src/backends/subdomain_service";
 
-const defs = [
+const defs: any[] = [
   { backend: ghostProBlog, tests: [
     { subdomain: "fly-io", hostname: 'fly.io', directory: "/articles/" },
     { subdomain: "demo" }
@@ -18,7 +18,7 @@ const defs = [
     { subdomain: "example" }
   ]},
   { backend: squarespace, tests: [
-    { subdomain: "example" }
+    { subdomain: "example", status: 302 }
   ]}
 ]
 for(const d of defs){
@@ -36,7 +36,7 @@ for(const d of defs){
             "User-Agent": "flyio test suite"
           }
         })
-        expect(resp.status).to.eq(200)
+        expect(resp.status).to.eq(t.status || 200)
       })
     }
   })
