@@ -19,7 +19,7 @@
     "inlineSources": true,
     "rootDirs": [
       "./src",
-      "./test",
+      "./test"
     ]
   },
   "typedocOptions": {
