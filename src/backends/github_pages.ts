@@ -39,7 +39,7 @@ export interface GitHubPagesOptions {
  * @module Backends
  */
 export function githubPages(options: GitHubPagesOptions | string): ProxyFunction<GitHubPagesOptions> {
-  const config = normalizeOptions(options);
+  const config = _normalizeOptions(options);
 
   let ghFetch = buildGithubPagesProxy(config)
   let buildTime = 0 // first failure might need a retry
@@ -91,9 +91,9 @@ export function githubPages(options: GitHubPagesOptions | string): ProxyFunction
   return self
 }
 
-githubPages.normalizeOptions = normalizeOptions;
+githubPages.normalizeOptions = _normalizeOptions;
 
-function normalizeOptions(input: unknown): GitHubPagesOptions {
+function _normalizeOptions(input: unknown): GitHubPagesOptions {
   const options: GitHubPagesOptions = { owner: "", repository: "" };
 
   if (typeof input === "string" && input.includes("/")) {
