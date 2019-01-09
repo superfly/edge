@@ -20,10 +20,12 @@ The code targets the Service Worker API and uses the Fly runtime API where neces
 
 ### Try the starter app
 
-* `git clone https://gist.github.com/ebc48856b74fde392a6d62a032b59a97.git forking-cdn`
-* `cd forking-cdn`
-* `yarn install`
-* `yarn start` - http://localhost:3000
+```bash
+git clone https://gist.github.com/ebc48856b74fde392a6d62a032b59a97.git forking-cdn
+cd forking-cdn
+yarn install
+yarn start # visit http://localhost:3000
+```
 
 Once you have that running, try swapping in a different origin. Edit `index.ts` and and replace `backends.origin("https://getting-started.edgeapp.net")` with `backends.githubPages("superfly/landing")`.
 
@@ -31,10 +33,11 @@ Once you have that running, try swapping in a different origin. Edit `index.ts` 
 
 You can deploy CDN based applications to the Fly hosting service using the CLI. Sign up at fly.io, then run:
 
-* `yarn fly login`
-* `yarn fly app create <name-of-your-app>`
-* `yarn fly deploy`
-
+```bash
+yarn fly login
+yarn fly app create <name-of-your-app>
+yarn fly deploy
+```
 
 You can also run on CloudFlare or StackPath, though not all features will work.
 
