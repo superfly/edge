@@ -40,7 +40,7 @@ You can also run on CloudFlare or StackPath, though not all features will work.
 
 ## Features
 
-### Straigthforward TypeScript/ JavaScript API
+### Straightforward TypeScript/ JavaScript API
 
 You can do a lot with a single `index.ts` file. This example redirects all requests to `https` and caches content when possible:
 
