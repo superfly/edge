@@ -92,3 +92,14 @@ See [CONTRIBUTING](https://github.com/superfly/cdn/blob/master/CONTRIBUTING.md).
 ## Configuration vs code
 
 The Fly CDN can be run standalone with a yaml based configuration schema. If you prefer to run with a config file, check out the config [README](https://github.com/superfly/cdn/blob/master/src/config/README.md).
+
+## Who's using it?
+
+* cars.com: HTTP routing
+* glitch.com: custom domain routing
+* fontawesome.com: CDN for paid customers
+* distractify.com: routing, caching, redirect management
+* *greenmatters.com: routing, caching, redirect management
+* artstorefronts.com: custom domain routing
+* kajabi.com: custom domain routing
+* posthaven.com: custom domain routing
