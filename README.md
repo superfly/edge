@@ -36,7 +36,7 @@ You can deploy this app to the Fly hosting service using the CLI. Sign up at fly
 
 ### Backends
 
-[Backends](https://github.com/superfly/cdn/tree/master/src/backends) are origin services you can route requests to. The project includes a backend type [any HTTP service](https://github.com/superfly/cdn/blob/master/src/backends/origin.ts), and more specialized types for proxying to third party services. 
+[Backends](https://github.com/superfly/cdn/tree/master/src/backends) are origin services you can route requests to. The project includes an `origin` backend type for [any HTTP service](https://github.com/superfly/cdn/blob/master/src/backends/origin.ts), and more specialized types for proxying to third party services. Including:
 
 * [GitHub Pages](https://github.com/superfly/cdn/blob/master/src/backends/github_pages.ts)
 * [Heroku](https://github.com/superfly/cdn/blob/master/src/backends/heroku.ts)
@@ -58,8 +58,7 @@ Want to help out? Write a new backend type and [open a Pull Request](https://git
 
 - Add, remove or overwrite response headers before they're sent to visitors
 - Redirect http requests to https in production 
-- [Inject HTML](https://fly.io/articles/fly-edge-apps-advanced-http-routing/)
-- Build middleware that only operates on a response
+- Inject HTML
 
 ## Configuration vs code
 
