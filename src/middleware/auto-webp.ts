@@ -35,13 +35,12 @@ export function imageService(origin: FetchFn | string): FetchFn {
       origin = proxy(origin)
     }
     if (typeof req === "string") req = new Request(req, init)
-    if (req.method !== "GET" && req.method !== "HEAD") {
-      return new Response("Only GET/HEAD allowed", { status: 405 })
-    }
 
     const op = parser(new URL(req.url))
+    // check if client supports webp
     const webp = webpAllowed(req)
 
+    // generate a cache key
     const key = cacheKey(op, webp)
     let resp: Response = await get(key)
     if(resp){
@@ -54,6 +53,7 @@ export function imageService(origin: FetchFn | string): FetchFn {
 
     let start = Date.now()
 
+    // check if the req is a png or jpeg image
     if(!isImage(resp)) {
       return resp
     }
@@ -64,9 +64,8 @@ export function imageService(origin: FetchFn | string): FetchFn {
       if(webp){
         img = img.webp({ force: true })
         resp.headers.set("content-type", "image/webp")
-      }else{
-        console.log("webp not allowed:", op.url.pathname)
       }
+
       const body = await img.toBuffer()
       resp = new Response(body.data, resp)
       resp.headers.set("content-length", body.data.byteLength.toString())
