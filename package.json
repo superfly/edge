@@ -40,6 +40,7 @@
   },
   "peerDependencies": {},
   "devDependencies": {
+    "@fly/fly": "^0.44.8",
     "@types/chai": "^4.1.7",
     "@types/lodash": "^4.14.119",
     "@types/mocha": "^5.2.5",
@@ -56,5 +57,9 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "directories": {
+    "doc": "docs",
+    "test": "test"
   }
 }

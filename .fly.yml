@@ -1,16 +1,17 @@
 config: &config
   flyCDN:
     backends:
-      getting-started:
+      fly:
         type: origin
-        origin: https://getting-started.edgeapp.net
+        origin: https://fly.io/
         headers:
-          host: getting-started.edgeapp.net
+          host: fly.io
     rules:
     - actionType: rewrite
-      backendKey: getting-started
+      backendKey: fly
     middleware:
     - type: https-upgrader
+    - type: auto-webp
 
 default: &default
   app: cdn
