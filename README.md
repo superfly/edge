@@ -99,7 +99,7 @@ The Fly CDN can be run standalone with a yaml based configuration schema. If you
 * glitch.com: custom domain routing
 * fontawesome.com: CDN for paid customers
 * distractify.com: routing, caching, redirect management
-* *greenmatters.com: routing, caching, redirect management
+* greenmatters.com: routing, caching, redirect management
 * artstorefronts.com: custom domain routing
 * kajabi.com: custom domain routing
 * posthaven.com: custom domain routing
