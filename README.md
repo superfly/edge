@@ -50,7 +50,7 @@ You can do a lot with a single `index.ts` file. This example redirects all reque
 ```typescript
 import { backends, middleware, pipeline } from "@fly/cdn";
 
-// setup a pipeline of middleware
+// user middleware for https redirect and caching
 const mw = pipeline(
   middleware.httpsUpgrader,
   middleware.httpCache
@@ -69,15 +69,21 @@ fly.http.respondWith(app);
 
 [Backends](https://fly.io/docs/apps/cdn/modules/backends.html) are origin services you can route requests to. The project includes a backend type [any HTTP service](https://github.com/superfly/cdn/blob/master/src/backends/origin.ts), and more specialized types for proxying to third party services.
 
-* [GitHub Pages](https://github.com/superfly/cdn/blob/master/src/backends/github_pages.ts)
-* [Heroku](https://github.com/superfly/cdn/blob/master/src/backends/heroku.ts)
-* [Ghost Pro](https://github.com/superfly/cdn/blob/master/src/backends/ghost_pro.ts)
+* [GitHub Pages](https://fly.io/docs/apps/cdn/modules/backends.html#githubpages)
+* [Heroku](https://fly.io/docs/apps/cdn/modules/backends.html#heroku)
+* [Ghost Pro](https://fly.io/docs/apps/cdn/modules/backends.html#ghostproblog)
+* [Glitch](https://fly.io/docs/apps/cdn/modules/backends.html#glitch)
+* [Netlify](https://fly.io/docs/apps/cdn/modules/backends.html#netlify)
 
 Want to help out? Write a new backend type and open a [pull request](https://github.com/superfly/cdn/compare?template=backend_type.md)!
 
 ### Middleware
 
 [Middleware](https://fly.io/docs/apps/cdn/modules/middleware.html) applies logic to requests before they're sent to the backend, and responses before they're sent to users.
+
+* [HTTP -> HTTPS upgrader](https://fly.io/docs/apps/cdn/modules/middleware.html#httpsupgrader)
+* [Add response headers](https://fly.io/docs/apps/cdn/modules/middleware.html#responseheaders)
+* [HTTP caching](https://fly.io/docs/apps/cdn/modules/middleware.html#httpcache)
 
 ## Development
 
