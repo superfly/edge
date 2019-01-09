@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.4.0-0"></a>
+# [0.4.0-0](https://github.com/superfly/cdn/compare/v0.3.3...v0.4.0-0) (2019-01-08)
+
+
+### Features
+
+* Glitch backend type ([b9bdb0b](https://github.com/superfly/cdn/commit/b9bdb0b))
+* http-cache middleware ([#15](https://github.com/superfly/cdn/issues/15)) ([5d6d47a](https://github.com/superfly/cdn/commit/5d6d47a))
+* Netlify backend type ([f1891a3](https://github.com/superfly/cdn/commit/f1891a3))
+
+
+
 <a name="0.3.3"></a>
 ## [0.3.3](https://github.com/superfly/cdn/compare/v0.3.2...v0.3.3) (2018-12-18)
 

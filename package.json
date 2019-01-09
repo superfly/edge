@@ -1,6 +1,6 @@
 {
   "name": "@fly/cdn",
-  "version": "0.3.3",
+  "version": "0.4.0-0",
   "description": "Fly's TypeScript CDN",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
@@ -34,6 +34,7 @@
   "homepage": "https://github.com/superfly/cdn#readme",
   "dependencies": {
     "@fly/fly": "^0.44.5",
+    "http-cache-semantics": "^4.0.1",
     "lodash": "^4.17.11"
   },
   "peerDependencies": {},

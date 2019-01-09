@@ -20,7 +20,11 @@
     "rootDirs": [
       "./src",
       "./test"
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "v8env/src/fly/*": ["./node_modules/@fly/v8env/lib/fly/*"]
+    }
   },
   "typedocOptions": {
     "out": "./docs/",
