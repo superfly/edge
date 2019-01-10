@@ -4,7 +4,7 @@
 
 # Fly CDN
 
-The Fly CDN is an edge application built to route HTTP traffic, cache content, and add "edge features" (like auth) to any application. It's written in TypeScript and runs on the Fly Edge Application [runtime](https://github.com/superfly/fly). It's built for developers — means runs locally, has a test suite, and integrate into a CI/release pipeline.
+The Fly CDN is an edge application built to route HTTP traffic, cache content, and add "edge features" (like auth) to any application. It's written in TypeScript and runs on the Fly Edge Application [runtime](https://github.com/superfly/fly). It's built for developers — it runs locally, has a test suite, and integrates into a CI/release pipeline.
 
 The code targets the Service Worker API and uses the Fly runtime API where necessary. You can deploy it to fly.io hosting or run it on any platform with an Edge Service Worker implementation (with reduced features).
 
