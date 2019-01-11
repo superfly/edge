@@ -2,53 +2,53 @@ import { proxy } from "../proxy";
 import { Image } from "@fly/v8env/lib/fly/image/index";
 import { get } from "@fly/v8env/lib/fly/cache/response";
 import { set } from "@fly/v8env/lib/fly/cache/response";
+import { FetchFunction } from "../fetch";
 
 /**
  * Automatically encodes images as webp for supported clients.
  * This would apply to requests with 'image/webp' in the accept header 
  * and 'image/jpeg' or 'image/png' in the response type from origin.
  * 
- * Example:
+ * Example: 
  * 
  * ```typescript
- * import { imageService } from "./src/middleware/auto-webp";
- *
- * const images = imageService(
- *   "http://www.example.com/"
- * )
- *
- * fly.http.respondWith(images)
+ * import { origin } from "./src/backends";
+ * import { autoWebp } from "./src/middleware/auto-webp";
+ * 
+ * const backend = origin({
+ *  origin: "https://fly.io/",
+ *  headers: {host: "fly.io"}
+ * })
+ * 
+ * const images = autoWebp(backend);
+ * 
+ * fly.http.respondWith(images);
  * ```
  */
 
-export interface ImageServiceOptions {
-  rootPath?: string,
-  webp?: boolean
-}
-
-export type FetchFn = (req: RequestInfo, init?: RequestInit) => Promise<Response>
-
-export function imageService(origin: FetchFn | string): FetchFn {
-  return async function imageServiceFetch(req: RequestInfo, init?: RequestInit) {
-    const parser = defaultParser
+export function autoWebp(origin: FetchFunction): FetchFunction {
+  return async function imageConversions(req: RequestInfo, init?: RequestInit) {
     if (typeof origin === "string") {
       origin = proxy(origin)
     }
     if (typeof req === "string") req = new Request(req, init)
 
-    const op = parser(new URL(req.url))
+    const op = new URL(req.url)
+
     // check if client supports webp
     const webp = webpAllowed(req)
 
     // generate a cache key
     const key = cacheKey(op, webp)
+
+    // get response from responseCache and serve it (if available)
     let resp: Response = await get(key)
     if(resp){
       resp.headers.set("Fly-Cache", "HIT")
       return resp
     }
 
-    const breq = new Request(op.url.toString(), req)
+    const breq = new Request(op.toString(), req)
     resp = await fetchFromCache(breq, origin)
 
     let start = Date.now()
@@ -71,14 +71,14 @@ export function imageService(origin: FetchFn | string): FetchFn {
       resp.headers.set("content-length", body.data.byteLength.toString())
 
       // set image in responseCache
-      await set(key, resp, { tags: [op.url.toString()], ttl: 3600 })
+      await set(key, resp, { tags: [op.toString()], ttl: 3600 })
       resp.headers.set("Fly-Cache", "MISS")
     }
     return resp
   }
 }
 
-async function fetchFromCache(req: Request, origin: FetchFn) {
+async function fetchFromCache(req: Request, origin: FetchFunction) {
   let start = Date.now()
   let resp: Response = await get(req.url)
   if (resp) {
@@ -121,17 +121,6 @@ function isImage(resp: Response): boolean{
   return false
 }
 
-export interface TransformURL {
-  url: URL
-}
-
-export type TransformURLParser = (url: URL, opts?: ImageServiceOptions) => TransformURL
-export function defaultParser(url: URL, opts?: ImageServiceOptions): TransformURL {
-  return {
-    url: url
-  }
-}
-
 export function webpAllowed(req: Request){
   const accept = req.headers.get("accept") || ""
   if(
@@ -142,9 +131,9 @@ export function webpAllowed(req: Request){
   return false
 }
 
-function cacheKey(op: TransformURL, webp: boolean){
+function cacheKey(op: URL, webp: boolean){
   return [
-    op.url,
+    op,
     webp
   ].join("|")
 }
