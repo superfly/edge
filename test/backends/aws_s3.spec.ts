@@ -23,7 +23,6 @@ describe("backends/awsS3", () => {
     describe("private", () => {
         if (app.config.aws_s3_secret_access_key)
             it('works', async () => {
-                console.log(JSON.stringify(app))
                 const fn = awsS3({
                     bucket: "flyio-private-website",
                     credentials: {
