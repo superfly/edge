@@ -10,16 +10,16 @@ import { SubdomainOptions, normalizeOptions } from "./subdomain_service";
  *
  * Example:
  * ```typescript
- * import { squarespace } from "./src/backends";
- * const backend = squarespace({
+ * import { squareSpace } from "./src/backends";
+ * const backend = squareSpace({
  *  subdomain: "archmotorcycle", 
  *  directory: "/",
  *  hostname: "www.archmotorcycle.com"
  * });
  * ```
- * @param options Squarespace information. Accepts subdomain as a string.
+ * @param options SquareSpace information. Accepts subdomain as a string.
  */
-export function squarespace(options: SubdomainOptions | string): ProxyFunction<SubdomainOptions> {
+export function squareSpace(options: SubdomainOptions | string): ProxyFunction<SubdomainOptions> {
   const config = normalizeOptions(options);
 
   const squarespaceHost = `${config.subdomain}.squarespace.com`
@@ -33,4 +33,4 @@ export function squarespace(options: SubdomainOptions | string): ProxyFunction<S
   return Object.assign(fn, { proxyConfig: config})
 }
 
-squarespace.normalizeOptions = normalizeOptions;
+squareSpace.normalizeOptions = normalizeOptions;
