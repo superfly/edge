@@ -1,4 +1,4 @@
-import * as aws4 from 'aws4';
+import { RequestSigner, sign } from 'aws4';
 
 export interface Credentials {
     accessKeyId: string,
@@ -17,7 +17,7 @@ export interface RequestOptions {
 
 const aws = {
     fetch(opts: RequestOptions, credentials: Credentials) {
-        let signer = new aws4.RequestSigner(opts, credentials);
+        let signer = new RequestSigner(opts, credentials);
         signer.request.protocol = 'https:';
         signer.sign();
         const req = signer.request;
@@ -25,7 +25,7 @@ const aws = {
         console.debug("AWS S3 requesting URL:", url)
         return fetch(url, { method: req.method, headers: req.headers });
     },
-    sign: aws4.sign
+    sign
 }
 
 export default aws;
