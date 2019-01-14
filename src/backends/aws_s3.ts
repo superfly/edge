@@ -49,27 +49,26 @@ export function awsS3(options: AwsS3Options | string): FetchFunction {
         let res: Response;
 
         if (typeof opts.credentials !== 'object')
-            res = await fetch(buildS3Url(opts, url.pathname), { headers: req.headers })
+            res = await fetch(buildS3Url(opts, url.pathname), { method: req.method, headers: req.headers })
         else
             res = await aws.fetch({
                 path: `/${opts.bucket}${url.pathname}`,
                 service: 's3',
                 region: opts.region,
+                method: req.method,
             }, opts.credentials);
 
         if (res.status >= 500) {
-            console.error(`AWS S3 returned an error, status code: ${res.status}, body:`, await res.text());
-            return new Response("Something went wrong.", { status: 500 })
+            console.error(`AWS S3 returned a server error, status code: ${res.status}, body:`, await res.text());
+            return new Response(req.method === "GET" ? "Something went wrong." : null, { status: 500 })
         }
 
-        if (res.status === 404) {
-            console.warn("AWS S3 returned a 404 for:", res.url)
-            return new Response("Not found.", { status: 404 })
-        }
+        if (res.status === 404)
+            return new Response(req.method === "GET" ? "Not found." : null, { status: 404 })
 
         if (res.status >= 400) {
             console.error(`AWS S3 returned a client error, status code: ${res.status}, body:`, await res.text());
-            return new Response("Something went wrong.", { status: 500 })
+            return new Response(req.method === "GET" ? "Something went wrong." : null, { status: 500 })
         }
 
         for (let h in res.headers)
