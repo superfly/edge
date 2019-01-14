@@ -13,6 +13,8 @@ export interface AwsS3Options {
     credentials?: Credentials
 }
 
+const allowedMethods = ["GET", "HEAD"]
+
 /**
  * Creates a fetch-like proxy function for making requests to AWS S3.
  * 
@@ -36,16 +38,45 @@ export function awsS3(options: AwsS3Options | string): FetchFunction {
     const opts = normalizeOptions(options);
     return async function awsS3Fetch(req: RequestInfo, init?: RequestInit): Promise<Response> {
         if (typeof req === "string") req = new Request(req, init);
+
+        if (!allowedMethods.includes(req.method))
+            return new Response(`HTTP Method not allowed, only ${allowedMethods.join(", ")} are allowed.`, { status: 405 })
+
         const url = new URL(req.url);
-        if (typeof opts.credentials === 'object') {
-            return aws.fetch({
+        if (url.pathname.endsWith("/"))
+            url.pathname += "index.html"
+
+        let res: Response;
+
+        if (typeof opts.credentials !== 'object')
+            res = await fetch(buildS3Url(opts, url.pathname), { headers: req.headers })
+        else
+            res = await aws.fetch({
                 path: `/${opts.bucket}${url.pathname}`,
                 service: 's3',
                 region: opts.region,
             }, opts.credentials);
+
+        if (res.status >= 500) {
+            console.error(`AWS S3 returned an error, status code: ${res.status}, body:`, await res.text());
+            return new Response("Something went wrong.", { status: 500 })
         }
-        const publicUrl = buildS3Url(opts, url.pathname);
-        return fetch(publicUrl, { headers: req.headers })
+
+        if (res.status === 404) {
+            console.warn("AWS S3 returned a 404 for:", res.url)
+            return new Response("Not found.", { status: 404 })
+        }
+
+        if (res.status >= 400) {
+            console.error(`AWS S3 returned a client error, status code: ${res.status}, body:`, await res.text());
+            return new Response("Something went wrong.", { status: 500 })
+        }
+
+        for (let h in res.headers)
+            if (h.startsWith("x-amz-"))
+                res.headers.delete(h)
+
+        return res
     }
 }
 

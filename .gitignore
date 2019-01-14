@@ -6,4 +6,4 @@ bin/fly
 .fly
 package-lock.json
 examples
-
+.fly.secrets.yml
