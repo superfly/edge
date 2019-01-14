@@ -1,5 +1,4 @@
-app: cdn
-config:
+config: &config
   flyCDN:
     backends:
       getting-started:
@@ -12,3 +11,23 @@ config:
       backendKey: getting-started
     middleware:
     - type: https-upgrader
+
+default: &default
+  app: cdn
+  config:
+    <<: *config
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+  config:
+    <<: *config
+    aws_s3_access_key_id:
+      fromSecret: aws_s3_access_key_id
+    aws_s3_secret_access_key:
+      fromSecret: aws_s3_secret_access_key
+
+production:
+  <<: *default
