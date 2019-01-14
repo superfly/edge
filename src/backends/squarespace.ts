@@ -12,9 +12,9 @@ import { SubdomainOptions, normalizeOptions } from "./subdomain_service";
  * ```typescript
  * import { squarespace } from "./src/backends";
  * const backend = squarespace({
- *  subdomain: "fly-io",
- *  directory: "/store/",
- *  hostname: "fly.io"
+ *  subdomain: "archmotorcycle", 
+ *  directory: "/",
+ *  hostname: "www.archmotorcycle.com"
  * });
  * ```
  * @param options Squarespace information. Accepts subdomain as a string.
