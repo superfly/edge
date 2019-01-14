@@ -26,7 +26,6 @@
       "v8env/src/fly/*": ["./node_modules/@fly/v8env/lib/fly/*"],
       "@fly/cdn": ["./src/"]
     }
-
   },
   "typedocOptions": {
     "out": "./docs/",
