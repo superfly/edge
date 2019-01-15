@@ -9,3 +9,4 @@ export * from "./backends/heroku";
 export * from "./backends/netlify";
 export * from "./backends/echo";
 export * from "./backends/squarespace";
+export * from "./backends/zeit-now";
