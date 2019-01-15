@@ -36,7 +36,8 @@
     "@fly/fly": "^0.44.5",
     "@types/aws4": "^1.5.1",
     "http-cache-semantics": "^4.0.1",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.11",
+    "webpack": "^4.28.4"
   },
   "peerDependencies": {},
   "devDependencies": {

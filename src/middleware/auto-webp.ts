@@ -26,6 +26,8 @@ import { FetchFunction } from "../fetch";
  * ```
  */
 
+export const images = new Array();
+
 export function autoWebp(origin: FetchFunction): FetchFunction {
   return async function imageConversions(req: RequestInfo, init?: RequestInit) {
     if (typeof origin === "string") {
