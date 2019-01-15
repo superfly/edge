@@ -2,6 +2,8 @@ import { FetchFunction, FetchGenerator, normalizeRequest } from "./fetch";
 import { pipeline } from "./pipeline";
 import { httpsUpgrader } from "./middleware/https-upgrader";
 import { githubPages } from "./backends/github_pages";
+import { netlify } from "./backends/netlify";
+import { heroku } from "./backends/heroku";
 
 export interface Matcher extends FetchFunction{
   matches: (req: Request) => boolean | Promise<boolean>
@@ -33,7 +35,10 @@ export function match(...choices: (Matcher|FetchFunction)[]): MatchGenerator{
     }
   }
 
-  return Object.assign(matchBuilder, { choices: choices })
+  function configureMatch(): FetchFunction{
+    throw "match has no configuration options"
+  }
+  return Object.assign(matchBuilder, { choices: choices, configure: configureMatch})
 }
 
 export function path(pattern: string | RegExp, fetch: FetchFunction): Matcher{
@@ -63,22 +68,31 @@ function isMatchGenerator(obj: any): obj is MatchGenerator{
   return typeof obj === "function" && obj.choices instanceof Array;
 }
 
-declare const mount: (path: string, fetch: FetchFunction) => Matcher;
+declare const mount: (path: string, ...args: (FetchFunction | Matcher)[]) => Matcher;
 declare const segment: (name: string, pct: number, fetch: FetchFunction) => Matcher;
 
 const origin = githubPages("superfly/landing");
 const docs = githubPages("superfly/docs");
-const app = pipeline(
-              httpsUpgrader,
-              match(
-                mount("/docs", docs),
-                path("/", origin),
+const newApp = netlify("hot-new-jamstack")
+const railsApp = heroku("blue-collar-rails")
+const fetch = pipeline(
+                httpsUpgrader,
                 match(
-                  segment("wat", 20, origin)
+                  mount("/docs", docs),
+                  mount("/app",
+                    segment("beta-users", 20, newApp),
+                    origin
+                  ),
+                  mount("/api",
+                    pipeline(
+                      rateLimiter,
+                      jsonErrors,
+                      api
+                    )
+                  )
                 ),
                 origin
-              )
-            )
+              );
 
 /*match((r:Matcher) => {
   r.mount("/docs", githubPages("superfly/docs")),

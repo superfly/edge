@@ -5,7 +5,7 @@
  * @module HTTP
  */
 
-import { FetchGenerator, FetchFunction } from "./fetch"
+import { FetchGenerator, FetchFunction, isFetchGenerator } from "./fetch"
 
 export interface PipelineFetch extends FetchFunction{
   stages: PipelineStage[]
@@ -19,7 +19,7 @@ export interface PipelineFetchGenerator extends FetchGenerator{
  * PipeplineStage can either be a FetchGenerator function, or a tuple of
  * FetchGenerator + args.
  */
-export type PipelineStage = FetchGenerator | [FetchGenerator, any[]]
+export type PipelineStage = FetchFunction | FetchGenerator
 
 /**
  * Combine multiple fetches into a single function. Allows middleware type functionality
@@ -27,42 +27,40 @@ export type PipelineStage = FetchGenerator | [FetchGenerator, any[]]
  * Example:
  *
  * ```javascript
- * import { pipeline } from "@fly/fetch/pipeline"
+ * import { httpsUpgrader, httpCache } from "@fly/cdn";
+ * import { echo } from "@fly/cdn/backends/echo";
  *
- * const addHeader = function(fetch){
- *   return function(req, init){
- *     if(typeof req === "string") req = new Request(req, init)
- *     req.headers.set("Superfly-Header", "shazam")
- *     return fetch(req, init)
- *   }
- * }
- *
- * const p = pipeline(fetch, addHeader)
+ * const p = pipeline(
+ *   httpsUpgrader,
+ *   httpCache,
+ *   echo
+ * )
  *
  * fly.http.respondWith(p)
  *```
  * 
  * @param stages fetch generator functions that apply additional logic
- * @returns a combinedfunction that can be used anywhere that wants `fetch`
+ * @returns a combined that can be used anywhere that wants `fetch`
  */
-export function pipeline(...stages: PipelineStage[]): FetchGenerator {
-  /**
-   * @param fetch the "origin" fetch function to call at the end of the pipeline
-   */
-  function pipelineFetch(fetch: FetchFunction): PipelineFetch {
-    if(!fetch){
-      fetch = async (req: RequestInfo, init?: RequestInit) => new Response("not found", { status: 404 })
-    }
-    for (let i = stages.length - 1; i >= 0; i--) {
-      const s = stages[i]
-      const fn = typeof s === "function" ? s : s[0]
-      const opts = s instanceof Array ? s[1] : []
-      fetch = fn(fetch, opts)
-    }
-    return Object.assign(fetch, { stages })
+export function pipeline(...stages: PipelineStage[]): PipelineFetch {
+  const fetchIndex = stages.findIndex((s) => !isFetchGenerator(s) && typeof s === "function");
+  let fetch : FetchFunction | undefined
+  if(fetchIndex >= 0){
+    fetch = stages[fetchIndex] as FetchFunction;
   }
-
-  return Object.assign(pipelineFetch, { stages })
+  if(!fetch){
+    fetch = () => Promise.resolve(new Response("not found", { status: 404}))
+  }
+  for (let i = stages.length - 1; i >= 0; i--) {
+    const fn = stages[i]
+    if(isFetchGenerator(fn)){
+      fetch = fn(fetch)
+    }else{
+      // can't proceed past a Fetch function
+      break;
+    }
+  }
+  return Object.assign(fetch, { stages })
 }
 
 export default pipeline
