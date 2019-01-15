@@ -69,6 +69,7 @@
 						<section class="tsd-index-section ">
 							<h3>Interfaces</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/middleware.httpcacheoptions.html" class="tsd-kind-icon">HTTPCache<wbr>Options</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/middleware.injecthtmloptions.html" class="tsd-kind-icon">InjectHTMLOptions</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/middleware.responseheadersoptions.html" class="tsd-kind-icon">Response<wbr>Headers<wbr>Options</a></li>
 							</ul>
@@ -90,6 +91,7 @@
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-private"><a href="middleware.html#addresponseheaders" class="tsd-kind-icon">add<wbr>Response<wbr>Headers</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="middleware.html#httpcache" class="tsd-kind-icon">http<wbr>Cache</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="middleware.html#httpsredirect" class="tsd-kind-icon">https<wbr>Redirect</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter"><a href="middleware.html#requestmodifier" class="tsd-kind-icon">request<wbr>Modifier</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter"><a href="middleware.html#responsemodifier" class="tsd-kind-icon">response<wbr>Modifier</a></li>
@@ -106,7 +108,7 @@
 					<div class="tsd-signature tsd-kind-icon">Response<wbr>Modifier<wbr>Result<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Response</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/5a01206/src/middleware/builder.ts#L6">middleware/builder.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/44fb3c6/src/middleware/builder.ts#L6">middleware/builder.ts:6</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -119,7 +121,7 @@
 					<div class="tsd-signature tsd-kind-icon">https<wbr>Upgrader<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> =&nbsp;requestModifier(httpsRedirect)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/5a01206/src/middleware/https-upgrader.ts#L12">middleware/https-upgrader.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/44fb3c6/src/middleware/https-upgrader.ts#L12">middleware/https-upgrader.ts:12</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -159,7 +161,7 @@
 					<div class="tsd-signature tsd-kind-icon">response<wbr>Headers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> =&nbsp;responseModifier(addResponseHeaders)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/5a01206/src/middleware/response-headers.ts#L18">middleware/response-headers.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/44fb3c6/src/middleware/response-headers.ts#L18">middleware/response-headers.ts:18</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -211,7 +213,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/5a01206/src/middleware/response-headers.ts#L26">middleware/response-headers.ts:26</a></li>
+									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/44fb3c6/src/middleware/response-headers.ts#L26">middleware/response-headers.ts:26</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -233,6 +235,48 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="httpcache" class="tsd-anchor"></a>
+					<h3>http<wbr>Cache</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">http<wbr>Cache<span class="tsd-signature-symbol">(</span>fetch<span class="tsd-signature-symbol">: </span><a href="../interfaces/http.fetchfunction.html" class="tsd-signature-type">FetchFunction</a>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/middleware.httpcacheoptions.html" class="tsd-signature-type">HTTPCacheOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/http.fetchfunction.html" class="tsd-signature-type">FetchFunction</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/44fb3c6/src/middleware/http-cache.ts#L32">middleware/http-cache.ts:32</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Cache HTTP responses with <code>cache-control</code> headers.</p>
+								</div>
+								<p>Basic example:</p>
+								<pre><code class="language-typescript"><span class="hljs-keyword">import</span> httpCache <span class="hljs-keyword">from</span> <span class="hljs-string">"./src/middleware/http-cache"</span>;
+<span class="hljs-keyword">import</span> backends <span class="hljs-keyword">from</span> <span class="hljs-string">"./src/backends"</span>;
+
+<span class="hljs-keyword">const</span> glitch = backends.glitch(<span class="hljs-string">"fly-example"</span>);
+
+<span class="hljs-keyword">const</span> origin = httpCache(glitch, { overrideMaxAge: <span class="hljs-number">3600</span> });
+
+fly.http.respondWith(origin);</code></pre>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>fetch: <a href="../interfaces/http.fetchfunction.html" class="tsd-signature-type">FetchFunction</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/middleware.httpcacheoptions.html" class="tsd-signature-type">HTTPCacheOptions</a></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/http.fetchfunction.html" class="tsd-signature-type">FetchFunction</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
 					<a name="httpsredirect" class="tsd-anchor"></a>
 					<h3>https<wbr>Redirect</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
@@ -242,7 +286,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/5a01206/src/middleware/https-upgrader.ts#L22">middleware/https-upgrader.ts:22</a></li>
+									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/44fb3c6/src/middleware/https-upgrader.ts#L22">middleware/https-upgrader.ts:22</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -283,7 +327,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/5a01206/src/middleware/builder.ts#L11">middleware/builder.ts:11</a></li>
+									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/44fb3c6/src/middleware/builder.ts#L11">middleware/builder.ts:11</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -342,7 +386,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/5a01206/src/middleware/builder.ts#L40">middleware/builder.ts:40</a></li>
+									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/44fb3c6/src/middleware/builder.ts#L40">middleware/builder.ts:40</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -419,6 +463,9 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/middleware.httpcacheoptions.html" class="tsd-kind-icon">HTTPCache<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="../interfaces/middleware.injecthtmloptions.html" class="tsd-kind-icon">InjectHTMLOptions</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
@@ -435,6 +482,9 @@
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-private">
 						<a href="middleware.html#addresponseheaders" class="tsd-kind-icon">add<wbr>Response<wbr>Headers</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="middleware.html#httpcache" class="tsd-kind-icon">http<wbr>Cache</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="middleware.html#httpsredirect" class="tsd-kind-icon">https<wbr>Redirect</a>

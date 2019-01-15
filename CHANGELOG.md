@@ -2,8 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-<a name="0.4.0-0"></a>
-# [0.4.0-0](https://github.com/superfly/cdn/compare/v0.3.3...v0.4.0-0) (2019-01-08)
+<a name="0.4.0"></a>
+# [0.4.0](https://github.com/superfly/cdn/compare/v0.3.3...v0.4.0) (2019-01-09)
 
 
 ### Features
@@ -12,6 +12,17 @@ All notable changes to this project will be documented in this file. See [standa
 * http-cache middleware ([#15](https://github.com/superfly/cdn/issues/15)) ([5d6d47a](https://github.com/superfly/cdn/commit/5d6d47a))
 * Netlify backend type ([f1891a3](https://github.com/superfly/cdn/commit/f1891a3))
 
+### Bug Fixes
+
+* generated typedefs break tsc compilation ([0e21699](https://github.com/superfly/cdn/commit/0e21699))
+
+
+<a name="0.4.0-1"></a>
+# [0.4.0-1](https://github.com/superfly/cdn/compare/v0.4.0-0...v0.4.0-1) (2019-01-09)
+
+
+<a name="0.4.0-0"></a>
+# [0.4.0-0](https://github.com/superfly/cdn/compare/v0.3.3...v0.4.0-0) (2019-01-08)
 
 
 <a name="0.3.3"></a>

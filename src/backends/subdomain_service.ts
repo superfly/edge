@@ -19,7 +19,7 @@ export interface SubdomainOptions {
 
 /** @hidden */
 export function optionNormalizer(map?: {[k:string]: string | false | undefined}){
-  return function normalizeOptions(input: unknown): SubdomainOptions {
+  return function normalize(input: unknown): SubdomainOptions {
     if(!map) map = {}
     const options: SubdomainOptions = {
       subdomain: "",
@@ -51,7 +51,5 @@ export function optionNormalizer(map?: {[k:string]: string | false | undefined})
   }
 }
 
-optionNormalizer.default = optionNormalizer();
-
 /** @hidden */
-export const normalizeOptions = optionNormalizer.default;
+export const normalizeOptions = optionNormalizer();

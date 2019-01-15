@@ -20,10 +20,12 @@ The code targets the Service Worker API and uses the Fly runtime API where neces
 
 ### Try the starter app
 
-* `git clone https://gist.github.com/ebc48856b74fde392a6d62a032b59a97.git forking-cdn`
-* `cd forking-cdn`
-* `yarn install`
-* `yarn start` - http://localhost:3000
+```bash
+git clone https://gist.github.com/ebc48856b74fde392a6d62a032b59a97.git forking-cdn
+cd forking-cdn
+yarn install
+yarn start # visit http://localhost:3000
+```
 
 Once you have that running, try swapping in a different origin. Edit `index.ts` and and replace `backends.origin("https://getting-started.edgeapp.net")` with `backends.githubPages("superfly/landing")`.
 
@@ -31,23 +33,24 @@ Once you have that running, try swapping in a different origin. Edit `index.ts` 
 
 You can deploy CDN based applications to the Fly hosting service using the CLI. Sign up at fly.io, then run:
 
-* `yarn fly login`
-* `yarn fly app create <name-of-your-app>`
-* `yarn fly deploy`
-
+```bash
+yarn fly login
+yarn fly app create <name-of-your-app>
+yarn fly deploy
+```
 
 You can also run on CloudFlare or StackPath, though not all features will work.
 
 ## Features
 
-### Straigthforward TypeScript/ JavaScript API
+### Straightforward TypeScript/ JavaScript API
 
 You can do a lot with a single `index.ts` file. This example redirects all requests to `https` and caches content when possible:
 
 ```typescript
 import { backends, middleware, pipeline } from "@fly/cdn";
 
-// setup a pipeline of middleware
+// user middleware for https redirect and caching
 const mw = pipeline(
   middleware.httpsUpgrader,
   middleware.httpCache
@@ -66,15 +69,21 @@ fly.http.respondWith(app);
 
 [Backends](https://fly.io/docs/apps/cdn/modules/backends.html) are origin services you can route requests to. The project includes a backend type [any HTTP service](https://github.com/superfly/cdn/blob/master/src/backends/origin.ts), and more specialized types for proxying to third party services.
 
-* [GitHub Pages](https://github.com/superfly/cdn/blob/master/src/backends/github_pages.ts)
-* [Heroku](https://github.com/superfly/cdn/blob/master/src/backends/heroku.ts)
-* [Ghost Pro](https://github.com/superfly/cdn/blob/master/src/backends/ghost_pro.ts)
+* [GitHub Pages](https://fly.io/docs/apps/cdn/modules/backends.html#githubpages)
+* [Heroku](https://fly.io/docs/apps/cdn/modules/backends.html#heroku)
+* [Ghost Pro](https://fly.io/docs/apps/cdn/modules/backends.html#ghostproblog)
+* [Glitch](https://fly.io/docs/apps/cdn/modules/backends.html#glitch)
+* [Netlify](https://fly.io/docs/apps/cdn/modules/backends.html#netlify)
 
 Want to help out? Write a new backend type and open a [pull request](https://github.com/superfly/cdn/compare?template=backend_type.md)!
 
 ### Middleware
 
 [Middleware](https://fly.io/docs/apps/cdn/modules/middleware.html) applies logic to requests before they're sent to the backend, and responses before they're sent to users.
+
+* [HTTP -> HTTPS upgrader](https://fly.io/docs/apps/cdn/modules/middleware.html#httpsupgrader)
+* [Add response headers](https://fly.io/docs/apps/cdn/modules/middleware.html#responseheaders)
+* [HTTP caching](https://fly.io/docs/apps/cdn/modules/middleware.html#httpcache)
 
 ## Development
 
@@ -83,3 +92,14 @@ See [CONTRIBUTING](https://github.com/superfly/cdn/blob/master/CONTRIBUTING.md).
 ## Configuration vs code
 
 The Fly CDN can be run standalone with a yaml based configuration schema. If you prefer to run with a config file, check out the config [README](https://github.com/superfly/cdn/blob/master/src/config/README.md).
+
+## Who's using it?
+
+* cars.com: HTTP routing
+* glitch.com: custom domain routing
+* fontawesome.com: CDN for paid customers
+* distractify.com: routing, caching, redirect management
+* greenmatters.com: routing, caching, redirect management
+* artstorefronts.com: custom domain routing
+* kajabi.com: custom domain routing
+* posthaven.com: custom domain routing

@@ -60,71 +60,70 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
+				<p><a href="https://www.npmjs.com/package/@fly/cdn"><img src="https://img.shields.io/npm/v/@fly/cdn.svg" alt="npm version"></a>
+					<a href="https://github.com/superfly/cdn/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/@fly/cdn.svg" alt="isc license"></a>
+				<a href="https://dev.azure.com/flydotio/fly/_build/latest?definitionId=1"><img src="https://dev.azure.com/flydotio/fly/_apis/build/status/fly" alt="Build Status"></a></p>
 				<h1 id="fly-cdn">Fly CDN</h1>
-				<p>The Fly CDN implements a fully functional CDN as a Fly <a href="https://fly.io/docs/#edge-applications">Edge App</a> in TypeScript. Out of the box, you&#39;re just a <code>fly deploy</code> away from leveraging a scalable CDN, infinitely customizable to your needs through code. It&#39;s easy to run locally, you can write tests for it, and even integrate it into your normal CI / CD / build pipelines.</p>
+				<p>The Fly CDN is an edge application built to route HTTP traffic, cache content, and add &quot;edge features&quot; (like auth) to any application. It&#39;s written in TypeScript and runs on the Fly Edge Application <a href="https://github.com/superfly/fly">runtime</a>. It&#39;s built for developers — means runs locally, has a test suite, and integrate into a CI/release pipeline.</p>
+				<p>The code targets the Service Worker API and uses the Fly runtime API where necessary. You can deploy it to fly.io hosting or run it on any platform with an Edge Service Worker implementation (with reduced features).</p>
+				<p><img src="https://fly.io/public/images/cdn-banner.png?@2x" alt="Forking CDN"></p>
 				<h2 id="getting-started">Getting Started</h2>
-				<h3 id="want-a-ui-">Want a UI?</h3>
-				<p>Sign up for an account on fly.io and use the <code>create app</code> button.</p>
 				<h3 id="pre-requisites">Pre-requisites</h3>
 				<ul>
+					<li>yarn (<code>npm install -g yarn</code>)</li>
 					<li>Node 10.x</li>
 					<li>node-gyp: <a href="https://github.com/nodejs/node-gyp#installation">https://github.com/nodejs/node-gyp#installation</a></li>
 				</ul>
-				<h3 id="clone-and-run-tests-">Clone and run tests.</h3>
-				<ul>
-					<li><code>git clone https://github.com/superfly/cdn.git flycdn</code> </li>
-					<li><code>cd flycdn</code></li>
-					<li><code>yarn install</code></li>
-					<li><code>yarn test</code></li>
-				</ul>
-				<h3 id="local-development-server">Local development server</h3>
-				<p>Run <code>yarn start</code> to launch a local development server on port 3000, then have a look in your browser: <a href="http://localhost:3000">http://localhost:3000</a></p>
+				<h3 id="try-the-starter-app">Try the starter app</h3>
+				<pre><code class="language-bash">git <span class="hljs-built_in">clone</span> https://gist.github.com/ebc48856b74fde392a6d62a032b59a97.git forking-cdn
+<span class="hljs-built_in">cd</span> forking-cdn
+yarn install
+yarn start <span class="hljs-comment"># visit http://localhost:3000</span></code></pre>
+				<p>Once you have that running, try swapping in a different origin. Edit <code>index.ts</code> and and replace <code>backends.origin(&quot;https://getting-started.edgeapp.net&quot;)</code> with <code>backends.githubPages(&quot;superfly/landing&quot;)</code>.</p>
 				<h3 id="deploy-to-production">Deploy to production</h3>
-				<p>You can deploy this app to the Fly hosting service using the CLI. Sign up at fly.io, then run:</p>
-				<ul>
-					<li><code>yarn fly login</code></li>
-					<li><code>yarn fly app create &lt;name-of-your-app&gt;</code></li>
-					<li><code>yarn fly deploy</code></li>
-				</ul>
-				<h2 id="backends-and-middleware">Backends and Middleware</h2>
+				<p>You can deploy CDN based applications to the Fly hosting service using the CLI. Sign up at fly.io, then run:</p>
+				<pre><code class="language-bash">yarn fly login
+yarn fly app create &lt;name-of-your-app&gt;
+yarn fly deploy</code></pre>
+				<p>You can also run on CloudFlare or StackPath, though not all features will work.</p>
+				<h2 id="features">Features</h2>
+				<h3 id="straightforward-typescript-javascript-api">Straightforward TypeScript/ JavaScript API</h3>
+				<p>You can do a lot with a single <code>index.ts</code> file. This example redirects all requests to <code>https</code> and caches content when possible:</p>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { backends, middleware, pipeline } <span class="hljs-keyword">from</span> <span class="hljs-string">"@fly/cdn"</span>;
+
+<span class="hljs-comment">// user middleware for https redirect and caching</span>
+<span class="hljs-keyword">const</span> mw = pipeline(
+  middleware.httpsUpgrader,
+  middleware.httpCache
+)
+
+<span class="hljs-comment">// point it at the origin</span>
+<span class="hljs-keyword">const</span> app = mw(
+  backends.origin(<span class="hljs-string">"https://getting-started.edgeapp.net"</span>)
+);
+
+<span class="hljs-comment">// respond to http requests</span>
+fly.http.respondWith(app);</code></pre>
 				<h3 id="backends">Backends</h3>
-				<p><a href="https://github.com/superfly/cdn/tree/master/src/backends">Backends</a> are origin services you can route requests to. The project includes a backend type <a href="https://github.com/superfly/cdn/blob/master/src/backends/origin.ts">any HTTP service</a>, and more specialized types for proxying to third party services.</p>
+				<p><a href="https://fly.io/docs/apps/cdn/modules/backends.html">Backends</a> are origin services you can route requests to. The project includes a backend type <a href="https://github.com/superfly/cdn/blob/master/src/backends/origin.ts">any HTTP service</a>, and more specialized types for proxying to third party services.</p>
 				<ul>
-					<li><a href="https://github.com/superfly/cdn/blob/master/src/backends/github_pages.ts">GitHub Pages</a></li>
-					<li><a href="https://github.com/superfly/cdn/blob/master/src/backends/heroku.ts">Heroku</a></li>
-					<li><a href="https://github.com/superfly/cdn/blob/master/src/backends/ghost_pro.ts">Ghost Pro</a></li>
+					<li><a href="https://fly.io/docs/apps/cdn/modules/backends.html#githubpages">GitHub Pages</a></li>
+					<li><a href="https://fly.io/docs/apps/cdn/modules/backends.html#heroku">Heroku</a></li>
+					<li><a href="https://fly.io/docs/apps/cdn/modules/backends.html#ghostproblog">Ghost Pro</a></li>
+					<li><a href="https://fly.io/docs/apps/cdn/modules/backends.html#glitch">Glitch</a></li>
+					<li><a href="https://fly.io/docs/apps/cdn/modules/backends.html#netlify">Netlify</a></li>
 				</ul>
-				<p>Want to help out? Write a new backend type and open a pull request!</p>
+				<p>Want to help out? Write a new backend type and open a <a href="https://github.com/superfly/cdn/compare?template=backend_type.md">pull request</a>!</p>
 				<h3 id="middleware">Middleware</h3>
-				<p><a href="https://github.com/superfly/cdn/tree/master/src/middleware">Middleware</a> applies logic to requests before they&#39;re sent to the backend, and responses before they&#39;re sent to users.</p>
+				<p><a href="https://fly.io/docs/apps/cdn/modules/middleware.html">Middleware</a> applies logic to requests before they&#39;re sent to the backend, and responses before they&#39;re sent to users.</p>
+				<ul>
+					<li><a href="https://fly.io/docs/apps/cdn/modules/middleware.html#httpsupgrader">HTTP -&gt; HTTPS upgrader</a></li>
+					<li><a href="https://fly.io/docs/apps/cdn/modules/middleware.html#responseheaders">Add response headers</a></li>
+				</ul>
+				<h2 id="development">Development</h2>
+				<p>See <a href="https://github.com/superfly/cdn/blob/master/CONTRIBUTING.md">CONTRIBUTING</a>.</p>
 				<h2 id="configuration-vs-code">Configuration vs code</h2>
-				<p>By default, this app looks for configuration information in <code>.fly.yml</code> and uses that to serve requests. This configuration file redirects <code>http</code> requests to <code>https</code>, and proxies all requests to a single backend (getting-started.edgeapp.net).</p>
-				<pre><code class="language-yaml"><span class="hljs-attr">app:</span> <span class="hljs-string">cdn</span>
-<span class="hljs-attr">config:</span>
-<span class="hljs-attr">  flyCDN:</span>
-<span class="hljs-attr">    backends:</span>
-<span class="hljs-attr">      getting-started:</span>
-<span class="hljs-attr">        type:</span> <span class="hljs-string">origin</span>
-<span class="hljs-attr">        origin:</span> <span class="hljs-attr">https://getting-started.edgeapp.net</span>
-<span class="hljs-attr">        headers:</span>
-<span class="hljs-attr">          host:</span> <span class="hljs-string">getting-started.edgeapp.net</span>
-<span class="hljs-attr">    rules:</span>
-<span class="hljs-attr">    - actionType:</span> <span class="hljs-string">rewrite</span>
-<span class="hljs-attr">      backendKey:</span> <span class="hljs-string">getting-started</span>
-<span class="hljs-attr">    middleware:</span>
-<span class="hljs-attr">    - type:</span> <span class="hljs-string">https-upgrader</span></code></pre>
-				<p>If you&#39;d prefer to write TypeScript, you can modify the index.ts file to look like this, and it will do the exact same thing:</p>
-				<pre><code class="language-typescript">
-<span class="hljs-keyword">import</span> { middleware } <span class="hljs-keyword">from</span> <span class="hljs-string">"./src/"</span>;
-<span class="hljs-keyword">import</span> proxy <span class="hljs-keyword">from</span> <span class="hljs-string">"./src/proxy"</span>;
-
-<span class="hljs-keyword">const</span> origin = proxy(<span class="hljs-string">"https://getting-started.edgeapp.net"</span>)
-
-fly.http.respondWith(
-  proxy.httpsUpgrader(
-    origin
-  )
-);</code></pre>
+				<p>The Fly CDN can be run standalone with a yaml based configuration schema. If you prefer to run with a config file, check out the config <a href="https://github.com/superfly/cdn/blob/master/src/config/README.md">README</a>.</p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">

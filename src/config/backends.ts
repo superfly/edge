@@ -13,6 +13,7 @@ const factories = new Map<string, ProxyFactory>([
   ["heroku", backends.heroku],
   ["ghost_pro", backends.ghostProBlog],
   ["glitch", backends.glitch],
+  ["squarespace", backends.squareSpace]
 ]);
 
 function getFactory(type: string): ProxyFactory {

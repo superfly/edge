@@ -21,16 +21,16 @@ export interface OriginOptions {
  * @hidden
  */
 export function origin(options: OriginOptions | string | URL): ProxyFunction<OriginOptions> {
-  const config = normalizeOptions(options);
+  const config = _normalizeOptions(options);
   
   const fn = proxy(config.origin, { forwardHostHeader: true, headers: config.headers });
 
   return Object.assign(fn, { proxyConfig: config });
 }
 
-origin.normalizeOptions = normalizeOptions;
+origin.normalizeOptions = _normalizeOptions;
 
-function normalizeOptions(input: unknown): OriginOptions {
+function _normalizeOptions(input: unknown): OriginOptions {
   const options: OriginOptions = {
     origin: ""
   };
