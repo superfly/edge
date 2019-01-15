@@ -1,8 +1,8 @@
 /**
  * @module Backends
  */
-import { FetchFunction } from '../fetch';
 import aws, { Credentials } from '../aws'
+import { ProxyFunction } from 'src/proxy';
 
 /**
  * AWS S3 bucket options
@@ -34,9 +34,10 @@ const allowedMethods = ["GET", "HEAD"]
  * @param options AWS S3 bucket to proxy to
  * @module Backends
  */
-export function awsS3(options: AwsS3Options | string): FetchFunction {
+export function awsS3(options: AwsS3Options | string): ProxyFunction<AwsS3Options> {
     const opts = normalizeOptions(options);
-    return async function awsS3Fetch(req: RequestInfo, init?: RequestInit): Promise<Response> {
+    console.log("s3 options", opts);
+    const fn = async function awsS3Fetch(req: RequestInfo, init?: RequestInit): Promise<Response> {
         if (typeof req === "string") req = new Request(req, init);
 
         if (!allowedMethods.includes(req.method))
@@ -77,6 +78,8 @@ export function awsS3(options: AwsS3Options | string): FetchFunction {
 
         return res
     }
+
+    return Object.assign(fn, { proxyConfig: opts })
 }
 
 function normalizeOptions(options: AwsS3Options | string): AwsS3Options {
