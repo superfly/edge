@@ -36,7 +36,7 @@ const allowedMethods = ["GET", "HEAD"]
  */
 export function awsS3(options: AwsS3Options | string): ProxyFunction<AwsS3Options> {
     const opts = normalizeOptions(options);
-    console.log("s3 options", opts);
+
     const fn = async function awsS3Fetch(req: RequestInfo, init?: RequestInit): Promise<Response> {
         if (typeof req === "string") req = new Request(req, init);
 
