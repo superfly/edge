@@ -60,13 +60,13 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
+				<p><img src="https://fly.io/public/images/cdn-banner.png?@2x" alt="Forking CDN"></p>
+				<h1 id="fly-cdn">Fly CDN</h1>
 				<p><a href="https://www.npmjs.com/package/@fly/cdn"><img src="https://img.shields.io/npm/v/@fly/cdn.svg" alt="npm version"></a>
 					<a href="https://github.com/superfly/cdn/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/@fly/cdn.svg" alt="isc license"></a>
 				<a href="https://dev.azure.com/flydotio/fly/_build/latest?definitionId=1"><img src="https://dev.azure.com/flydotio/fly/_apis/build/status/fly" alt="Build Status"></a></p>
-				<h1 id="fly-cdn">Fly CDN</h1>
 				<p>The Fly CDN is an edge application built to route HTTP traffic, cache content, and add &quot;edge features&quot; (like auth) to any application. It&#39;s written in TypeScript and runs on the Fly Edge Application <a href="https://github.com/superfly/fly">runtime</a>. It&#39;s built for developers — means runs locally, has a test suite, and integrate into a CI/release pipeline.</p>
 				<p>The code targets the Service Worker API and uses the Fly runtime API where necessary. You can deploy it to fly.io hosting or run it on any platform with an Edge Service Worker implementation (with reduced features).</p>
-				<p><img src="https://fly.io/public/images/cdn-banner.png?@2x" alt="Forking CDN"></p>
 				<h2 id="getting-started">Getting Started</h2>
 				<h3 id="pre-requisites">Pre-requisites</h3>
 				<ul>
@@ -119,11 +119,23 @@ fly.http.respondWith(app);</code></pre>
 				<ul>
 					<li><a href="https://fly.io/docs/apps/cdn/modules/middleware.html#httpsupgrader">HTTP -&gt; HTTPS upgrader</a></li>
 					<li><a href="https://fly.io/docs/apps/cdn/modules/middleware.html#responseheaders">Add response headers</a></li>
+					<li><a href="https://fly.io/docs/apps/cdn/modules/middleware.html#httpcache">HTTP caching</a></li>
 				</ul>
 				<h2 id="development">Development</h2>
 				<p>See <a href="https://github.com/superfly/cdn/blob/master/CONTRIBUTING.md">CONTRIBUTING</a>.</p>
 				<h2 id="configuration-vs-code">Configuration vs code</h2>
 				<p>The Fly CDN can be run standalone with a yaml based configuration schema. If you prefer to run with a config file, check out the config <a href="https://github.com/superfly/cdn/blob/master/src/config/README.md">README</a>.</p>
+				<h2 id="who-s-using-it-">Who&#39;s using it?</h2>
+				<ul>
+					<li>cars.com: HTTP routing</li>
+					<li>glitch.com: custom domain routing</li>
+					<li>fontawesome.com: CDN for paid customers</li>
+					<li>distractify.com: routing, caching, redirect management</li>
+					<li>greenmatters.com: routing, caching, redirect management</li>
+					<li>artstorefronts.com: custom domain routing</li>
+					<li>kajabi.com: custom domain routing</li>
+					<li>posthaven.com: custom domain routing</li>
+				</ul>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">

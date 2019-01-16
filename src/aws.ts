@@ -1,11 +1,13 @@
+/** @module HTTP */
 import { RequestSigner, sign } from 'aws4';
 
+/** @hidden */
 export interface Credentials {
     accessKeyId: string,
     secretAccessKey: string,
     sessionToken?: string, // only required for temporary credentials
 }
-
+/** @hidden */
 export interface RequestOptions {
     path: string,
     host?: string,
@@ -14,7 +16,7 @@ export interface RequestOptions {
     service?: string,
     region?: string,
 }
-
+/** @hidden */
 const aws = {
     fetch(opts: RequestOptions, credentials: Credentials) {
         let signer = new RequestSigner(opts, credentials);
@@ -27,5 +29,5 @@ const aws = {
     },
     sign
 }
-
+/** @hidden */
 export default aws;

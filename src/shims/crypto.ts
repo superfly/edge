@@ -1,5 +1,7 @@
+/** @module HTTP */
 import * as sjcl from 'sjcl'
 
+/** @hidden */
 export function createHmac(_algo: string, key: string | sjcl.BitArray) {
     const mac = new sjcl.misc.hmac(typeof key === 'string' ? sjcl.codec.utf8String.toBits(key) : key);
     return {
@@ -15,6 +17,7 @@ export function createHmac(_algo: string, key: string | sjcl.BitArray) {
     };
 }
 
+/** @hidden */
 export function createHash() {
     const hash = new sjcl.hash.sha256();
     return {

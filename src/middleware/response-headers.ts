@@ -13,7 +13,7 @@ export interface ResponseHeadersOptions {
 /**
  * Middleware to set headers on responses
  * @param fetch 
- * @param options 
+ * @param options
  */
 export const responseHeaders = responseModifier(addResponseHeaders)
 
@@ -22,6 +22,7 @@ export const responseHeaders = responseModifier(addResponseHeaders)
  * @private
  * @param resp 
  * @param options 
+ * @hidden
  */
 export async function addResponseHeaders(resp: Response, headers: ResponseHeadersOptions){
   if (headers) {

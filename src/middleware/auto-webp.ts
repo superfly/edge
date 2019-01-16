@@ -1,3 +1,4 @@
+/** @module Middleware */
 import { Image } from "@fly/v8env/lib/fly/image";
 import responseCache from "@fly/v8env/lib/fly/cache/response";
 import { FetchFunction } from "../fetch";
