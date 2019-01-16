@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.0-0"></a>
+# [0.5.0-0](https://github.com/superfly/cdn/compare/v0.4.0-1...v0.5.0-0) (2019-01-16)
+
+
+### Features
+
+* Automatically serve webp images when possible ([#17](https://github.com/superfly/cdn/issues/17)) ([c5cafc2](https://github.com/superfly/cdn/commit/c5cafc2))
+* AWS S3 backend ([#22](https://github.com/superfly/cdn/issues/22)) ([1b32d02](https://github.com/superfly/cdn/commit/1b32d02)), closes [#12](https://github.com/superfly/cdn/issues/12)
+* SquareSpace backend type ([213c4e7](https://github.com/superfly/cdn/commit/213c4e7)), closes [#16](https://github.com/superfly/cdn/issues/16)
+
+
+
 <a name="0.4.0"></a>
 # [0.4.0](https://github.com/superfly/cdn/compare/v0.3.3...v0.4.0) (2019-01-09)
 
