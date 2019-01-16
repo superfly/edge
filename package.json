@@ -36,10 +36,12 @@
     "@fly/fly": "^0.44.5",
     "@types/aws4": "^1.5.1",
     "http-cache-semantics": "^4.0.1",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.11",
+    "webpack": "^4.28.4"
   },
   "peerDependencies": {},
   "devDependencies": {
+    "@fly/fly": "^0.44.8",
     "@types/chai": "^4.1.7",
     "@types/lodash": "^4.14.119",
     "@types/mocha": "^5.2.5",
@@ -52,9 +54,15 @@
     "ts-loader": "^3.5.0",
     "typedoc": "^0.13.0",
     "typedoc-plugin-external-module-name": "^1.1.3",
-    "typescript": "^3.1.2"
+    "typescript": "^3.1.2",
+    "arraybuffer-loader": "^1.0.3",
+    "image-webpack-loader": "^4.3.1"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "directories": {
+    "doc": "docs",
+    "test": "test"
   }
 }
