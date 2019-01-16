@@ -1,5 +1,6 @@
 import { expect } from "chai";
 import { autoWebp } from "../../src/middleware";
+import { Image } from "@fly/v8env/lib/fly/image";
 
 const img = require("../fixtures/image.png");
 
@@ -33,7 +34,12 @@ describe("middleware/autoWebp", function() {
 		const body = await resp.arrayBuffer();
 		expect(resp.status).to.eq(200)
 		expect(resp.headers.get("content-type")).to.eq("image/webp")
-		expect(body.byteLength).to.be.lessThan(img.byteLength, "webp image data should be smaller than source png")
+		expect(body.byteLength).to.not.eq(img.byteLength, "webp image data should be smaller than source png")
+
+		const transformed = new Image(body);
+		const meta = transformed.metadata();
+
+		expect(meta.format).to.eq("webp");
 	})
 	it("doesn't serve webp when header is missing", async ()=>{
 		const fetch = autoWebp(mock)
