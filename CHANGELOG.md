@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.0"></a>
+# [0.5.0](https://github.com/superfly/cdn/compare/v0.5.0-0...v0.5.0) (2019-01-17)
+
+
+### Bug Fixes
+
+* squareSpace -> squarespace ([a60918b](https://github.com/superfly/cdn/commit/a60918b))
+
+
+
 <a name="0.5.0-0"></a>
 # [0.5.0-0](https://github.com/superfly/cdn/compare/v0.4.0-1...v0.5.0-0) (2019-01-16)
 
