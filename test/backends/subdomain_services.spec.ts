@@ -20,6 +20,12 @@ const defs: any[] = [
   { backend: squarespace, tests: [
     { subdomain: "archmotorcycle" },// whoah
     { subdomain: "archmotorcycle", hostname: "www.archmotorcycle.com" } // whoah
+  ]},
+  { backend: dropbox, options: [], tests: [{
+    hostname: 'content.dropboxapi.com',
+    token: 'x_Dfb5viqakAAAAAAAAGoUwH-_QTKeaKqGoN3iIM-M2capc3jsU0vx_HtZEQdZKu',
+    file: '/foo/foo.foo',
+    path: '/2/files/download'}
   ]}
 ]
 for(const d of defs){
