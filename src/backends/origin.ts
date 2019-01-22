@@ -13,6 +13,7 @@ import * as errors from "../errors";
 export interface OriginOptions {
   origin: string | URL,
   forwardHostHeader?: boolean,
+  retries?: number,
   headers?: { [name: string]: string | boolean | undefined },
 }
 
@@ -23,7 +24,7 @@ export interface OriginOptions {
 export function origin(options: OriginOptions | string | URL): ProxyFunction<OriginOptions> {
   const config = _normalizeOptions(options);
   
-  const fn = proxy(config.origin, { forwardHostHeader: true, headers: config.headers });
+  const fn = proxy(config.origin, { forwardHostHeader: true, headers: config.headers, retries: config.retries });
 
   return Object.assign(fn, { proxyConfig: config });
 }
