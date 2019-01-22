@@ -8,6 +8,7 @@ import { requestModifier } from "./builder";
  * Redirects http requests to https in production.
  * 
  * In development, this only logs a message
+ * @function
  */
 export const httpsUpgrader = requestModifier(httpsRedirect)
 

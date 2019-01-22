@@ -1,9 +1,5 @@
-import { FetchFunction, FetchGenerator, normalizeRequest } from "./fetch";
+/*import { FetchFunction, FetchGenerator, normalizeRequest } from "./fetch";
 import { pipeline } from "./pipeline";
-import { httpsUpgrader } from "./middleware/https-upgrader";
-import { githubPages } from "./backends/github_pages";
-import { netlify } from "./backends/netlify";
-import { heroku } from "./backends/heroku";
 
 export interface Matcher extends FetchFunction{
   matches: (req: Request) => boolean | Promise<boolean>
@@ -20,17 +16,9 @@ export function match(...choices: (Matcher|FetchFunction)[]): MatchGenerator{
         req = new Request(req, init)
         init = undefined
       }
-      for(const c of choices){
-         // * if matcher, check `matches`
-         // * if function, treat it as default fetch
-        let m = isMatcher(c) ? c.matches(req) : typeof c === "function";
-        if(m instanceof Promise){
-          m = await m
-        }
-        if(m){
-          return c(req, init)
-        }
-      }
+
+      const fn = findMatch(req, choices);
+
       return fetch(req, init)
     }
   }
@@ -39,6 +27,30 @@ export function match(...choices: (Matcher|FetchFunction)[]): MatchGenerator{
     throw "match has no configuration options"
   }
   return Object.assign(matchBuilder, { choices: choices, configure: configureMatch})
+}
+
+async function findMatch(req: Request, choices: (Matcher|FetchFunction)[]){
+  for(const c of choices){
+
+    // * if match generator, check to see if any of its choices apply
+    if(isMatchGenerator(c)){
+      const match = findMatch(req, c.choices)
+      if(match){
+        return c;
+      }
+    }
+    
+    // * if matcher, check `matches`
+    // * if function, treat it as default fetch
+    let m = isMatcher(c) ? c.matches(req) : typeof c === "function";
+    if(m instanceof Promise){
+      m = await m
+    }
+    if(m){
+      return c
+      //return c(req, init)
+    }
+ }
 }
 
 export function path(pattern: string | RegExp, fetch: FetchFunction): Matcher{
@@ -71,7 +83,7 @@ function isMatchGenerator(obj: any): obj is MatchGenerator{
 declare const mount: (path: string, ...args: (FetchFunction | Matcher)[]) => Matcher;
 declare const segment: (name: string, pct: number, fetch: FetchFunction) => Matcher;
 
-const origin = githubPages("superfly/landing");
+/*const origin = githubPages("superfly/landing");
 const docs = githubPages("superfly/docs");
 const newApp = netlify("hot-new-jamstack")
 const railsApp = heroku("blue-collar-rails")
@@ -85,7 +97,7 @@ const fetch = pipeline(
                   ),
                   mount("/api",
                     pipeline(
-                      rateLimiter,
+                      httpsUpgrader,
                       jsonErrors,
                       api
                     )

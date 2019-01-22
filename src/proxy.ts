@@ -31,6 +31,7 @@
  * @module HTTP
  */
 import { normalizeRequest, FetchFunction } from "./fetch"
+import { FlyRequest } from "@fly/v8env/lib/fly/fetch";
 function sleep(ms: number){
   return new Promise<void>((resolve, _) => {
     setTimeout(resolve, ms)
@@ -54,10 +55,7 @@ export function proxy(origin: string | URL, options?: ProxyOptions): ProxyFuncti
   options.origin = origin.toString();
   const fetchFn = options.fetch || fetch;
   async function proxyFetch(req: RequestInfo, init?: RequestInit) {
-    if(!(req instanceof Request)){
-      req = normalizeRequest(req, init);
-      init = undefined;
-    }
+    ({ req, init } = normalizeRequest(req, init))
     if (!options) {
       options = {}
     }
@@ -99,8 +97,8 @@ export function proxy(origin: string | URL, options?: ProxyOptions): ProxyFuncti
  * @param req
  * @param init
  */
-export function buildProxyRequest(origin: string | URL, options: ProxyOptions, r: RequestInfo, init?: RequestInit) {
-  const req = normalizeRequest(r)
+export function buildProxyRequest(origin: string | URL, options: ProxyOptions, req: RequestInfo, init?: RequestInit) {
+  ({ req, init } = normalizeRequest(req, init))
 
   const url = new URL(req.url)
   let breq: Request | null = null
@@ -131,9 +129,7 @@ export function buildProxyRequest(origin: string | URL, options: ProxyOptions, r
     breq = new Request(url.toString(), breq)
   }
   // we extend req with remoteAddr
-  if(req.remoteAddr){
-    breq.headers.set("x-forwarded-for", req.remoteAddr)
-  }
+  breq.headers.set("x-forwarded-for", (req as FlyRequest).remoteAddr || "")
   breq.headers.set("x-forwarded-host", requestedHostname)
   breq.headers.set("x-forwarded-proto", url.protocol.replace(":", ""))
 

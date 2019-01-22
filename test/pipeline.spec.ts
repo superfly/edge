@@ -1,22 +1,18 @@
 import { expect } from "chai"
 
-import { pipeline, FetchFunction } from "../src"
+import { pipeline } from "../src"
+import { requestModifier } from "../src/middleware/builder";
+import * as middleware from "../src/middleware";
 
-function outer(fetch: FetchFunction) {
-  return async function outerFetch(req: RequestInfo, init?: RequestInit) {
-    (req as any).headers.set("Outer-Fn", "woop!")
-    return fetch(req, init)
-  }
-}
+const outer = requestModifier(async function outerFetch(req: Request) {
+    req.headers.set("Outer-Fn", "woop!");
+});
 
-function inner(fetch: FetchFunction) {
-  return async function innerFetch(req: RequestInfo, init?: RequestInit) {
-    (req as any).headers.set("Inner-Fn", "woowoo!")
-    return fetch(req, init)
-  }
-}
+const inner = requestModifier(async function innerFetch(req: Request) {
+    req.headers.set("Inner-Fn", "woowoo!")
+});
 
-async function echo(req: RequestInfo, init?: RequestInit) {
+async function echo(req: RequestInfo) {
   const headers: any = Object.assign(
     {
       stages: JSON.stringify(
@@ -33,20 +29,12 @@ async function echo(req: RequestInfo, init?: RequestInit) {
   return new Response("hi", { headers: headers })
 }
 
-const p = pipeline(outer, inner)
-const fn = p(echo)
+const fn = pipeline(outer, inner, echo)
 
 describe("pipeline", () => {
   it("should make stages available", () => {
-    expect(p.stages).to.exist
-    expect(p.stages.length).to.eq(2)
-    expect(p.stages[0]).to.eq(outer)
-    expect(p.stages[1]).to.eq(inner)
-  })
-
-  it("should make stages available after fetch is generated", () => {
     expect(fn.stages).to.exist
-    expect(fn.stages.length).to.eq(2)
+    expect(fn.stages.length).to.eq(3)
     expect(fn.stages[0]).to.eq(outer)
     expect(fn.stages[1]).to.eq(inner)
   })
