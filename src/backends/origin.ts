@@ -39,7 +39,7 @@ function _normalizeOptions(input: unknown): OriginOptions {
   if (typeof input === "string" || input instanceof URL) {
     options.origin = input;
   } else if (isObject(input)) {
-    merge(options, input, ["origin", "headers"]);
+    merge(options, input, ["origin", "headers", "retries"]);
   } else {
     throw errors.invalidInput("options must be an OriginOptions object or url string");
   }
