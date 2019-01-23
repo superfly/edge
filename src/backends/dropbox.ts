@@ -3,7 +3,9 @@
  */
 
 import { ProxyFunction } from "../proxy";
-// import { fetch } from "@fly/v8env/lib/fetch";
+
+/** limit requests to GET and HEAD */
+const allowedMethods = ["GET", "HEAD"]
 
 /** const Dropbox path */
 const dropboxEndpoint = "https://content.dropboxapi.com/2/files/"
@@ -31,12 +33,32 @@ export interface DropboxOptions {
 export function dropbox(options: DropboxOptions): ProxyFunction<DropboxOptions> {
 
   const host = `${dropboxEndpoint}download` 
-    const token = options.token
+  const token = options.token
 
-  async function proxyFetch() {
+  async function proxyFetch(req: RequestInfo, init?: RequestInit): Promise<Response> {
+
+    if (typeof req === "string") req = new Request(req, init)
+
+    if (!allowedMethods.includes(req.method))
+      return new Response(`HTTP Method not allowed, only ${allowedMethods.join(", ")} are allowed.`, { status: 405 })
+
 		var config = normalizeOptions(options)
     let bresp = await fetch(host, config)
-		return bresp
+		
+    if (bresp.status === 409) {
+      return new Response("File does not exist.", { status: 404 })
+    }
+
+    let resOptions = { method: req.method, headers: req.headers, status: 200 }
+    let res: Response;
+    if (req.method == "GET") {
+      res = new Response(bresp.body, resOptions)
+    } else {
+      // try { bresp.body.cancel() } catch(e) {}
+      res = new Response("HEAD request", resOptions)
+    }
+
+    return res
   }
 
   return Object.assign(proxyFetch, { proxyConfig: options })

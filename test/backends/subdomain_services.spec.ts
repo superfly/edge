@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { squarespace, ghostProBlog, glitch, netlify, heroku } from "../../src/backends"
+import { squarespace, ghostProBlog, glitch, netlify, heroku, dropbox } from "../../src/backends"
 import * as errors from "../../src/errors";
 import { normalizeOptions } from "../../src/backends/subdomain_service";
 
@@ -23,8 +23,8 @@ const defs: any[] = [
   ]},
   { backend: dropbox, options: [], tests: [{
     hostname: 'content.dropboxapi.com',
-    token: 'x_Dfb5viqakAAAAAAAAGoUwH-_QTKeaKqGoN3iIM-M2capc3jsU0vx_HtZEQdZKu',
-    file: '/foo/foo.foo',
+    token: app.config.dropbox_secret_access_key,
+    file: app.config.dropbox_sample_file,
     path: '/2/files/download'}
   ]}
 ]
