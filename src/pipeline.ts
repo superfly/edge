@@ -45,8 +45,10 @@ export type PipelineStage = FetchFunction | FetchGenerator
 export function pipeline(...stages: PipelineStage[]): PipelineFetch {
   const fetchIndex = stages.findIndex((s) => !isFetchGenerator(s) && typeof s === "function");
   let fetch : FetchFunction | undefined
+  console.log("FetchIndex:", fetchIndex);
   if(fetchIndex >= 0){
     fetch = stages[fetchIndex] as FetchFunction;
+    stages = stages.slice(0, fetchIndex)
   }
   if(!fetch){
     fetch = () => Promise.resolve(new Response("not found", { status: 404}))
@@ -57,6 +59,7 @@ export function pipeline(...stages: PipelineStage[]): PipelineFetch {
       fetch = fn(fetch)
     }else{
       // can't proceed past a Fetch function
+      console.warn("not a fetch generator:", i)
       break;
     }
   }

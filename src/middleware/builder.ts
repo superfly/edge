@@ -11,7 +11,7 @@ export type RequestModifierResult = Promise<undefined | void | Response> | undef
  */
 export function requestModifier<T>(fn: (req: Request, options?: T) => RequestModifierResult)
 {
-  function generator(fetch: FetchFunction, options?: T){
+  const generator = function(fetch: FetchFunction, options?: T){
     return async function(req: RequestInfo, init?: RequestInit){
       if(typeof req === "string"){
         req = new Request(req, init)
