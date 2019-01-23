@@ -60,4 +60,31 @@ describe("proxy", () => {
       expect(resp.headers.get("location")).to.eq("http://another.com/wakka")
     })
   })
+
+  describe("errors", () => {
+    const badOrigin = async (req: RequestInfo): Promise<Response> => {
+      req = typeof req === "string" ? new Request(req) : req;
+      const url = new URL(req.url)
+      const retry = req.headers.get("Fly-Proxy-Retry")
+      if(!retry && url.pathname === "/socket-hang-up"){
+        throw new Error("socket hang up")
+      }
+      return new Response("ok")
+    }
+    it("returns a 503 and not an exception by default", async () => {
+      const fn = proxy.proxy("http://wat", { fetch: badOrigin})
+      const resp = await fn("http://wat/socket-hang-up")
+      expect(resp.status).to.eq(503)
+    })
+    it("throws errors when errorTo503=false", async () => {
+      const fn = proxy.proxy("http://wat", { fetch: badOrigin, errorTo503: false})
+      expect(async ()=> await fn("http://wat/socket-hang-up")).to.throw;
+    })
+
+    it("retries failed requests", async () => {
+      const fn = proxy.proxy("http://wat", { fetch: badOrigin, retries: 2})
+      const resp = await fn("http://wat/socket-hang-up")
+      expect(resp.status).to.eq(200)
+    })
+  })
 })

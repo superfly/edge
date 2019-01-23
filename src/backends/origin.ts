@@ -13,6 +13,7 @@ import * as errors from "../errors";
 export interface OriginOptions {
   origin: string | URL,
   forwardHostHeader?: boolean,
+  retries?: number,
   headers?: { [name: string]: string | boolean | undefined },
 }
 
@@ -23,7 +24,7 @@ export interface OriginOptions {
 export function origin(options: OriginOptions | string | URL): ProxyFunction<OriginOptions> {
   const config = _normalizeOptions(options);
   
-  const fn = proxy(config.origin, { forwardHostHeader: true, headers: config.headers });
+  const fn = proxy(config.origin, { forwardHostHeader: true, headers: config.headers, retries: config.retries });
 
   return Object.assign(fn, { proxyConfig: config });
 }
@@ -38,7 +39,7 @@ function _normalizeOptions(input: unknown): OriginOptions {
   if (typeof input === "string" || input instanceof URL) {
     options.origin = input;
   } else if (isObject(input)) {
-    merge(options, input, ["origin", "headers"]);
+    merge(options, input, ["origin", "headers", "retries"]);
   } else {
     throw errors.invalidInput("options must be an OriginOptions object or url string");
   }
