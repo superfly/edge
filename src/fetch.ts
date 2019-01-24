@@ -2,7 +2,6 @@
  * HTTP helpers, utilities, etc.
  * @module HTTP
  */
-import { FlyRequest } from "@fly/v8env/lib/fly/fetch";
 
 /**
  * Converts RequestInfo + RequestInit into a Request object.
@@ -15,7 +14,7 @@ export function normalizeRequest(req: RequestInfo, init?: RequestInit) {
   if (!(req instanceof Request)) {
     throw new Error("req must be either a string or a Request object")
   }
-  return {req: req as FlyRequest, init: init };
+  return {req: req, init: init };
 }
 /**
  * A `fetch` like function. These functions accept HTTP 
@@ -30,7 +29,7 @@ export interface FetchFunction {
 }
 
 export interface FlyFetchFunction {
-  (req: FlyRequest): Promise<Response>
+  (req: Request): Promise<Response>
 }
 
 export const FetchGenerator = {

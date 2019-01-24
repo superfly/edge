@@ -30,8 +30,8 @@
  * @preferred
  * @module HTTP
  */
-import { normalizeRequest, FetchFunction } from "./fetch"
-import { FlyRequest } from "@fly/v8env/lib/fly/fetch";
+import { normalizeRequest, FetchFunction } from "./fetch";
+
 function sleep(ms: number){
   return new Promise<void>((resolve, _) => {
     setTimeout(resolve, ms)
@@ -129,7 +129,7 @@ export function buildProxyRequest(origin: string | URL, options: ProxyOptions, r
     breq = new Request(url.toString(), breq)
   }
   // we extend req with remoteAddr
-  breq.headers.set("x-forwarded-for", (req as FlyRequest).remoteAddr || "")
+  breq.headers.set("x-forwarded-for", req.remoteAddr || "")
   breq.headers.set("x-forwarded-host", requestedHostname)
   breq.headers.set("x-forwarded-proto", url.protocol.replace(":", ""))
 

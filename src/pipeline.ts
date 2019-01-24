@@ -44,8 +44,7 @@ export type PipelineStage = FetchFunction | FetchGenerator
  */
 export function pipeline(...stages: PipelineStage[]): PipelineFetch {
   const fetchIndex = stages.findIndex((s) => !isFetchGenerator(s) && typeof s === "function");
-  let fetch : FetchFunction | undefined
-  console.log("FetchIndex:", fetchIndex);
+  let fetch : FetchFunction | undefined;
   if(fetchIndex >= 0){
     fetch = stages[fetchIndex] as FetchFunction;
     stages = stages.slice(0, fetchIndex)

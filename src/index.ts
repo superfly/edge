@@ -23,4 +23,8 @@ declare global {
     region: string,
     config: any
   }
+
+  interface Request{
+    remoteAddr?: string
+  }
 }
