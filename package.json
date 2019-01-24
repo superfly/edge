@@ -34,10 +34,11 @@
   "homepage": "https://github.com/superfly/cdn#readme",
   "dependencies": {
     "@fly/fly": "^0.44.5",
-    "@types/aws4": "^1.5.1",
     "http-cache-semantics": "^4.0.1",
     "lodash": "^4.17.11",
-    "webpack": "^4.28.4"
+    "webpack": "^4.28.4",
+    "sjcl": "^1.0.8",
+    "aws4": "^1.8.0"
   },
   "peerDependencies": {},
   "devDependencies": {
@@ -47,9 +48,8 @@
     "@types/mocha": "^5.2.5",
     "@types/sjcl": "^1.0.28",
     "@types/source-map": "^0.5.2",
-    "aws4": "^1.8.0",
+    "@types/aws4": "^1.5.1",
     "chai": "^4.2.0",
-    "sjcl": "^1.0.8",
     "standard-version": "^4.4.0",
     "ts-loader": "^3.5.0",
     "typedoc": "^0.13.0",
