@@ -31,7 +31,11 @@
  * @module HTTP
  */
 import { normalizeRequest, FetchFunction } from "./fetch"
-
+function sleep(ms: number){
+  return new Promise<void>((resolve, _) => {
+    setTimeout(resolve, ms)
+  });
+}
 /**
  * This generates a `fetch` like function for proxying requests to a given origin.
  * When this function makes origin requests, it adds standard proxy headers like
@@ -59,9 +63,12 @@ export function proxy(origin: string | URL, options?: ProxyOptions): ProxyFuncti
     }
     const breq = buildProxyRequest(origin, options, req, init)
     const retries = options.retries || 0;
+    const delayMS = 100;
     let tryCount = 0;
     do {
       if(tryCount > 0){
+        console.warn("Retrying request:", tryCount, "in", delayMS * tryCount * tryCount, "ms")
+        await sleep(Math.min(delayMS * tryCount * tryCount, 5000));
         breq.headers.set("Fly-Proxy-Retry", tryCount.toString());
       }
       tryCount += 1;
@@ -70,12 +77,12 @@ export function proxy(origin: string | URL, options?: ProxyOptions): ProxyFuncti
         if(options.rewriteLocationHeaders !== false){
           bresp = rewriteLocationHeader(req.url, breq.url, bresp)
         }
-        return bresp
+        return bresp // breaks loop on successful response
       }catch(err){
         if(tryCount < retries){
           continue;
         }
-        if(!options.errorTo503) throw err;
+        if(!options.errorTo503) throw err; // breaks loop
       }
     } while(tryCount <= retries);
     return new Response("origin error", { status: 503 })

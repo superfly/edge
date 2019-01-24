@@ -65,8 +65,9 @@ describe("proxy", () => {
     const badOrigin = async (req: RequestInfo): Promise<Response> => {
       req = typeof req === "string" ? new Request(req) : req;
       const url = new URL(req.url)
-      const retry = req.headers.get("Fly-Proxy-Retry")
-      if(!retry && url.pathname === "/socket-hang-up"){
+      const retry = parseInt(req.headers.get("Fly-Proxy-Retry") || "0")
+
+      if(retry < 2 && url.pathname === "/socket-hang-up"){
         throw new Error("socket hang up")
       }
       return new Response("ok")
@@ -82,7 +83,7 @@ describe("proxy", () => {
     })
 
     it("retries failed requests", async () => {
-      const fn = proxy.proxy("http://wat", { fetch: badOrigin, retries: 2})
+      const fn = proxy.proxy("http://wat", { fetch: badOrigin, retries: 10})
       const resp = await fn("http://wat/socket-hang-up")
       expect(resp.status).to.eq(200)
     })
