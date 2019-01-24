@@ -24,7 +24,7 @@ export interface OriginOptions {
 export function origin(options: OriginOptions | string | URL): ProxyFunction<OriginOptions> {
   const config = _normalizeOptions(options);
   
-  const fn = proxy(config.origin, { forwardHostHeader: true, headers: config.headers, retries: config.retries });
+  const fn = proxy(config.origin, { forwardHostHeader: config.forwardHostHeader, headers: config.headers, retries: config.retries });
 
   return Object.assign(fn, { proxyConfig: config });
 }
