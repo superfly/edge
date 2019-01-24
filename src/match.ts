@@ -6,7 +6,6 @@ export const Matcher = {
   filter: filterSymbol,
   generator: generatorSymbol
 }
-
 export interface Matcher{
   [filterSymbol]: (req: Request) => boolean | Promise<boolean>
 }
@@ -19,11 +18,17 @@ export interface MatchGenerator extends FetchGenerator, Matcher{
   choices?: (FetchFunction|MatchGenerator)[]
 }
 
-export type AnyMatcher = MatchFetch | MatchGenerator | FetchFunction
-
 export function match(...choices: (FetchFunction|MatchGenerator)[]): MatchGenerator{
   // turn any generator args into fetches
-  const fetches = choices.map((c) => isMatchGenerator(c) ? c(fetch) : c)
+  const fetches = choices.map((c) => {
+    if(isMatchGenerator(c)){
+      return Object.assign(
+        c(fetch),
+        {[filterSymbol]: c[filterSymbol]}
+      )
+    }
+    return c;
+  })
   const fn = function (fetch: FetchFunction){
     async function match(req: RequestInfo, init?: RequestInit){
       if(typeof req === "string"){
@@ -92,5 +97,5 @@ function isMatcher(obj: any): obj is Matcher{
   return !!obj[filterSymbol];
 }
 function isMatchGenerator(obj: any): obj is MatchGenerator{
-  return typeof obj[Matcher.generator] === "string";
+  return typeof obj[generatorSymbol] === "string";
 }

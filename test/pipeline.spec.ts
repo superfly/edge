@@ -17,7 +17,6 @@ async function echo(req: RequestInfo) {
       stages: JSON.stringify(
         fn.stages.map(s => {
           if (typeof s === "function") {
-            console.log("generator:", s.name)
             return (s as any)[FetchGenerator.symbol]
           }
           return typeof s
