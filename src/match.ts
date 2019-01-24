@@ -1,112 +1,96 @@
-/*import { FetchFunction, FetchGenerator, normalizeRequest } from "./fetch";
-import { pipeline } from "./pipeline";
+import { FetchFunction, FetchGenerator } from "./fetch";
 
-export interface Matcher extends FetchFunction{
-  matches: (req: Request) => boolean | Promise<boolean>
+const filterSymbol = Symbol("filter");
+const generatorSymbol = Symbol("generator");
+export const Matcher = {
+  filter: filterSymbol,
+  generator: generatorSymbol
 }
 
-export interface MatchGenerator extends FetchGenerator{
-  choices: (Matcher|FetchFunction)[]
+export interface Matcher{
+  [filterSymbol]: (req: Request) => boolean | Promise<boolean>
 }
 
-export function match(...choices: (Matcher|FetchFunction)[]): MatchGenerator{
-   function matchBuilder(fetch: FetchFunction){
-    return async function match(req: RequestInfo, init?: RequestInit){
+export interface MatchFetch extends FetchFunction, Matcher {
+}
+
+export interface MatchGenerator extends FetchGenerator, Matcher{
+  [generatorSymbol]: string,
+  choices?: (FetchFunction|MatchGenerator)[]
+}
+
+export type AnyMatcher = MatchFetch | MatchGenerator | FetchFunction
+
+export function match(...choices: (FetchFunction|MatchGenerator)[]): MatchGenerator{
+  // turn any generator args into fetches
+  const fetches = choices.map((c) => isMatchGenerator(c) ? c(fetch) : c)
+  const fn = function (fetch: FetchFunction){
+    async function match(req: RequestInfo, init?: RequestInit){
       if(typeof req === "string"){
         req = new Request(req, init)
         init = undefined
       }
 
-      const fn = findMatch(req, choices);
+      let fn = await findMatch(req, fetches);
 
+      if(fn){
+        return fn(req, init);
+      }
       return fetch(req, init)
     }
+    return match;
   }
 
-  function configureMatch(): FetchFunction{
-    throw "match has no configuration options"
-  }
-  return Object.assign(matchBuilder, { choices: choices, configure: configureMatch})
+  const r = Object.assign(
+    fn,
+    {
+      choices: choices,
+      [filterSymbol]: async (req: Request) => !!(await findMatch(req, fetches)),
+      [generatorSymbol]: "match"
+    }
+  );
+  return r;
 }
 
-async function findMatch(req: Request, choices: (Matcher|FetchFunction)[]){
-  for(const c of choices){
+export function mount(path: string, ...args: (FetchFunction|MatchGenerator)[]): MatchGenerator{
+  const normalizedPath = path.endsWith("/") ? path : path + "/";
 
-    // * if match generator, check to see if any of its choices apply
-    if(isMatchGenerator(c)){
-      const match = findMatch(req, c.choices)
-      if(match){
-        return c;
-      }
+  function mountFilter(req: Request){
+    const url = new URL(req.url);
+    return (
+      url.pathname === path ||
+      url.pathname.startsWith(normalizedPath)
+    )
+  }
+  return Object.assign(
+    match(...args),
+    {
+      [filterSymbol]: mountFilter,
+      [generatorSymbol]: "mount"
     }
-    
+  )
+}
+
+async function findMatch(req: Request, choices: FetchFunction[]){
+  for(const c of choices){
     // * if matcher, check `matches`
     // * if function, treat it as default fetch
-    let m = isMatcher(c) ? c.matches(req) : typeof c === "function";
+    let m = isMatcher(c) ? matchRequest(req, c) : typeof c === "function";
     if(m instanceof Promise){
       m = await m
     }
     if(m){
       return c
-      //return c(req, init)
     }
  }
 }
 
-export function path(pattern: string | RegExp, fetch: FetchFunction): Matcher{
-  async function pathFetch(req: RequestInfo, init?: RequestInit){
-    return fetch(req, init)
-  }
-  async function pathMatch(req: Request){
-    const url = new URL(req.url);
-    if(typeof pattern === "string" && url.pathname.startsWith(pattern)){
-      return true;
-    }
-    if(pattern instanceof RegExp && url.pathname.match(pattern)){
-      return true;
-    }
-    return false;
-  }
-  return Object.assign(
-    pathFetch,
-    { matches: pathMatch }
-  )
+function matchRequest(req: Request, m: Matcher){
+  return m[filterSymbol](req)
 }
-
 function isMatcher(obj: any): obj is Matcher{
-  return typeof obj === "function" && typeof obj.matches === "function";
+  return !!obj[filterSymbol];
 }
 function isMatchGenerator(obj: any): obj is MatchGenerator{
-  return typeof obj === "function" && obj.choices instanceof Array;
+  return typeof obj[Matcher.generator] === "string";
 }
-
-declare const mount: (path: string, ...args: (FetchFunction | Matcher)[]) => Matcher;
-declare const segment: (name: string, pct: number, fetch: FetchFunction) => Matcher;
-
-/*const origin = githubPages("superfly/landing");
-const docs = githubPages("superfly/docs");
-const newApp = netlify("hot-new-jamstack")
-const railsApp = heroku("blue-collar-rails")
-const fetch = pipeline(
-                httpsUpgrader,
-                match(
-                  mount("/docs", docs),
-                  mount("/app",
-                    segment("beta-users", 20, newApp),
-                    origin
-                  ),
-                  mount("/api",
-                    pipeline(
-                      httpsUpgrader,
-                      jsonErrors,
-                      api
-                    )
-                  )
-                ),
-                origin
-              );
-
-/*match((r:Matcher) => {
-  r.mount("/docs", githubPages("superfly/docs")),
-  r.path("/", githubPages("superfly/landing"))
-})*/

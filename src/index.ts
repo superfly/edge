@@ -3,7 +3,7 @@
 export * from "./fetch";
 export * from "./proxy";
 export * from "./pipeline";
-//export * from "./match";
+export * from "./match";
 
 import * as middleware from "./middleware"
 export { middleware }
