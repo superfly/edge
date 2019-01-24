@@ -10,3 +10,4 @@ export * from "./backends/netlify";
 export * from "./backends/echo";
 export * from "./backends/squarespace";
 export * from "./backends/zeit-now";
+export * from "./backends/surge";
