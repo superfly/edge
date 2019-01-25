@@ -15,6 +15,7 @@ export interface OriginOptions {
   forwardHostHeader?: boolean,
   retries?: number,
   headers?: { [name: string]: string | boolean | undefined },
+  queryStringParameters?: string,
 }
 
 /**
@@ -24,7 +25,7 @@ export interface OriginOptions {
 export function origin(options: OriginOptions | string | URL): ProxyFunction<OriginOptions> {
   const config = _normalizeOptions(options);
   
-  const fn = proxy(config.origin, { forwardHostHeader: config.forwardHostHeader, headers: config.headers, retries: config.retries });
+  const fn = proxy(config.origin, { forwardHostHeader: config.forwardHostHeader, headers: config.headers, retries: config.retries, queryStringParameters: config.queryStringParameters });
 
   return Object.assign(fn, { proxyConfig: config });
 }

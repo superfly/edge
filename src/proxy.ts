@@ -115,6 +115,7 @@ export function buildProxyRequest(origin: string | URL, options: ProxyOptions, r
   url.hostname = origin.hostname
   url.protocol = origin.protocol
   url.port = origin.port
+  url.search = origin.search
 
   if (options.stripPath && typeof options.stripPath === "string") {
     // remove basePath so we can serve `onehosthame.com/dir/` from `origin.com/`
@@ -205,6 +206,7 @@ export function rewriteLocationHeader(url: URL | string, burl: URL | string, res
  * Options for `proxy`.
  */
 export interface ProxyOptions {
+  queryStringParameters?: string
   /**
    * Replace this portion of URL path before making request to origin.
    *
