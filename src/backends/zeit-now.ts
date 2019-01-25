@@ -12,9 +12,9 @@ import { SubdomainOptions, normalizeOptions } from "./subdomain_service";
  * ```typescript
  * import { zeitNow } from "./src/backends";
  * const backend = zeitNow({
- *  subdomain: "archmotorcycle", <======= needs sample here
- *  directory: "/", <======= needs sample here
- *  hostname: "www.archmotorcycle.com" <======= needs sample here
+ *  subdomain: "nextjs-news-v2",
+ *  directory: "/",
+ *  hostname: "https://nextjs-news-v2.now.sh/" 
  * });
  * ```
  * @param options zeitNow information. Accepts subdomain as a string.
