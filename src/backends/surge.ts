@@ -12,9 +12,9 @@ import { SubdomainOptions, normalizeOptions } from "./subdomain_service";
  * ```typescript
  * import { surge } from "./src/backends";
  * const backend = surge({
- *  subdomain: "archmotorcycle", <======= needs sample here
- *  directory: "/", <======= needs sample here
- *  hostname: "www.archmotorcycle.com" <======= needs sample here
+ *  subdomain: "cloistered-swim",
+ *  directory: "/",
+ *  hostname: "http://cloistered-swim.surge.sh/"
  * });
  * ```
  * @param options surge information. Accepts subdomain as a string.
