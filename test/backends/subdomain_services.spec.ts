@@ -22,9 +22,8 @@ const defs: any[] = [
     { subdomain: "archmotorcycle", hostname: "www.archmotorcycle.com" } // whoah
   ]},
   { backend: surge, options: ["subdomain", "directory"], tests: [
-    { subdomain: "example" }
+    { subdomain: "cloistered-swim" }
   ]}
-
 ]
 for(const d of defs){
   const backend = d.backend as Function;

@@ -14,7 +14,6 @@ import { SubdomainOptions, normalizeOptions } from "./subdomain_service";
  * const backend = surge({
  *  subdomain: "cloistered-swim",
  *  directory: "/",
- *  hostname: "http://cloistered-swim.surge.sh/"
  * });
  * ```
  * @param options surge information. Accepts subdomain as a string.
