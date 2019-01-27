@@ -105,3 +105,5 @@ The Fly CDN can be run standalone with a yaml based configuration schema. If you
 * artstorefronts.com: custom domain routing
 * kajabi.com: custom domain routing
 * posthaven.com: custom domain routing
+
+[![](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/flydotio)
