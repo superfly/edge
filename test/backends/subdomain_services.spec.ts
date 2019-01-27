@@ -9,7 +9,7 @@ const defs: any[] = [
     { subdomain: "demo" }
   ]},
   { backend: glitch, options: ["subdomain"], tests: [
-    { appName: "fly-example" },
+    { appName: "fly-example" }
   ]},
   { backend: heroku, tests: [
     { appName: "example" }
@@ -21,8 +21,8 @@ const defs: any[] = [
     { subdomain: "archmotorcycle" },// whoah
     { subdomain: "archmotorcycle", hostname: "www.archmotorcycle.com" } // whoah
   ]},
-  { backend: zeit-zeitNow, tests: [
-    { subdomain: "nextjs-news-v2" }, 
+  { backend: zeitNow, tests: [
+    { subdomain: "nextjs-news-v2" }
   ]}
 ]
 for(const d of defs){
