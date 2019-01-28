@@ -69,6 +69,7 @@
 						<section class="tsd-index-section ">
 							<h3>Interfaces</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/backends.awss3options.html" class="tsd-kind-icon">Aws<wbr>S3Options</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/backends.githubpagesoptions.html" class="tsd-kind-icon">Git<wbr>Hub<wbr>Pages<wbr>Options</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/backends.glitchoptions.html" class="tsd-kind-icon">Glitch<wbr>Options</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/backends.herokuoptions.html" class="tsd-kind-icon">Heroku<wbr>Options</a></li>
@@ -78,11 +79,13 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="backends.html#awss3" class="tsd-kind-icon">aws<wbr>S3</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="backends.html#ghostproblog" class="tsd-kind-icon">ghost<wbr>Pro<wbr>Blog</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="backends.html#githubpages" class="tsd-kind-icon">github<wbr>Pages</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="backends.html#glitch" class="tsd-kind-icon">glitch</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="backends.html#heroku" class="tsd-kind-icon">heroku</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="backends.html#netlify" class="tsd-kind-icon">netlify</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="backends.html#squarespace" class="tsd-kind-icon">squarespace</a></li>
 							</ul>
 						</section>
 					</div>
@@ -90,6 +93,52 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="awss3" class="tsd-anchor"></a>
+					<h3>aws<wbr>S3</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">aws<wbr>S3<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/backends.awss3options.html" class="tsd-signature-type">AwsS3Options</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/http.proxyfunction.html" class="tsd-signature-type">ProxyFunction</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/backends.awss3options.html" class="tsd-signature-type">AwsS3Options</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/c8c2e99/src/backends/aws_s3.ts#L37">backends/aws_s3.ts:37</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Creates a fetch-like proxy function for making requests to AWS S3.</p>
+								</div>
+								<p>Example:</p>
+								<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { awsS3 } <span class="hljs-keyword">from</span> <span class="hljs-string">"./src/backends"</span>;
+<span class="hljs-keyword">const</span> backend = awsS3({
+ bucket: <span class="hljs-string">"flyio-test-website"</span>,
+ <span class="hljs-comment">// region: "us-east-1"</span>
+ <span class="hljs-comment">// credentials: { // for private S3 buckets</span>
+ <span class="hljs-comment">//   accessKeyId: app.config.aws_access_key_id,</span>
+ <span class="hljs-comment">//   secretAccessKey: app.config.aws_secret_access_key, // store this as a secret</span>
+ <span class="hljs-comment">// }</span>
+});</code></pre>
+								<dl class="tsd-comment-tags">
+									<dt>module</dt>
+									<dd><p>Backends</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <a href="../interfaces/backends.awss3options.html" class="tsd-signature-type">AwsS3Options</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>AWS S3 bucket to proxy to</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/http.proxyfunction.html" class="tsd-signature-type">ProxyFunction</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/backends.awss3options.html" class="tsd-signature-type">AwsS3Options</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
 					<a name="ghostproblog" class="tsd-anchor"></a>
 					<h3>ghost<wbr>Pro<wbr>Blog</h3>
@@ -100,7 +149,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/44fb3c6/src/backends/ghost_pro.ts#L22">backends/ghost_pro.ts:22</a></li>
+									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/c8c2e99/src/backends/ghost_pro.ts#L22">backends/ghost_pro.ts:22</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -138,7 +187,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/44fb3c6/src/backends/github_pages.ts#L41">backends/github_pages.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/c8c2e99/src/backends/github_pages.ts#L41">backends/github_pages.ts:41</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -179,7 +228,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/44fb3c6/src/backends/glitch.ts#L33">backends/glitch.ts:33</a></li>
+									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/c8c2e99/src/backends/glitch.ts#L33">backends/glitch.ts:33</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -216,7 +265,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/44fb3c6/src/backends/heroku.ts#L31">backends/heroku.ts:31</a></li>
+									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/c8c2e99/src/backends/heroku.ts#L31">backends/heroku.ts:31</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -249,7 +298,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/44fb3c6/src/backends/netlify.ts#L20">backends/netlify.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/c8c2e99/src/backends/netlify.ts#L20">backends/netlify.ts:20</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -268,6 +317,44 @@
 									<h5>options: <a href="../interfaces/backends.subdomainoptions.html" class="tsd-signature-type">SubdomainOptions</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>Netlify site information. Accepts subdomain as a string.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/http.proxyfunction.html" class="tsd-signature-type">ProxyFunction</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/backends.subdomainoptions.html" class="tsd-signature-type">SubdomainOptions</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="squarespace" class="tsd-anchor"></a>
+					<h3>squarespace</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">squarespace<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/backends.subdomainoptions.html" class="tsd-signature-type">SubdomainOptions</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/http.proxyfunction.html" class="tsd-signature-type">ProxyFunction</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/backends.subdomainoptions.html" class="tsd-signature-type">SubdomainOptions</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/superfly/fly-site/blob/c8c2e99/src/backends/squarespace.ts#L22">backends/squarespace.ts:22</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Creates a <code>fetch</code> like function for proxying requests to hosted Squarespace.</p>
+								</div>
+								<p>Example:</p>
+								<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { squarespace } <span class="hljs-keyword">from</span> <span class="hljs-string">"./src/backends"</span>;
+<span class="hljs-keyword">const</span> backend = squarespace({
+ subdomain: <span class="hljs-string">"archmotorcycle"</span>,
+ directory: <span class="hljs-string">"/"</span>,
+ hostname: <span class="hljs-string">"www.archmotorcycle.com"</span>
+});</code></pre>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <a href="../interfaces/backends.subdomainoptions.html" class="tsd-signature-type">SubdomainOptions</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>SquareSpace information. Accepts subdomain as a string.</p>
 									</div>
 								</li>
 							</ul>
@@ -300,6 +387,9 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/backends.awss3options.html" class="tsd-kind-icon">Aws<wbr>S3Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="../interfaces/backends.githubpagesoptions.html" class="tsd-kind-icon">Git<wbr>Hub<wbr>Pages<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
@@ -310,6 +400,9 @@
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="../interfaces/backends.subdomainoptions.html" class="tsd-kind-icon">Subdomain<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="backends.html#awss3" class="tsd-kind-icon">aws<wbr>S3</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="backends.html#ghostproblog" class="tsd-kind-icon">ghost<wbr>Pro<wbr>Blog</a>
@@ -325,6 +418,9 @@
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="backends.html#netlify" class="tsd-kind-icon">netlify</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="backends.html#squarespace" class="tsd-kind-icon">squarespace</a>
 					</li>
 				</ul>
 			</nav>

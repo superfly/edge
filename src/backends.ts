@@ -8,5 +8,6 @@ export * from "./backends/ghost_pro";
 export * from "./backends/heroku";
 export * from "./backends/netlify";
 export * from "./backends/echo";
+export * from "./backends/aws_s3";
 export * from "./backends/squarespace";
 export * from "./backends/surge";

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>GlitchOptions | @fly/cdn</title>
+	<title>AwsS3Options | @fly/cdn</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,10 +55,10 @@
 					<a href="../modules/backends.html">Backends</a>
 				</li>
 				<li>
-					<a href="backends.glitchoptions.html">GlitchOptions</a>
+					<a href="backends.awss3options.html">AwsS3Options</a>
 				</li>
 			</ul>
-			<h1>Interface GlitchOptions</h1>
+			<h1>Interface AwsS3Options</h1>
 		</div>
 	</div>
 </header>
@@ -68,7 +68,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Glitch configugration.</p>
+						<p>AWS S3 bucket options</p>
 					</div>
 				</div>
 			</section>
@@ -76,7 +76,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">GlitchOptions</span>
+						<span class="target">AwsS3Options</span>
 					</li>
 				</ul>
 			</section>
@@ -87,7 +87,9 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="backends.glitchoptions.html#appname" class="tsd-kind-icon">app<wbr>Name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="backends.awss3options.html#bucket" class="tsd-kind-icon">bucket</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="backends.awss3options.html#credentials" class="tsd-kind-icon">credentials</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="backends.awss3options.html#region" class="tsd-kind-icon">region</a></li>
 							</ul>
 						</section>
 					</div>
@@ -96,19 +98,34 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="appname" class="tsd-anchor"></a>
-					<h3>app<wbr>Name</h3>
-					<div class="tsd-signature tsd-kind-icon">app<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="bucket" class="tsd-anchor"></a>
+					<h3>bucket</h3>
+					<div class="tsd-signature tsd-kind-icon">bucket<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/c8c2e99/src/backends/glitch.ts#L13">backends/glitch.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/c8c2e99/src/backends/aws_s3.ts#L11">backends/aws_s3.ts:11</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Glitch application name: <appName>.glitch.me</p>
-						</div>
-					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="credentials" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> credentials</h3>
+					<div class="tsd-signature tsd-kind-icon">credentials<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Credentials</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/c8c2e99/src/backends/aws_s3.ts#L13">backends/aws_s3.ts:13</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="region" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> region</h3>
+					<div class="tsd-signature tsd-kind-icon">region<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/superfly/fly-site/blob/c8c2e99/src/backends/aws_s3.ts#L12">backends/aws_s3.ts:12</a></li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 		</div>
@@ -134,24 +151,30 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="backends.awss3options.html" class="tsd-kind-icon">Aws<wbr>S3Options</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="backends.githubpagesoptions.html" class="tsd-kind-icon">Git<wbr>Hub<wbr>Pages<wbr>Options</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="backends.glitchoptions.html" class="tsd-kind-icon">Glitch<wbr>Options</a>
+						<a href="backends.awss3options.html" class="tsd-kind-icon">Aws<wbr>S3Options</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="backends.glitchoptions.html#appname" class="tsd-kind-icon">app<wbr>Name</a>
+								<a href="backends.awss3options.html#bucket" class="tsd-kind-icon">bucket</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="backends.awss3options.html#credentials" class="tsd-kind-icon">credentials</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="backends.awss3options.html#region" class="tsd-kind-icon">region</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="backends.githubpagesoptions.html" class="tsd-kind-icon">Git<wbr>Hub<wbr>Pages<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="backends.glitchoptions.html" class="tsd-kind-icon">Glitch<wbr>Options</a>
+					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="backends.herokuoptions.html" class="tsd-kind-icon">Heroku<wbr>Options</a>
 					</li>

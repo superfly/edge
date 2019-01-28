@@ -1,0 +1,20 @@
+{
+  "scripts": {
+    "start": "yarn fly server",
+    "test": "yarn fly test"
+  },
+  "dependencies": {
+    "@fly/cdn": "^0.4.0"
+  },
+  "peerDependencies": {},
+  "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.5",
+    "chai": "^4.2.0",
+    "ts-loader": "^3.5.0",
+    "typescript": "^3.1.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

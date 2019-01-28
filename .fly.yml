@@ -1,14 +1,34 @@
-app: cdn
-config:
+config: &config
   flyCDN:
     backends:
-      getting-started:
+      fly:
         type: origin
-        origin: https://getting-started.edgeapp.net
+        origin: https://fly.io/
         headers:
-          host: getting-started.edgeapp.net
+          host: fly.io
     rules:
     - actionType: rewrite
-      backendKey: getting-started
+      backendKey: fly
     middleware:
     - type: https-upgrader
+    - type: auto-webp
+
+default: &default
+  app: cdn
+  config:
+    <<: *config
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+  config:
+    <<: *config
+    aws_s3_access_key_id:
+      fromSecret: aws_s3_access_key_id
+    aws_s3_secret_access_key:
+      fromSecret: aws_s3_secret_access_key
+
+production:
+  <<: *default

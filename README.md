@@ -1,14 +1,16 @@
-[![npm version](https://img.shields.io/npm/v/@fly/cdn.svg)](https://www.npmjs.com/package/@fly/cdn)
-[![isc license](https://img.shields.io/npm/l/@fly/cdn.svg)](https://github.com/superfly/cdn/blob/master/LICENSE) 
-[![Build Status](https://dev.azure.com/flydotio/fly/_apis/build/status/fly)](https://dev.azure.com/flydotio/fly/_build/latest?definitionId=1)
+![Forking CDN](https://fly.io/public/images/cdn-banner.png?@2x)
 
 # Fly CDN
 
-The Fly CDN is an edge application built to route HTTP traffic, cache content, and add "edge features" (like auth) to any application. It's written in TypeScript and runs on the Fly Edge Application [runtime](https://github.com/superfly/fly). It's built for developers — it runs locally, has a test suite, and integrates into a CI/release pipeline.
+[![npm version](https://img.shields.io/npm/v/@fly/cdn.svg)](https://www.npmjs.com/package/@fly/cdn)
+[![isc license](https://img.shields.io/npm/l/@fly/cdn.svg)](https://github.com/superfly/cdn/blob/master/LICENSE) 
+[![Build Status](https://dev.azure.com/flydotio/fly/_apis/build/status/fly)](https://dev.azure.com/flydotio/fly/_build/latest?definitionId=1)
+![Gitter](https://img.shields.io/gitter/room/superfly/fly.svg?colorB=red)
+
+
+The Fly CDN is an edge application built to route HTTP traffic, cache content, and add "edge features" (like auth) to any application. It's written in TypeScript and runs on the Fly Edge Application [runtime](https://github.com/superfly/fly). It's built for developers — means runs locally, has a test suite, and integrate into a CI/release pipeline.
 
 The code targets the Service Worker API and uses the Fly runtime API where necessary. You can deploy it to fly.io hosting or run it on any platform with an Edge Service Worker implementation (with reduced features).
-
-![Forking CDN](https://fly.io/public/images/cdn-banner.png?@2x)
 
 ## Getting Started
 
@@ -103,3 +105,5 @@ The Fly CDN can be run standalone with a yaml based configuration schema. If you
 * artstorefronts.com: custom domain routing
 * kajabi.com: custom domain routing
 * posthaven.com: custom domain routing
+
+[![](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/flydotio)
