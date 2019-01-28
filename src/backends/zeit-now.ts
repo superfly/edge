@@ -22,7 +22,7 @@ import { SubdomainOptions, normalizeOptions } from "./subdomain_service";
 export function zeitNow(options: SubdomainOptions | string): ProxyFunction<SubdomainOptions> {
   const config = normalizeOptions(options);
 
-  const zeitNowHost = `${config.subdomain}.zeit-now.com`
+  const zeitNowHost = `${config.subdomain}.now.sh`
   const uri = `https://${zeitNowHost}${config.directory}`
   const headers = {
     "host": zeitNowHost,
