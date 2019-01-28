@@ -1,10 +1,9 @@
 dist
 lib
+build
 node_modules
 .nyc_output
 bin/fly
 .fly
 package-lock.json
-examples/**/node_modules
-examples/**/.fly
-.fly.secrets.yml
+yarn.lock

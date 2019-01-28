@@ -1,0 +1,10 @@
+{
+  "include": ["./index.ts"],
+  "compilerOptions": {
+    "outDir": "./build/",
+    "baseUrl": ".",
+    "paths": {
+      "@fly/cdn": ["./src/"]
+    }
+  }
+}

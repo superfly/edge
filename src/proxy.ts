@@ -31,7 +31,11 @@
  * @module HTTP
  */
 import { normalizeRequest, FetchFunction } from "./fetch"
-
+function sleep(ms: number){
+  return new Promise<void>((resolve, _) => {
+    setTimeout(resolve, ms)
+  });
+}
 /**
  * This generates a `fetch` like function for proxying requests to a given origin.
  * When this function makes origin requests, it adds standard proxy headers like
@@ -44,7 +48,11 @@ export function proxy(origin: string | URL, options?: ProxyOptions): ProxyFuncti
   if (!options) {
     options = {}
   }
+  if(options.errorTo503 !== false){
+    options.errorTo503 = true;
+  }
   options.origin = origin.toString();
+  const fetchFn = options.fetch || fetch;
   async function proxyFetch(req: RequestInfo, init?: RequestInit) {
     if(!(req instanceof Request)){
       req = normalizeRequest(req, init);
@@ -54,11 +62,30 @@ export function proxy(origin: string | URL, options?: ProxyOptions): ProxyFuncti
       options = {}
     }
     const breq = buildProxyRequest(origin, options, req, init)
-    let bresp = await fetch(breq)
-    if(options.rewriteLocationHeaders !== false){
-      bresp = rewriteLocationHeader(req.url, breq.url, bresp)
-    }
-    return bresp
+    const retries = options.retries || 0;
+    const delayMS = 100;
+    let tryCount = 0;
+    do {
+      if(tryCount > 0){
+        console.warn("Retrying request:", tryCount, "in", delayMS * tryCount * tryCount, "ms")
+        await sleep(Math.min(delayMS * tryCount * tryCount, 5000));
+        breq.headers.set("Fly-Proxy-Retry", tryCount.toString());
+      }
+      tryCount += 1;
+      try{
+        let bresp = await fetchFn(breq.clone())
+        if(options.rewriteLocationHeaders !== false){
+          bresp = rewriteLocationHeader(req.url, breq.url, bresp)
+        }
+        return bresp // breaks loop on successful response
+      }catch(err){
+        if(tryCount < retries){
+          continue;
+        }
+        if(!options.errorTo503) throw err; // breaks loop
+      }
+    } while(tryCount <= retries);
+    return new Response("origin error", { status: 503 })
   }
 
   return Object.assign(proxyFetch, { proxyConfig: options})
@@ -221,8 +248,23 @@ export interface ProxyOptions {
     host?: string | boolean
   }
 
+  /**
+   * When underlying fetch throws an error, return a 503 response.
+   * 
+   * Defaults to `true`.
+   */
+  errorTo503?: boolean,
+
+  /**
+   * When underlying connection throughs an error, retry request <N> times.
+   */
+  retries?: number,
+
   /** @private */
-  origin?: string
+  origin?: string,
+
+  /** @private */
+  fetch?: FetchFunction
 }
 
 
