@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { squarespace, ghostProBlog, glitch, netlify, heroku, surge, zeitNow, aerobatic } from "../../src/backends"
+import { squarespace, ghostProBlog, glitch, netlify, heroku, surge, zeitNow, aerobatic, firebase } from "../../src/backends"
 import * as errors from "../../src/errors";
 import { normalizeOptions } from "../../src/backends/subdomain_service";
 
@@ -29,7 +29,10 @@ const defs: any[] = [
   ]},
   { backend: aerobatic, options: ["subdomain", "directory"], tests: [
     { subdomain: "sample" }
-  ]}
+  ]},
+  { backend: firebase, options: ["subdomain", "directory"], tests: [
+    { subdomain: "multi-site-magic" }
+  ]},
 ]
 for(const d of defs){
   const backend = d.backend as Function;
