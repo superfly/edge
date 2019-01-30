@@ -13,3 +13,4 @@ export * from "./backends/aws_s3";
 export * from "./backends/squarespace";
 export * from "./backends/surge";
 export * from "./backends/zeit-now";
+export * from "./backends/aerobatic";
