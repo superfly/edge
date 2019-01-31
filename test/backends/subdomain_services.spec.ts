@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { squarespace, ghostProBlog, glitch, netlify, heroku, zeitNow } from "../../src/backends"
+import { squarespace, ghostProBlog, glitch, netlify, heroku, surge, zeitNow } from "../../src/backends"
 import * as errors from "../../src/errors";
 import { normalizeOptions } from "../../src/backends/subdomain_service";
 
@@ -20,6 +20,9 @@ const defs: any[] = [
   { backend: squarespace, tests: [
     { subdomain: "archmotorcycle" },// whoah
     { subdomain: "archmotorcycle", hostname: "www.archmotorcycle.com" } // whoah
+  ]},
+  { backend: surge, options: ["subdomain", "directory"], tests: [
+    { subdomain: "cloistered-swim" }
   ]},
   { backend: zeitNow, tests: [
     { subdomain: "nextjs-news-v2" }
