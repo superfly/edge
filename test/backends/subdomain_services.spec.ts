@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { squarespace, ghostProBlog, glitch, netlify, heroku } from "../../src/backends"
+import { squarespace, ghostProBlog, glitch, netlify, heroku, zeitNow } from "../../src/backends"
 import * as errors from "../../src/errors";
 import { normalizeOptions } from "../../src/backends/subdomain_service";
 
@@ -9,7 +9,7 @@ const defs: any[] = [
     { subdomain: "demo" }
   ]},
   { backend: glitch, options: ["subdomain"], tests: [
-    { appName: "fly-example" },
+    { appName: "fly-example" }
   ]},
   { backend: heroku, tests: [
     { appName: "example" }
@@ -20,6 +20,9 @@ const defs: any[] = [
   { backend: squarespace, tests: [
     { subdomain: "archmotorcycle" },// whoah
     { subdomain: "archmotorcycle", hostname: "www.archmotorcycle.com" } // whoah
+  ]},
+  { backend: zeitNow, tests: [
+    { subdomain: "nextjs-news-v2" }
   ]}
 ]
 for(const d of defs){

@@ -6,7 +6,7 @@ import { proxy, ProxyFunction } from "../proxy";
 import { SubdomainOptions, optionNormalizer } from "./subdomain_service";
  
 /**
- * Glitch configugration.
+ * Glitch configuration.
  */
 export interface GlitchOptions {
   /** Glitch application name: <appName>.glitch.me */
