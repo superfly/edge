@@ -16,7 +16,8 @@ const factories = new Map<string, ProxyFactory>([
   ["squarespace", backends.squarespace],
   ["aws_s3", backends.awsS3],
   ["surge", backends.surge],
-  ["zeit-now", backends.zeitNow]
+  ["zeit-now", backends.zeitNow],
+  ["aerobatic", backends.aerobatic]
 ]);
 
 function getFactory(type: string): ProxyFactory {
