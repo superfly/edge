@@ -2,7 +2,7 @@
  * @module Backends
  */
 import aws, { Credentials } from '../aws'
-import { ProxyFunction } from 'src/proxy';
+import { ProxyFunction } from '../proxy';
 
 /**
  * AWS S3 bucket options
