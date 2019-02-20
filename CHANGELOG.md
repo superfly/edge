@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.6.0-0"></a>
+# [0.6.0-0](https://github.com/superfly/cdn/compare/v0.5.0-0...v0.6.0-0) (2019-02-20)
+
+
+### Bug Fixes
+
+* auto-webp works with config based setup now ([a06b1cd](https://github.com/superfly/cdn/commit/a06b1cd))
+* conflicting fly versions in dev/dependencies ([d0aa9c2](https://github.com/superfly/cdn/commit/d0aa9c2))
+* getting started sending wrong host header (fixes: [#34](https://github.com/superfly/cdn/issues/34)) ([073bf67](https://github.com/superfly/cdn/commit/073bf67))
+* include aws dependencies ([66ef0f5](https://github.com/superfly/cdn/commit/66ef0f5))
+* origin backend doesn't accept forwardHostHeader ([6b97455](https://github.com/superfly/cdn/commit/6b97455))
+* origin backend respects forwardHostHeader option ([57cd1d9](https://github.com/superfly/cdn/commit/57cd1d9))
+* origin backend users retries option properly ([5d2242d](https://github.com/superfly/cdn/commit/5d2242d))
+* proxy retries needs back off ([3c305f5](https://github.com/superfly/cdn/commit/3c305f5))
+* relative `proxy` import on s3 backend ([#45](https://github.com/superfly/cdn/issues/45)) ([5e01d86](https://github.com/superfly/cdn/commit/5e01d86))
+* squareSpace -> squarespace ([a60918b](https://github.com/superfly/cdn/commit/a60918b))
+
+
+### Features
+
+* aerobatic backend ([0fc08ab](https://github.com/superfly/cdn/commit/0fc08ab))
+* better error handling on proxy (fixes [#28](https://github.com/superfly/cdn/issues/28)) ([c8c2e99](https://github.com/superfly/cdn/commit/c8c2e99))
+* surge.sh backend ([a924769](https://github.com/superfly/cdn/commit/a924769))
+* Zeit Now backend ([35b30f8](https://github.com/superfly/cdn/commit/35b30f8))
+
+
+
 <a name="0.5.0"></a>
 # [0.5.0](https://github.com/superfly/cdn/compare/v0.4.0...v0.5.0) (2019-01-17)
 
