@@ -33,7 +33,7 @@
   },
   "homepage": "https://github.com/superfly/cdn#readme",
   "dependencies": {
-    "@fly/fly": "^0.44.5",
+    "@fly/fly": "^0.44.8",
     "http-cache-semantics": "^4.0.1",
     "lodash": "^4.17.11",
     "webpack": "^4.28.4",
@@ -42,7 +42,6 @@
   },
   "peerDependencies": {},
   "devDependencies": {
-    "@fly/fly": "^0.44.8",
     "@types/chai": "^4.1.7",
     "@types/lodash": "^4.14.119",
     "@types/mocha": "^5.2.5",
