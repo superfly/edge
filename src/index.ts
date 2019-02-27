@@ -3,6 +3,7 @@
 export * from "./fetch";
 export * from "./proxy";
 export * from "./pipeline";
+export * from "./match";
 
 import * as middleware from "./middleware"
 export { middleware }
@@ -21,5 +22,9 @@ declare global {
     env: "production" | "development" | "test",
     region: string,
     config: any
+  }
+
+  interface Request{
+    remoteAddr?: string
   }
 }

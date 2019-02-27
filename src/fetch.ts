@@ -2,10 +2,9 @@
  * HTTP helpers, utilities, etc.
  * @module HTTP
  */
-import { FlyRequest } from "@fly/v8env/lib/fly/fetch";
 
 /**
- * Converts RequestInfo into a Request object.
+ * Converts RequestInfo + RequestInit into a Request object.
  * @param req raw request
  */
 export function normalizeRequest(req: RequestInfo, init?: RequestInit) {
@@ -15,9 +14,8 @@ export function normalizeRequest(req: RequestInfo, init?: RequestInit) {
   if (!(req instanceof Request)) {
     throw new Error("req must be either a string or a Request object")
   }
-  return req as FlyRequest
+  return {req: req, init: init };
 }
-
 /**
  * A `fetch` like function. These functions accept HTTP 
  * requests, do some magic, and return HTTP responses.
@@ -30,11 +28,28 @@ export interface FetchFunction {
   (req: RequestInfo, init?: RequestInit): Promise<Response>
 }
 
+export interface FlyFetchFunction {
+  (req: Request): Promise<Response>
+}
+
+export const FetchGenerator = {
+  build: function buildFetchGenerator<T extends FetchGenerator>(fn: T, name: string): T{
+    (fn as any)[FetchGenerator.symbol] = name;
+    return fn;
+  },
+  symbol: Symbol("fetchGenerator")
+}
 /**
  * A function that generates a fetch-like function with additional logic
  */
-export type FetchGenerator = (fetch: FetchFunction, ...args: any[]) => FetchFunction
-export type FetchGeneratorWithOptions<T> = (fetch: FetchFunction, options?: T) => FetchFunction
+export interface FetchGenerator {
+  (fetch: FetchFunction, ...args: any[]): FetchFunction,
+  //[key: Symbol]: string
+}
+
+export function isFetchGenerator(obj: any): obj is FetchGenerator{
+  return typeof obj === "function" && typeof obj[FetchGenerator.symbol] === "string"
+}
 
 /**
  * Options for redirects
