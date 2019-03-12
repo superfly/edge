@@ -9,16 +9,16 @@ describe("backends/githubPages", function() {
   describe("options", () => {
     const validOptions = [
       [
-        "superfly/cdn",
-        { owner: "superfly", repository: "cdn" }
+        "superfly/edge",
+        { owner: "superfly", repository: "edge" }
       ],
       [
-        { owner: "superfly", repository: "cdn" },
-        { owner: "superfly", repository: "cdn" }
+        { owner: "superfly", repository: "edge" },
+        { owner: "superfly", repository: "edge" }
       ],
       [
-        { owner: "superfly", repository: "cdn", hostname: "host.name" },
-        { owner: "superfly", repository: "cdn", hostname: "host.name" }
+        { owner: "superfly", repository: "edge", hostname: "host.name" },
+        { owner: "superfly", repository: "edge", hostname: "host.name" }
       ],
     ];
 
@@ -32,8 +32,8 @@ describe("backends/githubPages", function() {
       [undefined, errors.InputError],
       ["", errors.InputError],
       [{ }, /owner is required/],
-      [{ owner: "", repository: "cdn" }, /owner is required/],
-      [{ repository: "cdn" }, /owner is required/],
+      [{ owner: "", repository: "edge" }, /owner is required/],
+      [{ repository: "edge" }, /owner is required/],
       [{ owner: "superfly", repository: "" }, /repository is required/],
       [{ owner: "superfly" }, /repository is required/],
     ]
@@ -47,7 +47,7 @@ describe("backends/githubPages", function() {
 
   describe("fetch", () => {
     it("works with plain repos", async () => {
-      const fn = githubPages("superfly/cdn");
+      const fn = githubPages("superfly/edge");
       const config = fn.proxyConfig;
 
       const resp = await fn("https://fly.io/", { method: "HEAD" })
@@ -68,7 +68,7 @@ describe("backends/githubPages", function() {
     it("detects custom domain removal and retries", async () => {
       const fn = githubPages({
         owner: "superfly",
-        repository: "cdn",
+        repository: "edge",
         hostname: "docs.fly.io"
       })
       const config = fn.proxyConfig

@@ -1,5 +1,5 @@
 import { expect } from "chai"
-import { buildCdnFromAppConfig, backends } from "../../src";
+import { buildAppFromConfig, backends } from "../../src";
 import { glitch } from "../../src/backends";
 
 const expected:any = {
@@ -11,9 +11,9 @@ const expected:any = {
   }),
   "glitch": glitch({appName:"fly-example"})
 }
-describe("config/buildCdn", () => {
+describe("config/buildApp", () => {
   it("should build default config", () => {
-    const cdn = buildCdnFromAppConfig(defaultConfig);
+    const cdn = buildAppFromConfig(defaultConfig);
     for(const [k, b] of cdn.backends.entries()){
       const fn = expected[k];
       expect(b.proxyConfig).to.eql(fn.proxyConfig);
