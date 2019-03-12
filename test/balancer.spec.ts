@@ -15,8 +15,14 @@ function healthy() {
     statuses: [200, 200, 200],
     lastError: 0,
     healthScore: 1,
+    latencyScore: 1,
     errorCount: 0
   }
+}
+function slow(latencyScore?: number){
+  const b = healthy()
+  b.latencyScore = latencyScore || 10
+  return b
 }
 function unhealthy(score?: number) {
   const b = healthy()
@@ -28,14 +34,14 @@ describe("balancing", () => {
   describe("backend scoring", () => {
     it("should score healthy backends high", () => {
       const backend = healthy()
-      const score = _internal.score(backend)
+      const score = _internal.scoreHealth(backend)
 
       expect(score).to.eq(1)
     })
 
     it("should score unhealthy backends low", () => {
       const backend = unhealthy()
-      const score = _internal.score(backend, 0)
+      const score = _internal.scoreHealth(backend, 0)
 
       expect(score).to.eq(0.5)
     })
@@ -43,18 +49,36 @@ describe("balancing", () => {
 
     it("should give less weight to older errors", () => {
       const backend = unhealthy()
-      let score = _internal.score(backend, backend.lastError + 999)
+      let score = _internal.scoreHealth(backend, backend.lastError + 999)
       expect(score).to.eq(0.5)
 
-      score = _internal.score(backend, backend.lastError + 2000) // 2s old error
+      score = _internal.scoreHealth(backend, backend.lastError + 2000) // 2s old error
       expect(score).to.eq(0.6)
 
-      score = _internal.score(backend, backend.lastError + 4000) // 4s old error
+      score = _internal.scoreHealth(backend, backend.lastError + 4000) // 4s old error
       expect(score).to.eq(0.85)
 
-      score = _internal.score(backend, backend.lastError + 9000) // 9s old error
+      score = _internal.scoreHealth(backend, backend.lastError + 9000) // 9s old error
       expect(score).to.eq(0.95)
     })
+
+    const latencies: { [key: string]: number[] } = {
+      "1": [1, 2, 8, 10, 5, 8, 9],
+      "10": [10, 12, 18, 19, 70, 8, 9],
+      "100": [100, 900, 758, 123, 204, 203]
+    }
+    for(const r of Object.getOwnPropertyNames(latencies)){
+      const v = parseInt(r)
+      const arr = latencies[v]
+      const average = avg(arr)
+      it(`should bucket ${average} average latencyScore: ${v}`, () => {
+        const backend = healthy()
+        backend.latencies = arr
+  
+        const score = _internal.scoreLatency(backend)
+        expect(score).to.eq(v)
+      })
+    }
   })
 
   describe("backend selection", () => {
@@ -66,6 +90,26 @@ describe("balancing", () => {
       expect(h.find((e) => e === b1)).to.eq(b1, "Backend 1 should be in selected")
       expect(h.find((e) => e === b2)).to.eq(b2, "Backend 2 should be in selected")
       expect(b1).to.not.eq(b2, "Backend 1 and Backend 2 should be different")
+    })
+
+    it("should choose lowest latency backends first", () => {
+      const h = [healthy(), healthy()]
+      const s = slow()
+      const backends = [s, unhealthy(), unhealthy(), unhealthy()].concat(h)
+      const [b1, b2] = _internal.chooseBackends(backends)
+
+      expect(b1).to.not.eq(s, "Backend 1 should not be the slow one")
+      expect(b2).to.not.eq(s, "Backend 2 should not be the slow one")
+    })
+
+    it("should not choose a high latency backend", () => {
+      const h = [healthy()]
+      const s = slow()
+      const backends = [s].concat(h)
+      const [b1, b2] = _internal.chooseBackends(backends)
+
+      expect(b1).to.not.eq(s, "Backend 1 should not be the slow one")
+      expect(b2).to.not.eq(s, "Backend 2 should not be the slow one")
     })
 
     it("ignores backends that have been tried", () => {
@@ -114,3 +158,8 @@ describe("balancing", () => {
     })
   })
 })
+
+function avg(array: number[]){
+  const sum = array.reduce((a,b) => a + b, 0)
+  return sum / array.length
+}

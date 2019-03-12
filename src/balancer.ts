@@ -17,13 +17,18 @@ export default function balancer(backends: FetchFn[]) {
     if (typeof h !== "function") {
       throw Error("Backend must be a fetch like function")
     }
+    // To track these per region, use the cache
+    // const statsRaw = await cache.getString(`backend:${id}`)
+    // const backend: Backend  = JSON.parse(statsRaw)
     return <Backend>{
       proxy: h,
       requestCount: 0,
       scoredRequestCount: 0,
       statuses: Array<number>(10),
+      latencies: Array<number>(10),
       lastError: 0,
       healthScore: 1,
+      latencyScore: 1,
       errorCount: 0
     }
   })
@@ -32,6 +37,8 @@ export default function balancer(backends: FetchFn[]) {
     if (typeof req === "string") {
       req = new Request(req)
     }
+    const url = new URL(req.url)
+    let trackLatency = url.pathname === "/" // this would be configurable in real life
     const attempted = new Set<Backend>()
     while (attempted.size < tracked.length) {
       let backend: Backend | null = null
@@ -51,27 +58,36 @@ export default function balancer(backends: FetchFn[]) {
       if (backend.scoredRequestCount != backend.requestCount) {
         // fixup score
         // this should be relatively concurrent with the fetch promise
-        score(backend)
+        scoreHealth(backend)
       }
       backend.requestCount += 1
       attempted.add(backend)
 
+      const start = Date.now()
       let resp: Response
       try {
         resp = await promise
       } catch (e) {
         resp = proxyError
+        trackLatency = false
       }
-      if (backend.statuses.length < 10) {
-        backend.statuses.push(resp.status)
-      } else {
-        backend.statuses[(backend.requestCount - 1) % backend.statuses.length] = resp.status
+      setFixedArrayValue(backend.statuses, resp.status, 10, backend.requestCount)
+
+      if(trackLatency){
+        const ms = Date.now() - start
+        setFixedArrayValue(backend.latencies, ms, 10, backend.requestCount)
+        scoreLatency(backend)
       }
 
-      if (resp.status === 429 || (resp.status >= 500 && resp.status < 600)) {
+      // save backend stats every 3s
+      /*if(!backend.lastSaved || (Date.now() - backend.lastSaved) > 3000){
+
+      }*/
+
+      if (resp.status >= 500 && resp.status < 600) {
         backend.lastError = Date.now()
         // always recompute score on errors
-        score(backend)
+        scoreHealth(backend)
 
         // clear out response to trigger retry
         if (canRetry(req, resp)) {
@@ -92,6 +108,9 @@ export interface FetchFn {
   (req: RequestInfo, init?: RequestInit | undefined): Promise<Response>
 }
 
+export interface BackendStats {
+  
+}
 /**
  * Represents a backend with health and statistics.
  */
@@ -100,12 +119,15 @@ export interface Backend {
   requestCount: 0,
   scoredRequestCount: 0,
   statuses: number[],
+  latencies: number[],
   lastError: number,
   healthScore: number,
-  errorCount: 0
+  latencyScore: number,
+  errorCount: 0,
+  lastSaved?: number
 }
 // compute a backend health score with time + status codes
-function score(backend: Backend, errorBasis?: number) {
+function scoreHealth(backend: Backend, errorBasis?: number) {
   if (typeof errorBasis !== "number" && !errorBasis) errorBasis = Date.now()
 
   const timeSinceError = (errorBasis - backend.lastError)
@@ -128,13 +150,23 @@ function score(backend: Backend, errorBasis?: number) {
       }
     }
   }
-  const score = (1 - (timeWeight * (errors / requests)))
-  backend.healthScore = score
+  const healthScore = (1 - (timeWeight * (errors / requests)))
+  backend.healthScore = healthScore
   backend.scoredRequestCount = backend.requestCount
-  return score
+  return healthScore
+}
+function scoreLatency(backend: Backend){
+  let total = 0
+  for(const l of backend.latencies){
+    total += l
+  }
+  const avgLatency = total / backend.latencies.length
+
+  backend.latencyScore = orderOfMagnitude(avgLatency)
+  return backend.latencyScore
 }
 function canRetry(req: Request, resp: Response) {
-  if (resp && resp.status !== 429 && resp.status < 500) return false // don't retry normal boring errors or success
+  if (resp && resp.status < 500) return false // don't retry normal boring errors or success
   if (req.method == "GET" || req.method == "HEAD") return true
   return false
 }
@@ -166,20 +198,54 @@ function chooseBackends(backends: Backend[], attempted?: Set<Backend>) {
     }
   }
 
+  // if two best backends have different latency, use only the fastest one
+  if(b1 && b2 && b1.latencyScore < b2.latencyScore) return [b1]
+  if(b1 && b2 && b2.latencyScore < b1.latencyScore) return [b2]
+  
   return [b1, b2]
 }
 
 function bestBackend(b1: Backend, b2: Backend) {
+  // simple health check before we compare latency
+  if(b1.healthScore < 0.85 && b2.healthScore > 0.85){
+    return b2
+  }
+  if(b2.healthScore < 0.85 && b1.healthScore > 0.85){
+    return b1
+  }
   if (
-    b1.healthScore > b2.healthScore ||
-    (b1.healthScore == b2.healthScore && b1.requestCount < b2.requestCount)
+    b1.latencyScore < b2.latencyScore ||
+    (b1.latencyScore == b2.latencyScore && b1.requestCount < b2.requestCount)
   ) {
     return b1
   }
   return b2
 }
 
+function setFixedArrayValue<T>(arr: T[], value: T, maxLength: number, totalCount: number){
+  if(arr.length < maxLength){
+    arr.push(value)
+  }else{
+    arr[(totalCount- 1) % arr.length] = value
+  }
+}
+
+function orderOfMagnitude(value: number){
+  //https://stackoverflow.com/questions/23917074/javascript-flooring-number-to-order-of-magnitude
+  const order = Math.floor(Math.log(value) / Math.LN10)
+  return Math.pow(10, order)
+}
+
+// save stats between app instances
+/*async function saveStats(backend: Backend){
+  const stats = Object.assign(backend, { proxy: undefined, lastSaved: undefined}) 
+  const json = JSON.stringify(stats)
+  await cache.set(`backend:${backend.proxy.toString}`, json, { ttl: 3600 * 24 })
+  backend.lastSaved = Date.now()
+}*/
+
 export const _internal = {
   chooseBackends,
-  score
+  scoreHealth,
+  scoreLatency
 }
