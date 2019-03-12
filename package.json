@@ -1,7 +1,7 @@
 {
-  "name": "@fly/cdn",
+  "name": "@fly/edge",
   "version": "0.6.0-0",
-  "description": "Fly's TypeScript CDN",
+  "description": "Fly's TypeScript Edge",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
   "files": [
@@ -16,22 +16,25 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/superfly/cdn.git"
+    "url": "git+https://github.com/superfly/edge.git"
   },
   "keywords": [
     "routing",
     "adn",
     "cdn",
+    "edge",
     "flyio",
     "onehostname",
+    "global",
+    "load-balancer",
     "middleware"
   ],
   "author": "Kurt Mackey",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/superfly/cdn/issues"
+    "url": "https://github.com/superfly/edge/issues"
   },
-  "homepage": "https://github.com/superfly/cdn#readme",
+  "homepage": "https://github.com/superfly/edge#readme",
   "dependencies": {
     "@fly/fly": "^0.44.8",
     "http-cache-semantics": "^4.0.1",

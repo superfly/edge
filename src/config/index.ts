@@ -7,7 +7,7 @@ import { RuleInfo, validateRule, buildRules } from "./rules";
 import { buildMiddleware, validateMiddleware } from "./middleware";
 import { stringify } from "querystring";
 
-export const CDNConfigKey = "flyCDN";
+export const AppConfigKey = "flyEdge";
 
 export interface CdnConfig {
   backends: { [key: string]: ItemConfig },
@@ -107,11 +107,11 @@ export function buildCdn(config: CdnConfig) {
   })
 }
 
-export function buildCdnFromAppConfig(c?: any) {
+export function buildAppFromConfig(c?: any) {
   try {
-    const config = c || app.config[CDNConfigKey];
+    const config = c || app.config[AppConfigKey] || app.config['flyCDN']; // support flyCDN config key for a while
     if (!config) {
-      throw new Error("flyCDN config property not found");
+      throw new Error("flyApp config property not found");
     }
     if (!isCdnConfig(config)) {
       // This is unreachable because isCdnConfig throws but typescript can't infer that so we throw too
@@ -120,7 +120,7 @@ export function buildCdnFromAppConfig(c?: any) {
     return buildCdn(config)
   } catch (error) {
     const fn = (...args: any[]) => {
-      return Promise.resolve(new Response(`Invalid CDN Config: ${error.message || error}`));
+      return Promise.resolve(new Response(`Invalid App Config: ${error.message || error}`));
     }
     return Object.assign(fn, { backends: new Map<string, ProxyFunction>()})
   }

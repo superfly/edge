@@ -1,12 +1,12 @@
-# Contributing to the Fly CDN
+# Contributing to the Fly Edge
 
 Thanks for stopping by! We'd like to make it as easy as possible for you to get started contributing, so read on to learn how.
 
 ## Where to start?
 
-If you want to suggest a new feature, found a bug, or have a question, [search the issue tracker](https://github.com/superfly/cdn/issues) to see if
+If you want to suggest a new feature, found a bug, or have a question, [search the issue tracker](https://github.com/superfly/edge/issues) to see if
 someone else in the community has already created a ticket. If not, go ahead and create one
-[here](https://github.com/superfly/cdn/issues/new)!
+[here](https://github.com/superfly/edge/issues/new)!
 
 ## Workflow
 
@@ -19,7 +19,7 @@ We try to work through pull requests as quickly as we can, but some large or far
 When you're ready to start contributing, [fork](https://help.github.com/articles/fork-a-repo/) the CDN and clone to your machine:
 
 ```sh
-git clone https://github.com/superfly/cdn.git flycdn
+git clone https://github.com/superfly/edge.git flycdn
 cd flycdn
 
 ```
@@ -61,7 +61,7 @@ Once you're happy with your changes and the test suite is passing locally, it's 
 It's good practice to update your code with the latest changes on the Fly CDN's `master` branch before publishing. To do this you'll need to update your local copy of master and merge any changes into your branch:
 
 ```sh
-git remote add upstream https://github.com/superfly/cdn.git
+git remote add upstream https://github.com/superfly/edge.git
 git fetch upstream master
 git rebase upstream/master
 ```
@@ -72,10 +72,10 @@ Then, push code to your fork:
 git push --set-upstream origin <your-branch>
 ```
 
-Finally, go to GitHub and [make a Pull Request](https://github.com/superfly/cdn/compare) :D
+Finally, go to GitHub and [make a Pull Request](https://github.com/superfly/edge/compare) :D
 
-[search the issue tracker]: https://github.com/superfly/cdn/issues?q=something
-[new issue]: https://github.com/superfly/cdn/issues/new
+[search the issue tracker]: https://github.com/superfly/edge/issues?q=something
+[new issue]: https://github.com/superfly/edge/issues/new
 [fork the CDN]: https://help.github.com/articles/fork-a-repo
 [make a pull request]: https://help.github.com/articles/creating-a-pull-request
 [git rebasing]: http://git-scm.com/book/en/Git-Branching-Rebasing
@@ -91,7 +91,7 @@ Sign up for an account on fly.io and use the `create app` button.
 
 ### Clone and run tests.
 
-* `git clone https://github.com/superfly/cdn.git flycdn` 
+* `git clone https://github.com/superfly/edge.git flycdn` 
 * `cd flycdn`
 * `yarn install`
 * `yarn test`

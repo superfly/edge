@@ -31,7 +31,7 @@ export interface GitHubPagesOptions {
  * import { githubPages } from "./src/backends";
  * const backend = githubPages({
  *  owner: "superfly",
- *  repo: "cdn",
+ *  repo: "edge",
  *  hostname: "docs.fly.io"
  * });
  * ```

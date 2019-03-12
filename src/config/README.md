@@ -1,13 +1,13 @@
-# Fly CDN (Standalone app)
+# Fly Edge (Standalone app)
 
-The Fly CDN can be run standalone with a yaml based configuration schema.
+The Fly Edge can be run standalone with a yaml based configuration schema.
 
 By default, this app looks for configuration information in `.fly.yml` and uses that to serve requests. This configuration file redirects `http` requests to `https`, and proxies all requests to a single backend (getting-started.edgeapp.net).
 
 ```yaml
-app: cdn
+app: edge-app
 config:
-  flyCDN:
+  flyApp:
     backends:
       getting-started:
         type: origin
@@ -21,12 +21,12 @@ config:
     - type: https-upgrader
 ```
 
-This config is the equivalent of writing TypeScript that consumes the `@fly/cdn` as library:
+This config is the equivalent of writing TypeScript that consumes the `@fly/edge` as library:
 
 ```typescript
 
-import { middleware } from "@fly/cdn";
-import proxy from "@fly/cdn/proxy";
+import { middleware } from "@fly/edge";
+import proxy from "@fly/edge/proxy";
 
 const origin = proxy("https://getting-started.edgeapp.net")
 
