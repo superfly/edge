@@ -9,7 +9,7 @@ export { middleware }
 import * as backends from "./backends";
 import { FetchFunction } from "./fetch";
 export { backends };
-export { isCdnConfig, buildCdn, buildCdnFromAppConfig } from "./config";
+export { isCdnConfig, buildCdn, buildAppFromConfig } from "./config";
 
 declare global {
   const fly: {
