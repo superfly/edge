@@ -1,3 +1,5 @@
+import { FetchFunction } from "./fetch";
+
 /**
  * A fetch function load balancer. Distributes requests to a set of backends; attempts to 
  * send requests to most recently healthy backends using a 2 random (pick two healthiest, 
@@ -12,7 +14,7 @@
  * @returns a function that behaves just like fetch, with a `.backends` property for 
  * retrieving backend stats.
  */
-export default function balancer(backends: FetchFn[]) {
+export default function balancer(backends: FetchFunction[]) {
   const tracked = backends.map((h) => {
     if (typeof h !== "function") {
       throw Error("Backend must be a fetch like function")
@@ -104,13 +106,7 @@ export default function balancer(backends: FetchFn[]) {
   return Object.assign(fn, { backends: tracked })
 }
 const proxyError = new Response("couldn't connect to origin", { status: 502 })
-export interface FetchFn {
-  (req: RequestInfo, init?: RequestInit | undefined): Promise<Response>
-}
 
-export interface BackendStats {
-  
-}
 /**
  * Represents a backend with health and statistics.
  */
@@ -236,14 +232,7 @@ function orderOfMagnitude(value: number){
   return Math.pow(10, order)
 }
 
-// save stats between app instances
-/*async function saveStats(backend: Backend){
-  const stats = Object.assign(backend, { proxy: undefined, lastSaved: undefined}) 
-  const json = JSON.stringify(stats)
-  await cache.set(`backend:${backend.proxy.toString}`, json, { ttl: 3600 * 24 })
-  backend.lastSaved = Date.now()
-}*/
-
+/** @private */
 export const _internal = {
   chooseBackends,
   scoreHealth,
