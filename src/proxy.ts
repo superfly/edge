@@ -73,7 +73,7 @@ export function proxy(origin: string | URL, options?: ProxyOptions): ProxyFuncti
       }
       tryCount += 1;
       try{
-        let bresp = await fetchFn(breq.clone())
+        let bresp = await fetchFn(breq.clone(), { certificate: options.certificate })
         if(options.rewriteLocationHeaders !== false){
           bresp = rewriteLocationHeader(req.url, breq.url, bresp)
         }
@@ -264,7 +264,15 @@ export interface ProxyOptions {
   origin?: string,
 
   /** @private */
-  fetch?: FetchFunction
+  fetch?: FetchFunction,
+
+  certificate?: {
+    key?: string | Buffer | Array<string | Buffer>
+    cert?: string | Buffer | Array<string | Buffer>
+    ca?: string | Buffer | Array<string | Buffer>
+    pfx?: string | Buffer | Array<string | Buffer>
+    passphrase?: string
+  }
 }
 
 
