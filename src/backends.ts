@@ -15,3 +15,4 @@ export * from "./backends/surge";
 export * from "./backends/zeit-now";
 export * from "./backends/aerobatic";
 export * from "./backends/gitlab_pages";
+export * from "./backends/firebase";
