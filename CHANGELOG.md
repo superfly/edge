@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.7.0"></a>
+# [0.7.0](https://github.com/superfly/edge/compare/v0.6.0-0...v0.7.0) (2019-03-14)
+
+
+### Features
+
+* firebase backend ([#42](https://github.com/superfly/edge/issues/42)) ([a964be5](https://github.com/superfly/edge/commit/a964be5))
+* gitlab pages backend ([#43](https://github.com/superfly/edge/issues/43)) ([93ee12d](https://github.com/superfly/edge/commit/93ee12d))
+* load balancing ([f3c77e6](https://github.com/superfly/edge/commit/f3c77e6))
+
+
+
 <a name="0.6.0"></a>
 # [0.6.0](https://github.com/superfly/edge/compare/v0.6.0-0...v0.6.0) (2019-03-12)
 
