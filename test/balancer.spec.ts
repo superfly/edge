@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import balancer, { _internal, Backend } from "../src/balancer"
+import balancer, { _internal, Backend, syncBackends } from "../src/balancer"
 
 async function fakeFetch(req: RequestInfo, init?: RequestInit) {
   return new Response("hi")
@@ -155,6 +155,32 @@ describe("balancing", () => {
       expect(resp.status).to.eq(200)
       expect(await resp.text()).to.eq("hi")
       expect(used.length).to.be.gte(2) // at least two backends hit
+    })
+  })
+
+  describe("backend changes", () => {
+    it("should keep existing backends when possible", async () => {
+      const original = [healthy(), unhealthy(), healthy()]
+      const updated = [original[1].proxy, healthy().proxy, original[0].proxy, healthy().proxy]
+
+      const backends = syncBackends(original, updated)
+
+      expect(backends.length).to.eq(updated.length)
+
+      for(const i of [1, 0]){
+        expect(backends).to.include(original[i])
+      }
+    })
+
+    it('balancer should use new backends', async () => {
+      const fn = balancer([fakeFetch])
+      const original = fn.backends;
+      fn.updateBackends([healthy().proxy, healthy().proxy])
+  
+      const updated = fn.backends;
+  
+      expect(updated.length).to.eq(2)
+      expect(updated).to.not.eq(original);
     })
   })
 })

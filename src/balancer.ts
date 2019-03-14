@@ -15,25 +15,7 @@ import { FetchFunction } from "./fetch";
  * retrieving backend stats.
  */
 export default function balancer(backends: FetchFunction[]) {
-  const tracked = backends.map((h) => {
-    if (typeof h !== "function") {
-      throw Error("Backend must be a fetch like function")
-    }
-    // To track these per region, use the cache
-    // const statsRaw = await cache.getString(`backend:${id}`)
-    // const backend: Backend  = JSON.parse(statsRaw)
-    return <Backend>{
-      proxy: h,
-      requestCount: 0,
-      scoredRequestCount: 0,
-      statuses: Array<number>(10),
-      latencies: Array<number>(10),
-      lastError: 0,
-      healthScore: 1,
-      latencyScore: 1,
-      errorCount: 0
-    }
-  })
+  let tracked = syncBackends([], backends)
 
   const fn = async function fetchBalancer(req: RequestInfo, init?: RequestInit | undefined): Promise<Response> {
     if (typeof req === "string") {
@@ -103,9 +85,43 @@ export default function balancer(backends: FetchFunction[]) {
     return proxyError
   }
 
-  return Object.assign(fn, { backends: tracked })
+  const balancer = Object.assign(fn, {
+    backends: tracked,
+    updateBackends: (backends: FetchFunction[]) => balancer.backends = tracked = syncBackends(tracked, backends)
+  })
+
+  return balancer;
 }
 const proxyError = new Response("couldn't connect to origin", { status: 502 })
+
+export function syncBackends(current: Backend[], replacements: FetchFunction[]){
+  const idx = new Map<FetchFunction, Backend>()
+  for(const b of current){
+    idx.set(b.proxy, b)
+  }
+
+  const updated: Backend[] = []
+
+  for(const fn of replacements){
+    if (typeof fn !== "function") {
+      throw Error("Backend must be a fetch like function")
+    }
+    const b = idx.get(fn) || {
+      proxy: fn,
+      requestCount: 0,
+      scoredRequestCount: 0,
+      statuses: Array<number>(10),
+      latencies: Array<number>(10),
+      lastError: 0,
+      healthScore: 1,
+      latencyScore: 1,
+      errorCount: 0
+    }
+
+    updated.push(b)
+  }
+  return updated;
+}
 
 /**
  * Represents a backend with health and statistics.
