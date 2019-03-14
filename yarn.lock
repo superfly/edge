@@ -2,21 +2,21 @@
 # yarn lockfile v1
 
 
-"@fly/build@0.44.5":
-  version "0.44.5"
-  resolved "https://registry.yarnpkg.com/@fly/build/-/build-0.44.5.tgz#6f9aed58db6841689998ca0b9b436927cee6bd4b"
+"@fly/build@0.47.1":
+  version "0.47.1"
+  resolved "https://registry.yarnpkg.com/@fly/build/-/build-0.47.1.tgz#fc955ca1a30521706333fca1a73935196a49abe9"
   dependencies:
-    "@fly/v8env" "0.44.5"
+    "@fly/v8env" "0.47.1"
     uglifyjs-webpack-plugin "^1.3.0"
     webpack "^3.11.0"
 
-"@fly/core@0.44.8":
-  version "0.44.8"
-  resolved "https://registry.yarnpkg.com/@fly/core/-/core-0.44.8.tgz#b8d0bf14b96b45897595ab08d05dde60f6bb679e"
+"@fly/core@0.47.1":
+  version "0.47.1"
+  resolved "https://registry.yarnpkg.com/@fly/core/-/core-0.47.1.tgz#1a34243b49f8bb3cae06d2c7313bb2172fab83db"
   dependencies:
-    "@fly/build" "0.44.5"
-    "@fly/examples" "0.44.4"
-    "@fly/v8env" "0.44.5"
+    "@fly/build" "0.47.1"
+    "@fly/examples" "0.47.1"
+    "@fly/v8env" "0.47.1"
     ansi-colors "^1.1.0"
     axios "^0.18.0"
     better-sqlite3 "^4.1.4"
@@ -30,7 +30,7 @@
     glob "^7.1.2"
     ioredis "^3.2.2"
     ioredis-mock "^3.10.2"
-    isolated-vm "1.7.2"
+    isolated-vm "1.7.9"
     js-yaml "^3.10.0"
     mocha "^4.0.1"
     pako "1.0.6"
@@ -38,25 +38,25 @@
     redis "^2.8.0"
     segfault-handler "^1.0.1"
     semver "^5.5.0"
-    sharp "^0.20.5"
+    sharp "^0.21.3"
     source-map "^0.6.1"
     tar-fs "^1.16.0"
     ws "^4.0.0"
 
-"@fly/examples@0.44.4":
-  version "0.44.4"
-  resolved "https://registry.yarnpkg.com/@fly/examples/-/examples-0.44.4.tgz#90c289078dda618f4710cdaaed5b76411db87443"
+"@fly/examples@0.47.1":
+  version "0.47.1"
+  resolved "https://registry.yarnpkg.com/@fly/examples/-/examples-0.47.1.tgz#c81cca968f8d916e6d84011f8959805e59fd773f"
 
-"@fly/fly@^0.44.5":
-  version "0.44.8"
-  resolved "https://registry.yarnpkg.com/@fly/fly/-/fly-0.44.8.tgz#bdb6c216e257e0b4a7ca6e624d9828eefb5dcebd"
+"@fly/fly@>= 0.44.8":
+  version "0.47.1"
+  resolved "https://registry.yarnpkg.com/@fly/fly/-/fly-0.47.1.tgz#3536555c838d28d8a8aa710694d0f570f2de598d"
   dependencies:
-    "@fly/core" "0.44.8"
-    "@fly/v8env" "0.44.5"
+    "@fly/core" "0.47.1"
+    "@fly/v8env" "0.47.1"
 
-"@fly/v8env@0.44.5":
-  version "0.44.5"
-  resolved "https://registry.yarnpkg.com/@fly/v8env/-/v8env-0.44.5.tgz#bb9d778d15c1f2499c5a768f7407d7e134206015"
+"@fly/v8env@0.47.1":
+  version "0.47.1"
+  resolved "https://registry.yarnpkg.com/@fly/v8env/-/v8env-0.47.1.tgz#85f5a2c140733b35a47932fa93f9803cfd43f1cf"
   dependencies:
     better-assert "^1.0.2"
     cookie "^0.3.1"
@@ -595,6 +595,12 @@ bindings@^1.2.1, bindings@^1.3.0:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/bindings/-/bindings-1.3.1.tgz#21fc7c6d67c18516ec5aaa2815b145ff77b26ea5"
 
+bindings@^1.3.1:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/bindings/-/bindings-1.5.0.tgz#10353c9e945334bc0511a6d90b38fbc7c9c504df"
+  dependencies:
+    file-uri-to-path "1.0.0"
+
 bl@^1.0.0:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/bl/-/bl-1.2.2.tgz#a160911717103c07410cef63ef51b397c025af9c"
@@ -1019,7 +1025,7 @@ color-string@^1.5.2:
     color-name "^1.0.0"
     simple-swizzle "^0.2.2"
 
-color@^3.0.0:
+color@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/color/-/color-3.1.0.tgz#d8e9fb096732875774c84bf922815df0308d0ffc"
   dependencies:
@@ -1928,9 +1934,9 @@ expand-brackets@^2.1.4:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
-expand-template@^1.0.2:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/expand-template/-/expand-template-1.1.1.tgz#981f188c0c3a87d2e28f559bc541426ff94f21dd"
+expand-template@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/expand-template/-/expand-template-2.0.3.tgz#6e14b3fcee0f3a6340ecb57d2e8918692052a47c"
 
 ext-list@^2.0.0:
   version "2.2.2"
@@ -2019,6 +2025,10 @@ file-type@^6.1.0:
 file-type@^8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/file-type/-/file-type-8.1.0.tgz#244f3b7ef641bbe0cca196c7276e4b332399f68c"
+
+file-uri-to-path@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/file-uri-to-path/-/file-uri-to-path-1.0.0.tgz#553a7b8446ff6f684359c445f1e37a05dacc33dd"
 
 filename-reserved-regex@^2.0.0:
   version "2.0.0"
@@ -2929,9 +2939,9 @@ isobject@^3.0.0, isobject@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
 
-isolated-vm@1.7.2:
-  version "1.7.2"
-  resolved "https://registry.yarnpkg.com/isolated-vm/-/isolated-vm-1.7.2.tgz#3c01846a2b27f98e857633d6cd0b43093b3cfe24"
+isolated-vm@1.7.9:
+  version "1.7.9"
+  resolved "https://registry.yarnpkg.com/isolated-vm/-/isolated-vm-1.7.9.tgz#c2e68058524817fa33657e4edcd1512902a8509e"
 
 isurl@^1.0.0-alpha5:
   version "1.0.0"
@@ -3469,9 +3479,13 @@ mute-stream@~0.0.4:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
 
-nan@^2.0.9, nan@^2.11.0, nan@^2.9.2:
+nan@^2.0.9, nan@^2.9.2:
   version "2.12.1"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.12.1.tgz#7b1aa193e9aa86057e3c7bbd0ac448e770925552"
+
+nan@^2.12.1:
+  version "2.13.0"
+  resolved "https://registry.yarnpkg.com/nan/-/nan-2.13.0.tgz#7bdfc27dd3c060c46e60b62c72b74012d1a4cd68"
 
 nanomatch@^1.2.9:
   version "1.2.13"
@@ -3488,6 +3502,10 @@ nanomatch@^1.2.9:
     regex-not "^1.0.0"
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
+
+napi-build-utils@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/napi-build-utils/-/napi-build-utils-1.0.1.tgz#1381a0f92c39d66bf19852e7873432fc2123e508"
 
 needle@^2.2.1:
   version "2.2.4"
@@ -3509,9 +3527,9 @@ nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
 
-node-abi@^2.2.0:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/node-abi/-/node-abi-2.5.0.tgz#942e1a78bce764bc0c1672d5821e492b9d032052"
+node-abi@^2.7.0:
+  version "2.7.1"
+  resolved "https://registry.yarnpkg.com/node-abi/-/node-abi-2.7.1.tgz#a8997ae91176a5fbaa455b194976e32683cda643"
   dependencies:
     semver "^5.4.1"
 
@@ -3985,21 +4003,22 @@ posix-character-classes@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
 
-prebuild-install@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/prebuild-install/-/prebuild-install-4.0.0.tgz#206ce8106ce5efa4b6cf062fc8a0a7d93c17f3a8"
+prebuild-install@^5.2.2:
+  version "5.2.5"
+  resolved "https://registry.yarnpkg.com/prebuild-install/-/prebuild-install-5.2.5.tgz#c7485911fe98950b7f7cd15bb9daee11b875cc44"
   dependencies:
     detect-libc "^1.0.3"
-    expand-template "^1.0.2"
+    expand-template "^2.0.3"
     github-from-package "0.0.0"
     minimist "^1.2.0"
     mkdirp "^0.5.1"
-    node-abi "^2.2.0"
+    napi-build-utils "^1.0.1"
+    node-abi "^2.7.0"
     noop-logger "^0.1.1"
     npmlog "^4.0.1"
     os-homedir "^1.0.1"
     pump "^2.0.1"
-    rc "^1.1.6"
+    rc "^1.2.7"
     simple-get "^2.7.0"
     tar-fs "^1.13.0"
     tunnel-agent "^0.6.0"
@@ -4137,7 +4156,7 @@ randomfill@^1.0.3:
     randombytes "^2.0.5"
     safe-buffer "^5.1.0"
 
-rc@^1.1.6, rc@^1.2.7:
+rc@^1.2.7:
   version "1.2.8"
   resolved "https://registry.yarnpkg.com/rc/-/rc-1.2.8.tgz#cd924bf5200a075b83c188cd6b9e211b7fc0d3ed"
   dependencies:
@@ -4399,7 +4418,7 @@ semver-truncate@^1.1.2:
   dependencies:
     semver "^5.3.0"
 
-"semver@2 || 3 || 4 || 5", semver@^5.1.0, semver@^5.3.0, semver@^5.4.1, semver@^5.5.0, semver@^5.5.1, semver@^5.6.0:
+"semver@2 || 3 || 4 || 5", semver@^5.1.0, semver@^5.3.0, semver@^5.4.1, semver@^5.5.0, semver@^5.6.0:
   version "5.6.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.6.0.tgz#7e74256fbaa49c75aa7c7a205cc22799cac80004"
 
@@ -4444,19 +4463,20 @@ sha.js@^2.4.0, sha.js@^2.4.8:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
 
-sharp@^0.20.5:
-  version "0.20.8"
-  resolved "https://registry.yarnpkg.com/sharp/-/sharp-0.20.8.tgz#e853f10b53b730824f0c3c5e453c79fa0812a48b"
+sharp@^0.21.3:
+  version "0.21.3"
+  resolved "https://registry.yarnpkg.com/sharp/-/sharp-0.21.3.tgz#381937de66c123687f2ac7186f85921c6bb19cdd"
   dependencies:
-    color "^3.0.0"
+    bindings "^1.3.1"
+    color "^3.1.0"
     detect-libc "^1.0.3"
     fs-copy-file-sync "^1.1.1"
-    nan "^2.11.0"
+    nan "^2.12.1"
     npmlog "^4.1.2"
-    prebuild-install "^4.0.0"
-    semver "^5.5.1"
-    simple-get "^2.8.1"
-    tar "^4.4.6"
+    prebuild-install "^5.2.2"
+    semver "^5.6.0"
+    simple-get "^3.0.3"
+    tar "^4.4.8"
     tunnel-agent "^0.6.0"
 
 shebang-command@^1.2.0:
@@ -4485,9 +4505,17 @@ simple-concat@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/simple-concat/-/simple-concat-1.0.0.tgz#7344cbb8b6e26fb27d66b2fc86f9f6d5997521c6"
 
-simple-get@^2.7.0, simple-get@^2.8.1:
+simple-get@^2.7.0:
   version "2.8.1"
   resolved "https://registry.yarnpkg.com/simple-get/-/simple-get-2.8.1.tgz#0e22e91d4575d87620620bc91308d57a77f44b5d"
+  dependencies:
+    decompress-response "^3.3.0"
+    once "^1.3.1"
+    simple-concat "^1.0.0"
+
+simple-get@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/simple-get/-/simple-get-3.0.3.tgz#924528ac3f9d7718ce5e9ec1b1a69c0be4d62efa"
   dependencies:
     decompress-response "^3.3.0"
     once "^1.3.1"
@@ -4854,7 +4882,7 @@ tar-stream@^1.1.2, tar-stream@^1.5.2:
     to-buffer "^1.1.1"
     xtend "^4.0.0"
 
-tar@^4, tar@^4.4.6:
+tar@^4, tar@^4.4.8:
   version "4.4.8"
   resolved "https://registry.yarnpkg.com/tar/-/tar-4.4.8.tgz#b19eec3fde2a96e64666df9fdb40c5ca1bc3747d"
   dependencies:
