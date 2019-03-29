@@ -41,7 +41,8 @@
     "lodash": "^4.17.11",
     "webpack": "^4.28.4",
     "sjcl": "^1.0.8",
-    "aws4": "^1.8.0"
+    "aws4": "^1.8.0",
+    "ua-parser-js": "^0.7.19"
   },
   "peerDependencies": {},
   "devDependencies": {
