@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.7.2"></a>
+## [0.7.2](https://github.com/superfly/edge/compare/v0.7.1...v0.7.2) (2019-04-04)
+
+
+### Bug Fixes
+
+* faster installs, fly now a dev dependency ([d9e7e6b](https://github.com/superfly/edge/commit/d9e7e6b))
+
+
+
 <a name="0.7.1"></a>
 ## [0.7.1](https://github.com/superfly/edge/compare/v0.7.0...v0.7.1) (2019-03-14)
 
