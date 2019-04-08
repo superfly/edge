@@ -32,6 +32,7 @@ export type PipelineStage = FetchGenerator | [FetchGenerator, any[]]
  * const p = pipeline(fetch, addHeader)
  *
  * fly.http.respondWith(p)
+ * ```
  *
  * @param stages fetch generator functions that apply additional logic
  * @returns a combinedfunction that can be used anywhere that wants `fetch`
