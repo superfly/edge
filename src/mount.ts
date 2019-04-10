@@ -6,7 +6,7 @@ import { normalizeRequest, FetchFunction } from '.'
 export type MountInfo = [string | RegExp, FetchFunction]
 
 /**
- * Allows you to mount routes to different proxied backends
+ * Allows you to mount routes to different proxied backends (supports RegExp)
  *
  * Example:
  *
@@ -16,7 +16,7 @@ export type MountInfo = [string | RegExp, FetchFunction]
  * const routes: MountInfo[] = [
  *  ['/blog', proxy('https://medium.com/blog')],
  *  ['/docs', proxy('https://docs.example.com/docs')],
- *  [/^\/(?:[a-z]{2}(-[A-Z]{2})?\/)?products/, proxy('https://app.example.com')] // ie, /de-DE/products
+ *  [/^\/(?:[a-z]{2}(-[A-Z]{2})?\/)?app/, proxy('https://app.example.com')] // ie, /de-DE/products
  * ]
  *
  * const p = pipeline(middleware.httpsUpgrader, middleware.autoWebp)
