@@ -33,5 +33,12 @@ declare global {
       pfx?: string | Buffer | Array<string | Buffer>
       passphrase?: string
     }
+    tls?: {
+      servername?: string
+    }
+  }
+
+  export interface Request{
+    remoteAddr?: string
   }
 }

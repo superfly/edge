@@ -55,7 +55,7 @@ export function proxy(origin: string | URL, options?: ProxyOptions): ProxyFuncti
   const fetchFn = options.fetch || fetch;
   async function proxyFetch(req: RequestInfo, init?: RequestInit) {
     if(!(req instanceof Request)){
-      req = normalizeRequest(req, init);
+      req = new Request(req, init);
       init = undefined;
     }
     if (!options) {
@@ -73,7 +73,7 @@ export function proxy(origin: string | URL, options?: ProxyOptions): ProxyFuncti
       }
       tryCount += 1;
       try{
-        let bresp = await fetchFn(breq.clone(), { certificate: options.certificate })
+        let bresp = await fetchFn(breq.clone(), { certificate: options.certificate, tls: options.tls })
         if(options.rewriteLocationHeaders !== false){
           bresp = rewriteLocationHeader(req.url, breq.url, bresp)
         }
@@ -99,8 +99,15 @@ export function proxy(origin: string | URL, options?: ProxyOptions): ProxyFuncti
  * @param req
  * @param init
  */
-export function buildProxyRequest(origin: string | URL, options: ProxyOptions, r: RequestInfo, init?: RequestInit) {
-  const req = normalizeRequest(r)
+export function buildProxyRequest(origin: string | URL, options: ProxyOptions, req: RequestInfo, init?: RequestInit) {
+  if (typeof req === "string") {
+    req = new Request(req, init)
+    init = undefined
+  }
+
+  if (!(req instanceof Request)) {
+    throw new Error("req must be either a string or a Request object")
+  }
 
   const url = new URL(req.url)
   let breq: Request | null = null
@@ -272,6 +279,10 @@ export interface ProxyOptions {
     ca?: string | Buffer | Array<string | Buffer>
     pfx?: string | Buffer | Array<string | Buffer>
     passphrase?: string
+  },
+
+  tls?:{
+    servername?: string
   }
 }
 
