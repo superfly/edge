@@ -10,11 +10,13 @@ import * as backends from "./backends";
 import { FetchFunction } from "./fetch";
 export { backends };
 export { isCdnConfig, buildCdn, buildAppFromConfig } from "./config";
+import * as data from "./data";
+export { data };
 
 declare global {
   const fly: {
     http: {
-      respondWith: (fn: FetchFunction) => void
+      respondWith: (fn: (req: Request) => Promise<Response>) => void
     }
   }
   const app: {

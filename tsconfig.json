@@ -24,7 +24,7 @@
     "baseUrl": ".",
     "paths": {
       "v8env/src/fly/*": ["./node_modules/@fly/v8env/lib/fly/*"],
-      "@fly/cdn": ["./src/"]
+      "@fly/edge": ["./src/"]
     }
   },
   "typedocOptions": {
