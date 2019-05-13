@@ -81,7 +81,7 @@ export function restAPI(tokenOrOptions: string | RestOptions): FetchFunction{
         return jsonResponse(data, { status: 201})
       case "DELETE":
         await collection.del(key);
-        return jsonResponse(data, { status: 204})
+        return jsonResponse({ok: true}, { status: 204})
     }
 
     return jsonResponse({error: "not found"}, { status: 404})
