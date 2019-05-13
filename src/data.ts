@@ -27,6 +27,8 @@ const apiPathPattern = /^\/([a-zA-Z0-9-_]+)(\/(.+))?$/
  *   }
  *   return new Response('not found', { status: 404});
  * })
+ * ```
+ * 
  * @param tokenOrOptions 
  */
 export function restAPI(tokenOrOptions: string | RestOptions): FetchFunction{
