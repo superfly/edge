@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.9.0-1"></a>
+# [0.9.0-1](https://github.com/superfly/edge/compare/v0.9.0-0...v0.9.0-1) (2019-05-13)
+
+
+### Bug Fixes
+
+* bad response on data API DELETE ([3a91157](https://github.com/superfly/edge/commit/3a91157))
+
+
+
 <a name="0.9.0-0"></a>
 # [0.9.0-0](https://github.com/superfly/edge/compare/v0.8.0...v0.9.0-0) (2019-05-09)
 
