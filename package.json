@@ -1,6 +1,6 @@
 {
   "name": "@fly/edge",
-  "version": "0.9.0-1",
+  "version": "0.9.0-2",
   "description": "Fly's TypeScript Edge",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
