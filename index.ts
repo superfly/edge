@@ -1,4 +1,4 @@
-import { buildCdnFromAppConfig } from "./src";
+import { buildAppFromConfig } from "./src";
   
 // from config
-fly.http.respondWith(buildCdnFromAppConfig());
+fly.http.respondWith(buildAppFromConfig());

@@ -62,6 +62,11 @@ export function autoWebp(fetch: FetchFunction): FetchFunction {
       const body = await img.toBuffer()
       resp = new Response(body.data, resp)
       resp.headers.set("content-length", body.data.byteLength.toString())
+      let etag = resp.headers.get("etag")
+      if(etag){
+        etag = etag.replace(/^("?)([^"]+)("?)$/, "$1$2-webp$3")
+        resp.headers.set("etag", etag)
+      }
 
       // put webp in responseCache for an hour
       await responseCache.set(key, resp, { tags: [req.url], ttl: 3600 })
