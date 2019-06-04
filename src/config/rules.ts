@@ -91,11 +91,11 @@ function compileRule(rule: RuleInfo) {
   const fn = function compiledRule(req: Request) {
     const url = new URL(req.url)
     if (rule.matchScheme === "http" || rule.matchScheme === "https") {
-      const scheme = url.protocol.substring(0, -1)
-      if (scheme != rule.matchScheme || app.env === "development") return false
+      const scheme = url.protocol.slice(0, -1)
+      if (scheme !== rule.matchScheme) return false
     }
     if (rule.hostname && rule.hostname != "") {
-      if (url.hostname != rule.hostname || app.env !== "development") {
+      if (url.hostname !== rule.hostname || app.env !== "development") {
         return false
       }
     }
