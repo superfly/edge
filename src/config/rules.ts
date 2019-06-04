@@ -54,13 +54,16 @@ export function buildRules(backends: BackendProxies, rules: RuleInfo[]) {
       let original = new URL(req.url)
       let url: string | undefined = undefined
       if (match.pathPattern && rule.redirectURLPattern) {
-        url = original.pathname.replace(match.pathPattern, rule.redirectURLPattern)
+        url = match.pathPattern.replace(original.pathname, rule.redirectURLPattern)
+      } else if (rule.redirectURLPattern) {
+        url = rule.redirectURLPattern
       }
       if (!url || original.toString() === url) {
         return new Response("Can't redirect to a bad URL", { status: 500 })
       }
       const status = rule.redirectStatus || 302
-      return new Response("Redirect", { status: status, headers: { location: url.toString() } })
+      const redirectTo = new URL(url, original)
+      return new Response("Redirect", { status: status, headers: { location: redirectTo.toString() } })
     }
     if (rule.actionType !== "rewrite") {
       return new Response("Invalid rule action", { status: 500 })
@@ -72,7 +75,7 @@ export function buildRules(backends: BackendProxies, rules: RuleInfo[]) {
     // rewrite request if necessary
     if (match.pathPattern && rule.pathReplacementPattern) {
       let url = new URL(req.url)
-      url = new URL(url.pathname.replace(match.pathPattern, rule.pathReplacementPattern), url)
+      url = new URL(match.pathPattern.replace(url.pathname, rule.pathReplacementPattern), url)
       req = new Request(url.toString(), <RequestInit>req)
     }
     if (!rule.responseReplacements || rule.responseReplacements.length === 0) {
@@ -86,7 +89,7 @@ export function buildRules(backends: BackendProxies, rules: RuleInfo[]) {
 }
 
 function compileRule(rule: RuleInfo) {
-  const pathPattern = ensureRegExp(rule.pathPattern)
+  const pathPattern = ensurePathPatternMatcher(rule.pathPattern)
   const httpHeaderValue = ensureRegExp(rule.httpHeaderValue)
   const fn = function compiledRule(req: Request) {
     const url = new URL(req.url)
@@ -105,22 +108,76 @@ function compileRule(rule: RuleInfo) {
         return false
       }
     }
-
-    if (pathPattern) {
-      if (!url.pathname.match(pathPattern)) {
-        return false
-      }
+    if (pathPattern && !pathPattern.match(url.pathname)) {
+      return false
     }
     return true
   }
   return Object.assign(fn, { rule: rule, pathPattern: pathPattern })
 }
 
-function ensureRegExp(pattern?: string | RegExp) {
+function ensureRegExp(pattern?: string | RegExp): RegExp | null {
   if (!pattern || pattern == "") return null
   if (typeof pattern === "string") return new RegExp(pattern)
-  if (typeof pattern != "object" || !(pattern instanceof RegExp)) {
-    throw new Error("Pattern must be a string or RegExp: " + typeof pattern)
+  if (pattern instanceof RegExp) return pattern
+
+  throw new Error("Pattern must be a string or RegExp: " + typeof pattern)
+}
+
+function ensurePathPatternMatcher(pattern?: string | RegExp): PathPatternMatcher | null {
+  if (!pattern || pattern == "") return null
+  if (typeof pattern === "string") return new PathPatternMatcher(pattern)
+  if (pattern instanceof RegExp) return new PathPatternMatcher(pattern)
+
+  throw new Error("Pattern must be a string or RegExp: " + typeof pattern)
+}
+
+
+export class PathPatternMatcher {
+  private regex: RegExp
+  private params: string[] = []
+
+  constructor(pattern: string | RegExp) {
+    if (pattern instanceof RegExp) {
+      this.regex = pattern
+    } else {
+      const matches = pattern.match(/([:\*]\w+)/g)
+      if (matches) {
+        for (const match of matches) {
+          this.params.push(match.substring(1))
+          if (match.startsWith(":")) {
+            pattern = pattern.replace(match, "([^/.]+)")
+          } else if (match.startsWith("*")) {
+            pattern = pattern.replace(match, "(.+)")
+          }
+        }
+      }
+      this.regex = new RegExp(pattern)
+    }
   }
-  return pattern
+
+  match(path: string) {
+    return this.regex.test(path)
+  }
+
+  parse(path: string) {
+    const params: { [name: string]: string } = {}
+
+    const match = this.regex.exec(path)
+    if (!match) {
+      return params
+    }
+    for (const [paramIndex, paramName] of this.params.entries()) {
+      params[paramName] = match[paramIndex + 1];
+    }
+    return params
+  }
+
+  replace(path: string, replacement: string) {
+    const params = this.parse(path)
+    for (const [name, value] of Object.entries(params)) {
+      replacement = replacement.replace(`$${name}`, value)
+    }
+    return replacement
+  }
 }
