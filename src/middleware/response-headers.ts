@@ -26,8 +26,12 @@ export const responseHeaders = responseModifier(addResponseHeaders)
  */
 export async function addResponseHeaders(resp: Response, headers: ResponseHeadersOptions){
   if (headers) {
+    if("headers" in headers && typeof headers.headers === "object"){
+      //@ts-ignore
+      headers = (headers.headers as ResponseHeadersOptions);
+    }
     for (const [k, v] of Object.entries(headers)) {
-      if (v === false) {
+      if (v === false || v === "") {
         resp.headers.delete(k)
       } else if (<any>v !== true) { // true implies pass through
         resp.headers.set(k, v.toString())
