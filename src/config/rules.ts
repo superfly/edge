@@ -97,12 +97,12 @@ function compileRule(rule: RuleInfo) {
       const scheme = url.protocol.slice(0, -1)
       if (scheme !== rule.matchScheme) return false
     }
-    if (rule.hostname && rule.hostname != "") {
-      if (url.hostname !== rule.hostname || app.env !== "development") {
+    if (rule.hostname && rule.hostname !== "") {
+      if (url.hostname !== rule.hostname) {
         return false
       }
     }
-    if (rule.httpHeaderKey && rule.httpHeaderKey != "" && httpHeaderValue) {
+    if (rule.httpHeaderKey && rule.httpHeaderKey !== "" && httpHeaderValue) {
       const header = req.headers.get(rule.httpHeaderKey)
       if (!header || !header.match(httpHeaderValue)) {
         return false
