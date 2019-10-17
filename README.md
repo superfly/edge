@@ -69,23 +69,23 @@ fly.http.respondWith(app);
 
 ### Backends
 
-[Backends](https://fly.io/docs/apps/edge/modules/backends.html) are origin services you can route requests to. The project includes a backend type [any HTTP service](https://github.com/superfly/edge/blob/master/src/backends/origin.ts), and more specialized types for proxying to third party services.
+[Backends](https://github.com/superfly/edge/tree/master/src/backends) are origin services you can route requests to. The project includes a backend type [any HTTP service](https://github.com/superfly/edge/blob/master/src/backends/origin.ts), and more specialized types for proxying to third party services.
 
-* [GitHub Pages](https://fly.io/docs/apps/edge/modules/backends.html#githubpages)
-* [Heroku](https://fly.io/docs/apps/edge/modules/backends.html#heroku)
-* [Ghost Pro](https://fly.io/docs/apps/edge/modules/backends.html#ghostproblog)
-* [Glitch](https://fly.io/docs/apps/edge/modules/backends.html#glitch)
-* [Netlify](https://fly.io/docs/apps/edge/modules/backends.html#netlify)
+* [GitHub Pages](https://github.com/superfly/edge/blob/master/src/backends/github_pages.ts)
+* [Heroku](https://github.com/superfly/edge/blob/master/src/backends/heroku.ts)
+* [Ghost Pro](https://github.com/superfly/edge/blob/master/src/backends/ghost_pro.ts)
+* [Glitch](https://github.com/superfly/edge/blob/master/src/backends/glitch.ts)
+* [Netlify](https://github.com/superfly/edge/blob/master/src/backends/netlify.ts)
 
 Want to help out? Write a new backend type and open a [pull request](https://github.com/superfly/edge/compare?template=backend_type.md)!
 
 ### Middleware
 
-[Middleware](https://fly.io/docs/apps/edge/modules/middleware.html) applies logic to requests before they're sent to the backend, and responses before they're sent to users.
+[Middleware](https://github.com/superfly/edge/tree/master/src/middleware) applies logic to requests before they're sent to the backend, and responses before they're sent to users.
 
-* [HTTP -> HTTPS upgrader](https://fly.io/docs/apps/edge/modules/middleware.html#httpsupgrader)
-* [Add response headers](https://fly.io/docs/apps/edge/modules/middleware.html#responseheaders)
-* [HTTP caching](https://fly.io/docs/apps/edge/modules/middleware.html#httpcache)
+* [HTTP -> HTTPS upgrader](https://github.com/superfly/edge/blob/master/src/middleware/https-upgrader.ts)
+* [Add response headers](https://github.com/superfly/edge/blob/master/src/middleware/response-headers.ts)
+* [HTTP caching](https://github.com/superfly/edge/blob/master/src/middleware/http-cache.ts)
 
 ## Development
 
