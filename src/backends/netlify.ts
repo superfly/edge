@@ -20,7 +20,7 @@ import { normalizeOptions, SubdomainOptions } from "./subdomain_service";
 export function netlify(options: SubdomainOptions | string): ProxyFunction<SubdomainOptions> {
   const config = normalizeOptions(options);
 
-  const netlifyHost = `${config.subdomain}.netlify.com` 
+  const netlifyHost = `${config.subdomain}.netlify.app` 
   const uri = `https://${netlifyHost}${config.directory}`
   const headers = {
     "host": netlifyHost,
