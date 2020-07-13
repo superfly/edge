@@ -53,7 +53,7 @@
     "arraybuffer-loader": "^1.0.3",
     "chai": "^4.2.0",
     "image-webpack-loader": "^4.3.1",
-    "standard-version": "^4.4.0",
+    "standard-version": "^8.0.1",
     "ts-loader": "^3.5.0",
     "typedoc": "^0.13.0",
     "typedoc-plugin-external-module-name": "^1.1.3",
