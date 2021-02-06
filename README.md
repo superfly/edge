@@ -29,7 +29,7 @@ yarn install
 yarn start # visit http://localhost:3000
 ```
 
-Once you have that running, try swapping in a different origin. Edit `index.ts` and and replace `backends.origin("https://getting-started.edgeapp.net")` with `backends.githubPages("superfly/landing")`.
+Once you have that running, try swapping in a different origin. Edit `index.ts` and replace `backends.origin("https://getting-started.edgeapp.net")` with `backends.githubPages("superfly/landing")`.
 
 ### Deploy to production
 
